@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="862.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="560.0" prefWidth="862.0">
+         <children>
+            <AnchorPane layoutY="13.0" prefHeight="555.0" prefWidth="303.0" styleClass="left-form" stylesheets="@loginCss.css">
+               <children>
+                  <ImageView fitHeight="129.0" fitWidth="107.0" layoutX="99.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/user-solid.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="54.0" layoutY="160.0" prefHeight="47.0" prefWidth="197.0" text="Welcome Admin" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="52.0" layoutY="490.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="LogOut" />
+                  <Button fx:id="btn_updateAnimal" layoutX="53.0" layoutY="265.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Update Animal" />
+                  <Button layoutX="53.0" layoutY="324.0" mnemonicParsing="false"  prefHeight="40.0" prefWidth="200.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Change Password" />
+                  <Button layoutX="52.0" layoutY="379.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Assign Task" />
+                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="54.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/cat-solid.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="54.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/list-check-solid.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="54.0" layoutY="333.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/user-lock-solid.png" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="109.0" layoutY="207.0" text="&quot;name&quot;" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="27.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="52.0" layoutY="432.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="200.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Live Update" />
+                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="54.0" layoutY="444.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/chart-line-solid.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="54.0" layoutY="496.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/right-from-bracket-solid.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="303.0" layoutY="27.0" prefHeight="555.0" prefWidth="555.0">
+               <children>
+                  <AnchorPane fx:id="anc_live" layoutX="4.0" layoutY="-5.0" prefHeight="547.0" prefWidth="555.0" visible="false">
+                     <children>
+                        <AnchorPane layoutX="30.0" layoutY="90.0" prefHeight="157.0" prefWidth="486.0" stylesheets="@AdminCss.css">
+                           <children>
+                              <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="122.0" prefWidth="200.0" styleClass="card" stylesheets="@AdminCss.css">
+                                 <children>
+                                    <Label layoutX="41.0" layoutY="14.0" prefHeight="47.0" prefWidth="127.0" text="Number of Coustomers" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="98.0" layoutY="81.0" text="0" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="280.0" layoutY="14.0" prefHeight="122.0" prefWidth="200.0" styleClass="card" stylesheets="@AdminCss.css">
+                                 <children>
+                                    <Label layoutX="94.0" layoutY="81.0" text="0" textFill="WHITE">
+                                       <font>
+                                          <Font name="System Bold" size="21.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="37.0" layoutY="14.0" prefHeight="47.0" prefWidth="127.0" text="Number of Zoo-Keepers" textAlignment="CENTER" textFill="#f8f8f8" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="17.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </AnchorPane>
+                           </children>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="white-bg" />
+                           </styleClass>
+                        </AnchorPane>
+                        <Label layoutX="228.0" layoutY="22.0" prefHeight="40.0" prefWidth="99.0" text="Live Update">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane layoutX="29.0" layoutY="274.0" prefHeight="199.0" prefWidth="486.0" stylesheets="@AdminCss.css">
+                           <children>
+                              <TableView layoutX="19.0" layoutY="21.0" prefHeight="157.0" prefWidth="448.0">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="Issue Id" />
+                                  <TableColumn prefWidth="366.0" text="Description" />
+                                </columns>
+                              </TableView>
+                           </children>
+                           <styleClass>
+                              <String fx:value="white-bg" />
+                              <String fx:value="shadow" />
+                           </styleClass>
+                        </AnchorPane>
+                        <Button layoutX="219.0" layoutY="486.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="107.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Reload" />
+                        <Button layoutX="514.0" layoutY="1.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="37.0" styleClass="close" stylesheets="@loginCss.css" text="X" textFill="#e40808" />
+                        <Line endX="265.0" layoutX="272.0" layoutY="71.0" startX="-254.0" />
+                        <ImageView fitHeight="47.0" fitWidth="37.0" layoutX="182.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/chart-line-solid.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="anc_Animal" layoutX="125.0" layoutY="-12.0" prefHeight="567.0" prefWidth="559.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-12.0">
+                     <children>
+                        <AnchorPane layoutX="17.0" layoutY="16.0" prefHeight="300.0" prefWidth="520.0">
+                           <children>
+                              <AnchorPane layoutX="15.0" layoutY="72.0" prefHeight="157.0" prefWidth="504.0" stylesheets="@AdminCss.css">
+                                 <children>
+                                    <TextField layoutX="53.0" layoutY="49.0" stylesheets="@AdminCss.css" />
+                                    <ChoiceBox layoutX="330.0" layoutY="49.0" prefWidth="150.0" stylesheets="@AdminCss.css" />
+                                    <ChoiceBox layoutX="330.0" layoutY="110.0" prefWidth="150.0" />
+                                    <Label layoutX="53.0" layoutY="27.0" prefHeight="17.0" prefWidth="62.0" text="Animal ID" />
+                                    <Label layoutX="330.0" layoutY="27.0" prefHeight="17.0" prefWidth="86.0" text="Animal Type" />
+                                    <Label layoutX="330.0" layoutY="89.0" prefHeight="17.0" prefWidth="62.0" text="Sex" />
+                                    <Label layoutX="53.0" layoutY="89.0" prefHeight="17.0" prefWidth="62.0" text="Cage ID" />
+                                    <TextField layoutX="53.0" layoutY="110.0" stylesheets="@AdminCss.css" />
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="shadow" />
+                                    <String fx:value="white-bg" />
+                                 </styleClass>
+                              </AnchorPane>
+                              <AnchorPane layoutX="12.0" layoutY="236.0" prefHeight="57.0" prefWidth="496.0" stylesheets="@AdminCss.css">
+                                 <children>
+                                    <Button layoutX="43.0" layoutY="17.0" mnemonicParsing="false" text="Add" />
+                                    <Button layoutX="161.0" layoutY="17.0" mnemonicParsing="false" text="Delete" />
+                                    <Button layoutX="282.0" layoutY="16.0" mnemonicParsing="false" text="Search" />
+                                    <Button layoutX="406.0" layoutY="17.0" mnemonicParsing="false" text="Update" />
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="shadow" />
+                                    <String fx:value="white-bg" />
+                                 </styleClass>
+                              </AnchorPane>
+                              <Label layoutX="218.0" layoutY="14.0" text="Animal Data">
+                                 <font>
+                                    <Font size="19.0" />
+                                 </font></Label>
+                              <Line endX="214.0" endY="-6.0" layoutX="260.0" layoutY="51.0" startX="-212.0" />
+                              <Button layoutX="504.0" layoutY="-1.0" mnemonicParsing="false" text="X" textFill="#da0000" />
+                              <ImageView fitHeight="32.0" fitWidth="37.0" layoutX="174.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@img/cat-solid.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="30.0" layoutY="331.0" prefHeight="200.0" prefWidth="500.0" stylesheets="@AdminCss.css">
+                           <children>
+                              <TableView layoutX="64.0" layoutY="25.0" prefHeight="150.0" prefWidth="400.0">
+                                <columns>
+                                  <TableColumn prefWidth="111.0" text="Animal ID" />
+                                  <TableColumn prefWidth="105.0" text="Animal Type" />
+                                    <TableColumn prefWidth="87.0" text="Cage ID" />
+                                    <TableColumn prefWidth="96.0" text="M/F" />
+                                </columns>
+                              </TableView>
+                           </children>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="white-bg" />
+                           </styleClass>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="anc_task" layoutX="91.0" layoutY="-12.0" prefHeight="553.0" prefWidth="559.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-12.0">
+                     <children>
+                        <AnchorPane layoutX="28.0" layoutY="118.0" prefHeight="122.0" prefWidth="504.0" stylesheets="@AdminCss.css">
+                           <children>
+                              <Label layoutX="52.0" layoutY="32.0" text="Task ID" />
+                              <TextField layoutX="135.0" layoutY="28.0" />
+                              <Label layoutX="40.0" layoutY="68.0" text="Zoo keeper ID" />
+                              <TextField layoutX="135.0" layoutY="64.0" />
+                              <Button layoutX="387.0" layoutY="49.0" mnemonicParsing="false" text="Add" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="white-bg" />
+                           </styleClass>
+                        </AnchorPane>
+                        <AnchorPane layoutX="40.0" layoutY="277.0" prefHeight="260.0" prefWidth="480.0" stylesheets="@AdminCss.css">
+                           <children>
+                              <TableView layoutX="40.0" layoutY="18.0" prefHeight="224.0" prefWidth="400.0">
+                                <columns>
+                                  <TableColumn prefWidth="106.0" text="Task id" />
+                                  <TableColumn prefWidth="134.0" text="Keeper ID" />
+                                    <TableColumn prefWidth="235.0" text="Status" />
+                                </columns>
+                              </TableView>
+                           </children>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="white-bg" />
+                           </styleClass>
+                        </AnchorPane>
+                        <Label layoutX="250.0" layoutY="36.0" text="Assign Task">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <Line endX="196.0" endY="-6.0" layoutX="291.0" layoutY="86.0" startX="-198.0" startY="-6.0" />
+                        <Button layoutX="519.0" layoutY="14.0" mnemonicParsing="false" text="X" textFill="#da0000" />
+                        <ImageView fitHeight="40.0" fitWidth="41.0" layoutX="193.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/list-check-solid.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="anc_ChangePwd" layoutX="190.0" layoutY="-14.0" prefHeight="555.0" prefWidth="559.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-14.0">
+                     <children>
+                        <AnchorPane layoutX="45.0" layoutY="101.0" prefHeight="150.0" prefWidth="480.0" stylesheets="@AdminCss.css">
+                           <children>
+                              <Label layoutX="57.0" layoutY="27.0" text="Coustermer id" />
+                              <Label layoutX="79.0" layoutY="70.0" prefHeight="17.0" prefWidth="55.0" text="New Pwd" />
+                              <TextField layoutX="163.0" layoutY="23.0" />
+                              <TextField layoutX="163.0" layoutY="66.0" />
+                              <Button layoutX="383.0" layoutY="48.0" mnemonicParsing="false" text="Change" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="white-bg" />
+                           </styleClass>
+                        </AnchorPane>
+                        <Label layoutX="223.0" layoutY="30.0" text="Change pwd">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <AnchorPane layoutX="45.0" layoutY="304.0" prefHeight="150.0" prefWidth="480.0" stylesheets="@AdminCss.css">
+                           <children>
+                              <Label layoutX="57.0" layoutY="27.0" text="Zoo keeper ID" />
+                              <Label layoutX="82.0" layoutY="70.0" text="New Pwd" />
+                              <TextField layoutX="172.0" layoutY="23.0" />
+                              <TextField layoutX="172.0" layoutY="66.0" />
+                              <Button layoutX="385.0" layoutY="44.0" mnemonicParsing="false" text="Change" />
+                           </children>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="white-bg" />
+                           </styleClass>
+                        </AnchorPane>
+                        <Button layoutX="518.0" layoutY="14.0" mnemonicParsing="false" text="X" textFill="#e80404" />
+                        <Line endX="264.0" layoutX="269.0" layoutY="73.0" startX="-246.0" />
+                        <ImageView fitHeight="33.0" fitWidth="40.0" layoutX="172.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@img/user-lock-solid.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

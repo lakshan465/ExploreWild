@@ -1,0 +1,67 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to edit this template
+*/
+/*
+    Created on : 15 Jan 2024, 11:46:06
+    Author     : lakshan
+*/
+
+
+/*loginPGdesign*/
+
+.left-form{
+    -fx-background-color: linear-gradient(to bottom right, #085203, #693803);
+    -fx-border-color: #000;
+    -fx-border-width: .4px 0px .4px .4px;
+
+}
+.right-form{
+    -fx-background-color: linear-gradient(to bottom right, #5eb005, #3a6e02);
+    -fx-border-color: #fff;
+    -fx-border-width: .4px .4px .4px 0px;
+
+}
+.close{
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close:hover{
+    -fx-background-color: #ff4f6c;
+}
+
+/* Change the color to black on hover */
+.your-icon-class:hover {
+  -fx-fill: black;
+}
+
+
+
+.textfield{
+    -fx-background-color: #fff;
+    -fx-background-radius: 4px;
+    -fx-border-color: #000;
+    -fx-border-width: .4px;
+    -fx-border-radius: 4px;
+    -fx-font-size:13px;
+    -fx-font-family:"Tahoma";
+}
+
+.textfield:focused{
+    -fx-background-color:linear-gradient(to bottom right, #fff, #65eb73);
+    -fx-border-width: 1.3px;
+
+}
+.login-btnLK{
+    -fx-background-color: linear-gradient(to bottom right, #158220, #0a300e);
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+}
+
+.login-btnLK:hover{
+    -fx-background-color: linear-gradient(to bottom right,  #65eb73,#1bab2a);
+}
