@@ -7,12 +7,15 @@ import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import javax.xml.transform.Result;
 
@@ -86,8 +89,19 @@ public class LoginController implements Initializable {
                     alert.setContentText("You login as an Admin!");
                     alert.showAndWait();
                     resultAdmin.close();
+
+                    //hide login window
+                    loginBtn.getScene().getWindow().hide();
                     //preAdmin.close();
+
                     //load admin window with alert
+                    FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("Admin.fxml"));
+                    Scene scene = new Scene(fxmlLoader.load(), 862, 560);
+                    Stage stage = new Stage();
+
+                    stage.setScene(scene);
+                    stage.show();
+                    stage.setResizable(false);
                 }
 
 
@@ -102,11 +116,17 @@ public class LoginController implements Initializable {
                     //preStaff.close();
                     //load staff window with alert
 
+                    //hide login window
+                    loginBtn.getScene().getWindow().hide();
+
                 }
 
                 ResultSet resultUser = preStaff.executeQuery();
                 if (resultUser.next()) {
                     //load user window with alert
+
+                    //hide login window
+                    loginBtn.getScene().getWindow().hide();
                 }
             }
         } catch (Exception e) {
