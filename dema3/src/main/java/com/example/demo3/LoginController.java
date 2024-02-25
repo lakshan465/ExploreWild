@@ -10,10 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -88,7 +85,17 @@ public class LoginController implements Initializable {
                     alert.setHeaderText(null);
                     alert.setContentText("You login as an Admin!");
                     alert.showAndWait();
-                    resultAdmin.close();
+
+
+                    //based on username admin name wil change
+                    AdminController.name= unameTxt.getText();
+//                    String name =unameTxt.getText();
+//                    AdminController ad = new AdminController();
+//                    public Label una;
+//                    una.setText(name);
+//                    ad.static_admin_name = una;
+//                    System.out.println("next window load");
+//                    resultAdmin.close();
 
                     //hide login window
                     loginBtn.getScene().getWindow().hide();
