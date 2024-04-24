@@ -8,7 +8,8 @@ public class dbConnection {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");//com.mysql.jdbc.Driver
-            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/Pet", "root", "");
+            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/pet", "root", "");
+            System.out.println("successfully connected!");
             return conn;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();

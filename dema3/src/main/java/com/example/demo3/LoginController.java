@@ -83,6 +83,7 @@ public class LoginController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("login Successful!");
                     alert.setHeaderText(null);
+                    System.out.println("You login as an Admin!");
                     alert.setContentText("You login as an Admin!");
                     alert.showAndWait();
 

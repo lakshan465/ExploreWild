@@ -18,6 +18,9 @@
     -fx-border-width:2px;
     -fx-border-radius:8px;
  }
+ .center .table-column{
+    -fx-alignment:center;
+ }
 
  .table-view .column-header-background{
     -fx-background-color:linear-gradient(to bottom right,#4f937a,#6fa0e8);

@@ -1,6 +1,8 @@
 package com.example.demo3;
 
 public class AnimalData {
+
+    //encapsulation
     private Integer AnimalId;
     private Integer CageId;
     private String Sex;
