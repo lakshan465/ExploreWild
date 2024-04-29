@@ -31,7 +31,7 @@
                      </font>
                   </Label>
                   <Button fx:id="btn_logOut" layoutX="52.0" layoutY="490.0" mnemonicParsing="false" onAction="#logout" onMouseClicked="#logout" prefHeight="40.0" prefWidth="200.0" styleClass="logout-btn" stylesheets="@loginCss.css" text="LogOut" />
-                  <Button fx:id="btn_updateAnimal" layoutX="53.0" layoutY="265.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="200.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Update Animal" />
+                  <Button fx:id="btn_updateAnimal" layoutX="53.0" layoutY="265.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="200.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Animal Data" />
                   <Button fx:id="btn_changePwd" layoutX="53.0" layoutY="324.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="200.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Change Password" />
                   <Button fx:id="btn_assignTask" layoutX="52.0" layoutY="379.0" mnemonicParsing="false" onAction="#switchForm" prefHeight="40.0" prefWidth="200.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Assign Task" />
                   <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="54.0" layoutY="273.0" pickOnBounds="true" preserveRatio="true">
@@ -136,7 +136,7 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="anc_Animal" layoutX="125.0" layoutY="-12.0" prefHeight="555.0" prefWidth="559.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="anc_Animal" layoutX="125.0" layoutY="-12.0" prefHeight="555.0" prefWidth="559.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="17.0" layoutY="16.0" prefHeight="300.0" prefWidth="520.0">
                            <children>
@@ -199,7 +199,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="anc_task" layoutX="91.0" layoutY="-12.0" prefHeight="553.0" prefWidth="559.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-12.0">
+                  <AnchorPane fx:id="anc_task" layoutX="91.0" layoutY="-12.0" prefHeight="553.0" prefWidth="559.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-12.0">
                      <children>
                         <AnchorPane layoutX="28.0" layoutY="118.0" prefHeight="141.0" prefWidth="504.0" stylesheets="@AdminCss.css">
                            <children>
@@ -207,11 +207,13 @@
                               <TextField fx:id="txt_task_id" layoutX="135.0" layoutY="28.0" />
                               <Label layoutX="40.0" layoutY="68.0" text="Zoo keeper ID" />
                               <TextField fx:id="txt_keeper_id" layoutX="135.0" layoutY="64.0" />
-                              <Button fx:id="add_task_btn" layoutX="333.0" layoutY="28.0" mnemonicParsing="false" onAction="#addTask" text="Add" />
+                              <Button fx:id="add_task_btn" layoutX="295.0" layoutY="20.0" mnemonicParsing="false" onAction="#addTask" text="Add" />
                               <Label layoutX="40.0" layoutY="106.0" text="Description" />
                               <TextField fx:id="txt_description" layoutX="135.0" layoutY="102.0" />
-                              <Button fx:id="Delete_task_btn" layoutX="378.0" layoutY="90.0" mnemonicParsing="false" text="Delete" />
-                              <Button fx:id="Search_task_btn" layoutX="415.0" layoutY="41.0" mnemonicParsing="false" text="Search" />
+                              <Button fx:id="Delete_task_btn" layoutX="398.0" layoutY="20.0" mnemonicParsing="false" onAction="#deleteTask" text="Delete" />
+                              <Button fx:id="Search_task_btn" layoutX="339.0" layoutY="20.0" mnemonicParsing="false" onAction="#searchTask" text="Search" />
+                              <Button fx:id="add_task_btn1" layoutX="295.0" layoutY="58.0" mnemonicParsing="false" onAction="#searchByPending" text="Show Pending task" />
+                              <Button fx:id="add_task_btn11" layoutX="295.0" layoutY="90.0" mnemonicParsing="false" onAction="#searchByDone" text="Show Finished task" />
                            </children>
                            <styleClass>
                               <String fx:value="shadow" />

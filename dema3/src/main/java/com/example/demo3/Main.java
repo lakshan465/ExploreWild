@@ -16,8 +16,8 @@ public class Main extends Application {
       //  Scene scene = new Scene(fxmlLoader.load(), 600, 400);
 
       //  stage.setScene(scene);
-        stage.show();
-        stage.setResizable(false);
+//        stage.show();
+//        stage.setResizable(false);
 
         //teparrly code for testing Strat
         FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/com/example/demo3/Admin.fxml"));

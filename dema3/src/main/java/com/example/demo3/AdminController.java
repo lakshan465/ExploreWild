@@ -160,8 +160,8 @@ public class AdminController extends User implements Initializable {
     static String name;//based on this var value welcome text will be change
 
 
-    Connection con, conload;
-    PreparedStatement pre, precuz, prekeeper;
+    Connection con, conload, conTask;
+    PreparedStatement pre, precuz, prekeeper, preTask;
     ResultSet resultAnimal, resultTask, resultIssue, resultReloadcuz, resultReloadkeeprer, resultAddAnimal;
 
 
@@ -215,59 +215,200 @@ public class AdminController extends User implements Initializable {
 
     }
 
-//add task start
-public void addTask() {//insert new animal information to database
-    String sql = "INSERT INTO task (zoo keeper_id,status,description) VALUES (?,?,?)";
-    Connection conAdTsk = dbConnection.connection();
+    //add task start
+    public void addTask() {//insert new animal information to database
+        String sql = "INSERT INTO task (`zoo keeper_id`, status, description) VALUES (?, ?, ?)";
+        Connection conAdTsk = dbConnection.connection();
+        PreparedStatement preTask = null;
 
-    try {
-        Alert alert;
+        try {
+            Alert alert;
 
-        if ( txt_keeper_id.getText().isEmpty()
-                || txt_description.getText().isEmpty()) {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error massage");
-            alert.setContentText("Please fill blank fields except task ID");
-            alert.showAndWait();//user can add data without filling animal_id box
-        } else {
+            if (txt_keeper_id.getText().isEmpty()
+                    || txt_description.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error massage");
+                alert.setContentText("Please fill blank fields except task ID");
+                alert.showAndWait();//user can add data without filling animal_id box
+            } else {
 
-            pre = conAdTsk.prepareStatement(sql);
-            //pre.setString(1, animal_id.getText()); no need bcz its auto incremnt by itself
-            pre.setString(1, txt_keeper_id.getText());
-            pre.setString(2, "Pending");
-            pre.setString(3, txt_description.getText());
+                assert conAdTsk != null;
 
-            pre.executeUpdate();
+                preTask = conAdTsk.prepareStatement(sql);
+                //pre.setString(1, animal_id.getText()); no need bcz its auto incremnt by itself
+                preTask.setInt(1, Integer.parseInt(txt_keeper_id.getText()));
+                //preTask.setInt();
+                preTask.setString(2, "Pending");
+                preTask.setString(3, txt_description.getText());
 
-            alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Successfully added!");
-            alert.showAndWait();
+                preTask.executeUpdate();
 
-            //this will update the table view when we press add btn
-            //to update table view
-            addTaskShowListData();
+                alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Successfully added!");
+                alert.showAndWait();
 
-            //clear the field
-            addTaskClear();
+                //this will update the table view when we press add btn
+                //to update table view
+                addTaskShowListData();
+
+                //clear the field
+                addTaskClear();
 
 
+            }
+            preTask.close();
+            conAdTsk.close();
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
-        pre.close();
-        conAdTsk.close();
 
-
-    } catch (SQLException e) {
-        e.printStackTrace();
-    } catch (NullPointerException e) {
-        e.printStackTrace();
     }
-
-}
     //add task end
 
-    public void addTaskClear(){
+    //search by pending
+    public void searchByPending() throws SQLException {
+        String sql = "SELECT * FROM task WHERE status ='Pending'";
+        addTaskShowListDatabySerach(sql);
+    }
+
+    public void searchByDone() throws SQLException {
+        String sql = "SELECT * FROM task WHERE status ='Done'";
+        addTaskShowListDatabySerach(sql);
+    }
+    //search by pending end
+
+    //search task start
+
+    public void searchTask() throws SQLException {
+        String taskIdSearch = txt_task_id.getText();
+        String keeperIdSearch = txt_keeper_id.getText();
+
+        if (!txt_task_id.getText().isEmpty()) {
+            String sql = "SELECT * FROM task WHERE task_id LIKE '" + taskIdSearch + "'";
+            addTaskShowListDatabySerach(sql);
+        } else {
+            // Corrected the SQL string
+            String sql = "SELECT * FROM task WHERE `zoo keeper_id` = '" + keeperIdSearch + "'";
+            addTaskShowListDatabySerach(sql);
+        }
+
+        addTaskClear();
+    }
+
+
+    public ObservableList<TaskData> addTaskDatabySerach(String sql1) throws SQLException {
+        //AnimalData is newly created class name
+        //retrrive data from server and give to the linked list
+        //then function return it
+        ObservableList<TaskData> listData = FXCollections.observableArrayList();
+
+
+        String sql = sql1;
+        conTask = dbConnection.connection();
+        try {
+            preTask = conTask.prepareStatement(sql);
+            ResultSet resultTask = preTask.executeQuery();
+            TaskData task_d;
+
+            while (resultTask.next()) {
+                task_d = new TaskData(
+                        resultTask.getInt("task_id"),
+                        resultTask.getInt("zoo keeper_id"),
+                        resultTask.getString("status"),
+                        resultTask.getString("description"));
+                listData.add(task_d);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        conTask.close();
+        resultTask.close();
+        return listData;
+
+    }
+
+    public void addTaskShowListDatabySerach(String str) throws SQLException//addTaskShowListDatabySerach
+    {//data that retrive form server spred to the table in order
+        ObservableList<TaskData> addTaskListforsearch = addTaskDatabySerach(str);
+
+        task_id_col.setCellValueFactory(new PropertyValueFactory<>("taskId"));//AnimalId is attribute of Animal
+        keeper_id_col.setCellValueFactory(new PropertyValueFactory<>("keeperId"));//this map object attribute and table column
+        status_col.setCellValueFactory(new PropertyValueFactory<>("status"));
+        des_col.setCellValueFactory(new PropertyValueFactory<>("Description"));
+
+        task_table_view.setItems(addTaskListforsearch);
+    }
+
+
+    //search task end
+
+    public void deleteTask() {
+        try {
+            Alert alert;
+            if (txt_task_id.getText().isEmpty() && txt_keeper_id.getText().isEmpty()) {
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("error");
+                alert.setContentText("fill at least one id field");
+                alert.showAndWait();
+            } else {
+                alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Confirmation massage");
+                if (!txt_task_id.getText().isEmpty()) {
+                    alert.setContentText("Are you sure about deleting task with task id:" + txt_task_id.getText() + " ?");
+                }
+                if (!txt_keeper_id.getText().isEmpty()) {
+                    alert.setContentText("Are you sure about deleting task that related to Zoo keeper id:" + txt_keeper_id.getText() + " ?");
+                }
+                Optional<ButtonType> option = alert.showAndWait();
+                Connection conD;
+                Statement st;
+                if (option.get().equals(ButtonType.OK)) {
+                    if (!txt_task_id.getText().isEmpty()) {
+                        String sql = "DELETE FROM task where task_id = '" + txt_task_id.getText() + "'";
+                        conD = dbConnection.connection();
+                        st = conD.createStatement();
+                        st.executeUpdate(sql);
+
+                        alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Info massage!");
+                        alert.setContentText("Deleted!");
+                        alert.showAndWait();
+                    } else {
+                        String sql = "DELETE FROM task where `zoo keeper_id` = '" + txt_keeper_id.getText() + "'";
+                        conD = dbConnection.connection();
+                        st = conD.createStatement();
+                        st.executeUpdate(sql);
+
+                        alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Info massage!");
+                        alert.setContentText("Deleted!");
+                        alert.showAndWait();
+                    }
+
+                    conD.close();
+                    st.close();
+                }
+            }
+            addTaskClear();
+            addTaskShowListData();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    //Delete task start
+
+
+    //Delete task end
+    public void addTaskClear() {
         txt_task_id.setText("");
         txt_keeper_id.setText("");
         txt_description.setText("");
@@ -555,7 +696,7 @@ public void addTask() {//insert new animal information to database
 
     }
 
-    public void animalTypeList() {
+    public void animalTypeList() {//drop down menu  for animal gender
 
         //List<String> list1 = new ArrayList<>();
 
@@ -812,6 +953,34 @@ public void addTask() {//insert new animal information to database
                 anc_ChangePwd.setVisible(false);
                 anc_live.setVisible(false);
                 anc_task.setVisible(false);
+
+//              //  btn_assignTask.getStyleClass().add("login-btnLK");
+//                btn_updateAnimal.setStyle("-fx-background-color: linear-gradient(to bottom right, #4f937a, #6e2773);");
+//
+//                btn_changePwd.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+//
+//
+//
+//                btn_assignTask.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+//
+//                btn_liveUpdate.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+
+
                 //when press update animal btn table also show
                 addAnimalShowListData();
                 animalTypeList();
@@ -823,18 +992,102 @@ public void addTask() {//insert new animal information to database
                 anc_ChangePwd.setVisible(true);
                 anc_live.setVisible(false);
                 anc_task.setVisible(false);
+
+//                btn_changePwd.setStyle("-fx-background-color: linear-gradient(to bottom right, #4f937a, #6e2773);");
+//
+////                btn_changePwd
+////                        btn_updateAnimal
+////                btn_assignTask
+////                        btn_liveUpdate
+//                btn_updateAnimal.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+//
+//                btn_assignTask.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+//
+//                btn_liveUpdate.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+
+
             } else if (event.getSource() == btn_assignTask) {
                 anc_Animal.setVisible(false);
                 anc_ChangePwd.setVisible(false);
                 anc_live.setVisible(false);
                 anc_task.setVisible(true);
+
+//                btn_assignTask.setStyle("-fx-background-color: linear-gradient(to bottom right, #4f937a, #6e2773);");
+//
+//                btn_updateAnimal.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+////                btn_changePwd
+////                        btn_updateAnimal
+////                btn_assignTask
+////                        btn_liveUpdate
+//                btn_changePwd.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+//
+//                btn_liveUpdate.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+                addTaskClear();
                 addTaskShowListData();
             } else if (event.getSource() == btn_liveUpdate) {
                 anc_Animal.setVisible(false);
                 anc_ChangePwd.setVisible(false);
                 anc_live.setVisible(true);
                 anc_task.setVisible(false);
+
+//                btn_liveUpdate.setStyle("-fx-background-color: linear-gradient(to bottom right, #4f937a, #6e2773);");
+//
+//                btn_updateAnimal.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+////                btn_changePwd
+////                        btn_updateAnimal
+////                btn_assignTask
+////                        btn_liveUpdate
+//                btn_assignTask.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+//
+//                btn_changePwd.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
+//                        "-fx-background-radius: 5px;" +
+//                        "-fx-cursor: hand;" +
+//                        "-fx-text-fill: #fff;" +
+//                        "-fx-font-size:14px;" +
+//                        "-fx-font-family:'Arial';");
+
                 addIssueShowListData();
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
