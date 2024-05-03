@@ -14,9 +14,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.ZooKeeperController">
    <children>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane prefHeight="600.0" prefWidth="900.0">
          <children>
             <AnchorPane layoutX="47.0" layoutY="33.0" prefHeight="600.0" prefWidth="350.0" styleClass="left-form" stylesheets="@loginCss.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="550.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -57,32 +57,42 @@
             </AnchorPane>
             <AnchorPane prefHeight="600.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane fx:id="anc_ticket" layoutX="164.0" layoutY="24.0" prefHeight="600.0" prefWidth="550.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                  <AnchorPane fx:id="anc_ticket" layoutX="164.0" layoutY="24.0" prefHeight="600.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                      <children>
-                        <AnchorPane layoutX="33.0" layoutY="318.0" prefHeight="228.0" prefWidth="497.0">
+                        <AnchorPane layoutX="46.0" layoutY="346.0" prefHeight="200.0" prefWidth="460.0" stylesheets="@AdminCss.css">
                            <children>
-                              <Label layoutX="145.0" layoutY="23.0" text="Total" />
-                              <Label layoutX="190.0" layoutY="23.0" text="Rs." />
-                              <Label fx:id="label_total" layoutX="216.0" layoutY="23.0" text="xxxx" />
-                              <Label layoutX="150.0" layoutY="55.0" text="Amount" />
-                              <TextField fx:id="txt_payAmount" layoutX="228.0" layoutY="51.0" />
-                              <Label layoutX="130.0" layoutY="113.0" text="Balance" />
-                              <Label layoutX="186.0" layoutY="113.0" text="Rs." />
-                              <Label fx:id="label_balance" layoutX="216.0" layoutY="113.0" text="xxxx" />
-                              <Button fx:id="btn_pay" layoutX="211.0" layoutY="157.0" mnemonicParsing="false" text="Pay" />
+                              <Label layoutX="103.0" layoutY="23.0" text="Total" />
+                              <Label layoutX="143.0" layoutY="23.0" text="Rs." />
+                              <Label fx:id="label_total" layoutX="175.0" layoutY="23.0" text="xxxx" />
+                              <Label layoutX="122.0" layoutY="55.0" text="Amount" />
+                              <TextField fx:id="txt_payAmount" layoutX="238.0" layoutY="46.0" prefHeight="35.0" prefWidth="149.0" styleClass="choice" stylesheets="@AdminCss.css" />
+                              <Label layoutX="89.0" layoutY="113.0" text="Balance" />
+                              <Label layoutX="143.0" layoutY="113.0" text="Rs." />
+                              <Label fx:id="label_balance" layoutX="175.0" layoutY="113.0" text="xxxx" />
+                              <Button fx:id="btn_pay" layoutX="213.0" layoutY="155.0" mnemonicParsing="false" text="Pay" />
                            </children>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="anc" />
+                              <String fx:value="white-bg" />
+                           </styleClass>
                         </AnchorPane>
-                        <AnchorPane layoutX="27.0" layoutY="69.0" prefHeight="258.0" prefWidth="497.0">
+                        <AnchorPane layoutX="27.0" layoutY="69.0" prefHeight="258.0" prefWidth="497.0" stylesheets="@AdminCss.css">
                            <children>
-                              <Label layoutX="102.0" layoutY="60.0" text="Name" />
-                              <TextField fx:id="txt_fname" layoutX="167.0" layoutY="56.0" promptText="First name" />
-                              <TextField fx:id="txt_Lname" layoutX="324.0" layoutY="56.0" promptText="Last Name" />
-                              <TextField fx:id="txt_parent" layoutX="234.0" layoutY="108.0" />
-                              <Label layoutX="65.0" layoutY="112.0" text="Number of Visiting Parent" />
-                              <Label layoutX="77.0" layoutY="158.0" text="Number of Visiting Kids" />
-                              <TextField fx:id="txt_child" layoutX="234.0" layoutY="154.0" />
-                              <Button fx:id="btn_calculate" layoutX="202.0" layoutY="204.0" mnemonicParsing="false" text="Calculate" />
+                              <Label layoutX="82.0" layoutY="56.0" text="Name" />
+                              <TextField fx:id="txt_fname" layoutX="167.0" layoutY="44.0" prefHeight="40.0" prefWidth="149.0" promptText="First name" styleClass="choice" stylesheets="@AdminCss.css" />
+                              <TextField fx:id="txt_Lname" layoutX="323.0" layoutY="44.0" prefHeight="40.0" prefWidth="149.0" promptText="Last Name" styleClass="choice" stylesheets="@AdminCss.css" />
+                              <TextField fx:id="txt_parent" layoutX="323.0" layoutY="97.0" prefHeight="40.0" prefWidth="149.0" styleClass="choice" stylesheets="@AdminCss.css" />
+                              <Label layoutX="29.0" layoutY="97.0" text="Number of Visiting Parent" />
+                              <Label layoutX="77.0" layoutY="154.0" text="Number of Visiting Kids" />
+                              <TextField fx:id="txt_child" layoutX="323.0" layoutY="151.0" prefHeight="40.0" prefWidth="149.0" styleClass="choice" stylesheets="@AdminCss.css" />
+                              <Button fx:id="btn_calculate" layoutX="217.0" layoutY="212.0" mnemonicParsing="false" text="Calculate" />
                            </children>
+                           <styleClass>
+                              <String fx:value="shadow" />
+                              <String fx:value="white-bg" />
+                              <String fx:value="anc" />
+                           </styleClass>
                         </AnchorPane>
                         <Label layoutX="248.0" layoutY="22.0" prefHeight="32.0" prefWidth="81.0" text="Tickets">
                            <font>
@@ -94,10 +104,10 @@
                               <Image url="@img/ticket-solid.png" />
                            </image>
                         </ImageView>
-                        <Line endX="258.0" layoutX="266.0" layoutY="69.0" startX="-213.0" />
+                        <Line endX="185.0" layoutX="253.0" layoutY="54.0" startX="-146.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="anc_tskNissue" prefHeight="600.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                  <AnchorPane fx:id="anc_tskNissue" prefHeight="600.0" prefWidth="550.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                      <children>
                         <AnchorPane layoutX="26.0" layoutY="71.0" prefHeight="310.0" prefWidth="497.0" stylesheets="@AdminCss.css">
                            <children>

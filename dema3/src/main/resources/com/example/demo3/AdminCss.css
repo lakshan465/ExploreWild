@@ -32,3 +32,18 @@
     -fx-background-color:transparent;
     -fx-size:40px;
  }
+
+ .choice{
+    -fx-background-radius:30;
+    -fx-background-color:linear-gradient(to bottom right,#4f937a,#6fa0e8);
+ }
+
+  .anc{
+  -fx-background-radius:30;
+     -fx-background-color:rgba(171, 224, 168,0.5);
+  }
+
+  .ancControll{
+    -fx-background-radius:30;
+       -fx-background-color:rgba(20, 66, 219,0.7);
+  }

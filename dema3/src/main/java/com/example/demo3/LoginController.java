@@ -36,9 +36,9 @@ public class LoginController implements Initializable {
     @FXML
     private TextField unameTxt;
 
-    private Connection connection;
-    private PreparedStatement prepare;
-    private ResultSet result;
+//    private Connection connection;
+//    private PreparedStatement prepare;
+//    private ResultSet result;
 
     public void close() {
 
@@ -90,6 +90,13 @@ public class LoginController implements Initializable {
 
                     //based on username admin name wil change
                     AdminController.name= unameTxt.getText();
+
+
+
+
+
+
+
 //                    String name =unameTxt.getText();
 //                    AdminController ad = new AdminController();
 //                    public Label una;
@@ -105,7 +112,7 @@ public class LoginController implements Initializable {
                     //load admin window with alert
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo3/Admin.fxml"));
 
-                    Scene scene = new Scene(fxmlLoader.load(), 862, 560);
+                    Scene scene = new Scene(fxmlLoader.load(), 950, 600);
                     Stage stage = new Stage();
 
                     stage.setScene(scene);
@@ -121,22 +128,51 @@ public class LoginController implements Initializable {
                     alert.setHeaderText(null);
                     alert.setContentText("You login as a Staff member!");
                     alert.showAndWait();
-                    resultStaff.close();
+                    //resultStaff.close();
                     //preStaff.close();
                     //load staff window with alert
 
+                    ZooKeeperController.name = unameTxt.getText();
+
                     //hide login window
                     loginBtn.getScene().getWindow().hide();
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo3/CoWorker.fxml"));
+
+                    Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+                    Stage stage = new Stage();
+
+                    stage.setScene(scene);
+                    stage.show();
+                    stage.setResizable(false);
 
                 }
 
                 ResultSet resultUser = preUser.executeQuery();
                 if (resultUser.next()) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("login Successful!");
+                    alert.setHeaderText(null);
+                    System.out.println("You login as Customer!");
+                    alert.setContentText("You login as Customer!");
+                    alert.showAndWait();
                     //load user window with alert
+
+                    CuzController.name= unameTxt.getText();//this take the username and pass that to customer class to show in the interface
 
                     //hide login window
                     loginBtn.getScene().getWindow().hide();
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo3/Cuz.fxml"));
+
+                    Scene scene = new Scene(fxmlLoader.load(), 862, 560);
+                    Stage stage = new Stage();
+
+                    stage.setScene(scene);
+                    stage.show();
+                    stage.setResizable(false);
                 }
+                conn.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

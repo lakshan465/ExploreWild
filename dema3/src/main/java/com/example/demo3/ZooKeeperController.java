@@ -1,4 +1,5 @@
 package com.example.demo3;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,6 +14,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ZooKeeperController  implements Initializable {
+
+
 
 
     @FXML
@@ -93,9 +96,26 @@ public class ZooKeeperController  implements Initializable {
     @FXML
     private TextField txt_taskId;
 
+
+
+
+    public static String name;
+
+    public void switchForm(ActionEvent event){
+        if(event.getSource() == btn_ticket){
+            anc_ticket.setVisible(true);
+            anc_tskNissue.setVisible(false);
+
+        } else if (event.getSource() == btn_taskNissue) {
+
+            anc_ticket.setVisible(false);
+            anc_tskNissue.setVisible(true);
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        lebal_name.setText(name);
     }
 }
 
