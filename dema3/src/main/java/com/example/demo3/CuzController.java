@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.System.exit;
 
 public class CuzController implements Initializable {
 
@@ -214,6 +216,35 @@ public class CuzController implements Initializable {
         }
 
     }
+
+    //Live Feed
+
+    public void playBtn() throws IOException {
+
+        //WebView webView=new WebView();
+        //webView.getEngine().load("https://www.youtube.com/watch?v=3szkFHfr6sA");
+
+        //webView.setPrefSize(700,500);
+        //Scene scene=new Scene(webView);
+        Stage stage = new Stage();
+        //stage.setScene(scene);
+        //stage.show();
+
+
+        //Stage.setScene(new Scene(webView));
+       // Stage.show();
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("LiveFeed.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+
+        stage.setScene(scene);
+        stage.show();
+        stage.setOnCloseRequest(windowEvent -> {
+            stage.close();
+        });
+
+
+    }
+
 
 //    con.close();
 
