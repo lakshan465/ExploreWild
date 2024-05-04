@@ -18,20 +18,20 @@
                     <children>
                         <Label layoutX="29.0" layoutY="200.0" prefHeight="72.0" prefWidth="243.0" text="Zoo Management System" textAlignment="CENTER" textFill="#e1dada" wrapText="true">
                             <font>
-                                <Font name="Marker Felt Thin" size="27.0" />
+                                <Font size="25.0" />
                             </font>
                         </Label>
-                  <ImageView fitHeight="99.0" fitWidth="95.0" layoutX="103.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/paw-solid.png" />
-                     </image>
-                  </ImageView>
+                        <ImageView fitHeight="99.0" fitWidth="95.0" layoutX="103.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/paw-solid.png" />
+                            </image>
+                        </ImageView>
                     </children></AnchorPane>
                 <AnchorPane layoutX="302.0" prefHeight="400.0" prefWidth="300.0" stylesheets="@loginCss.css">
                     <children>
                         <Label layoutX="69.0" layoutY="112.0" prefHeight="36.0" prefWidth="164.0" text="Welcome Back!">
                             <font>
-                                <Font name="Marker Felt Thin" size="27.0" />
+                                <Font size="24.0" />
                             </font></Label>
                         <TextField fx:id="unameTxt" layoutX="40.0" layoutY="170.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="textfield" stylesheets="@loginCss.css" />
                         <PasswordField fx:id="pwdTxt" layoutX="40.0" layoutY="222.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="textfield" stylesheets="@loginCss.css" />
@@ -41,11 +41,11 @@
                                 <Font name="Tahoma Bold" size="19.0" />
                             </font>
                         </Button>
-                  <ImageView fitHeight="72.0" fitWidth="67.0" layoutX="119.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/user-regular.png" />
-                     </image>
-                  </ImageView>
+                        <ImageView fitHeight="72.0" fitWidth="67.0" layoutX="119.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@img/user-regular.png" />
+                            </image>
+                        </ImageView>
                     </children></AnchorPane>
             </children>
         </AnchorPane>

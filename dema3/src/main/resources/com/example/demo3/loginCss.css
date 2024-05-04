@@ -54,7 +54,7 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 }
 .login-btnLK{
-    -fx-background-color: linear-gradient(to bottom right, #158220, #0a300e);
+    -fx-background-color: linear-gradient(to bottom right, #085203, #693803);
     -fx-background-radius: 5px;
     -fx-cursor: hand;
     -fx-text-fill: #fff;
@@ -64,4 +64,17 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 
 .login-btnLK:hover{
     -fx-background-color: linear-gradient(to bottom right,  #65eb73,#1bab2a);
+}
+
+.logout-btn{
+    -fx-background-color: linear-gradient(to bottom right, #a1309f, #540253);
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+}
+
+.logout-btn:hover{
+    -fx-background-color: linear-gradient(to bottom right,  #ed588a,#de2160);
 }
