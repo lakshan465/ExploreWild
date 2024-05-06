@@ -13,6 +13,13 @@ public class TaskData {
         this.Description = Description;
     }
 
+    public TaskData(Integer taskId, String status,String Description) {
+        this.taskId = taskId;
+//        this.keeperId = keeperId;
+        this.status = status;
+        this.Description = Description;
+    }
+
     public Integer getTaskId() {
         return taskId;
     }

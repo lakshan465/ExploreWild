@@ -217,7 +217,7 @@ public class AdminController extends User implements Initializable {
 
     //add task start
     public void addTask() {//insert new animal information to database
-        String sql = "INSERT INTO task (`zoo keeper_id`, status, description) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO task (zoo_keeper_id, status, description) VALUES (?, ?, ?)";
         Connection conAdTsk = dbConnection.connection();
         PreparedStatement preTask = null;
 
@@ -294,7 +294,7 @@ public class AdminController extends User implements Initializable {
             addTaskShowListDatabySerach(sql);
         } else {
             // Corrected the SQL string
-            String sql = "SELECT * FROM task WHERE `zoo keeper_id` = '" + keeperIdSearch + "'";
+            String sql = "SELECT * FROM task WHERE zoo zoo_keeper_id = '" + keeperIdSearch + "'";
             addTaskShowListDatabySerach(sql);
         }
 
@@ -319,7 +319,7 @@ public class AdminController extends User implements Initializable {
             while (resultTask.next()) {
                 task_d = new TaskData(
                         resultTask.getInt("task_id"),
-                        resultTask.getInt("zoo keeper_id"),
+                        resultTask.getInt("zoo_keeper_id"),
                         resultTask.getString("status"),
                         resultTask.getString("description"));
                 listData.add(task_d);
@@ -381,7 +381,7 @@ public class AdminController extends User implements Initializable {
                         alert.setContentText("Deleted!");
                         alert.showAndWait();
                     } else {
-                        String sql = "DELETE FROM task where `zoo keeper_id` = '" + txt_keeper_id.getText() + "'";
+                        String sql = "DELETE FROM task where zoo_keeper_id = '" + txt_keeper_id.getText() + "'";
                         conD = dbConnection.connection();
                         st = conD.createStatement();
                         st.executeUpdate(sql);
@@ -862,7 +862,7 @@ public class AdminController extends User implements Initializable {
             while (resultTask.next()) {
                 taskData = new TaskData(
                         resultTask.getInt("task_id"),
-                        resultTask.getInt("zoo keeper_id"),
+                        resultTask.getInt("zoo_keeper_id"),
                         resultTask.getString("status"),
                         resultTask.getString("description"));
                 listData.add(taskData);

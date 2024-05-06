@@ -139,7 +139,7 @@ public class LoginController implements Initializable {
 
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo3/CoWorker.fxml"));
 
-                    Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+                    Scene scene = new Scene(fxmlLoader.load(), 950, 600);
                     Stage stage = new Stage();
 
                     stage.setScene(scene);
@@ -165,7 +165,7 @@ public class LoginController implements Initializable {
 
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo3/Cuz.fxml"));
 
-                    Scene scene = new Scene(fxmlLoader.load(), 862, 560);
+                    Scene scene = new Scene(fxmlLoader.load(), 950, 600);
                     Stage stage = new Stage();
 
                     stage.setScene(scene);

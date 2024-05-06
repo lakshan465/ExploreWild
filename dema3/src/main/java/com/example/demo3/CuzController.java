@@ -100,30 +100,34 @@ public class CuzController implements Initializable {
 
     }
     public void logout() {
-//        try {
-//            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-//            alert.setTitle("Error Message");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Are you want to logout ?");
-//            Optional<ButtonType> option = alert.showAndWait();
-//
-//            if (option.get().equals(ButtonType.OK)) {
-//                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-//                Stage stage = new Stage();
-//                Scene scene = new Scene(root);
-//                stage.setScene(scene);
-//                stage.show();
-//                System.out.println("logout");
-//
-//                //hide login window
-//                btn_LogOut.getScene().getWindow().hide();
-//            }
-//
-//
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Error Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you want to logout ?");
+            Optional<ButtonType> option = alert.showAndWait();
 
+            if (option.get().equals(ButtonType.OK)) {
+                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
+                Stage stage = new Stage();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                System.out.println("logout");
+
+                //hide login window
+                btn_LogOut.getScene().getWindow().hide();
+            }
+
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    public void close() {
+
+        System.exit(0);
     }
 
     public void calculate() {//calculate cost based on members, no sql quarres execute in this function
