@@ -28,7 +28,7 @@ public class LiveFeedController {
 
     @FXML
     void play(ActionEvent event) {
-        webView.getEngine().load("https://www.youtube.com/embed/pb-j3svRQLI?si=JZ1r7e3_LcHKYsdG");
+        webView.getEngine().load("http://localhost:8080/m/");
 
         webView.setPrefSize(600,357);
     }
