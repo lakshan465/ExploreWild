@@ -1,6 +1,9 @@
 package com.example.demo3;
 
+import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -68,14 +71,17 @@ public class LoginController implements Initializable {
                 PreparedStatement preStaff = conn.prepareStatement(sqlForStaff);
                 PreparedStatement preUser = conn.prepareStatement(sqlForUser);
 
+                //String uname= unameTxt.getText();
+                //String pwd=getHashPwd(pwdTxt.getText());
+
                 preAdmin.setString(1, unameTxt.getText());
-                preAdmin.setString(2, pwdTxt.getText());
+                preAdmin.setString(2, getHashPwd(pwdTxt.getText()) );
 
                 preStaff.setString(1, unameTxt.getText());
-                preStaff.setString(2, pwdTxt.getText());
+                preStaff.setString(2,getHashPwd(pwdTxt.getText()));
 
                 preUser.setString(1, unameTxt.getText());
-                preUser.setString(2, pwdTxt.getText());
+                preUser.setString(2, getHashPwd(pwdTxt.getText()));
 
 
                 ResultSet resultAdmin = preAdmin.executeQuery();
@@ -177,6 +183,41 @@ public class LoginController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    String getHashPwd(String pwd) {
+        try {
+            MessageDigest md = null;
+
+            md = MessageDigest.getInstance("SHA");
+
+            md.update(pwd.getBytes());
+            byte[] rbt = md.digest();
+            StringBuilder sb = new StringBuilder();
+
+            for (byte b : rbt) {
+
+                sb.append(String.format("%02x", b));
+
+            }
+
+
+            return sb.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @FXML
+    void registerFormLoad() throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/example/demo3/RegForm.fxml"));
+        Scene scene=new Scene(loader.load());
+        Stage stage=new Stage();
+        stage.setScene(scene);
+        stage.show();
+
     }
 
     @Override

@@ -10,13 +10,13 @@ public class dbConnection {
             Class.forName("com.mysql.cj.jdbc.Driver");//com.mysql.jdbc.Driver
 
             // Oshan
-             Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://sql6.freesqldatabase.com:3306/sql6702223", "sql6702223", "2Znc2KZyGL");
+             //Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://sql6.freesqldatabase.com:3306/sql6702223", "sql6702223", "2Znc2KZyGL");
 
             // Lakshan
             //Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://sql11.freesqldatabase.com:3306/sql11702663", "sql11702663", "dbQCaS1mX6");
 
 
-            //Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sql11702663", "root", "");
+            Connection conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/sql11702663", "root", "");
             //"jdbc:mysql://sql11.freesqldatabase.com:3306/sql11702663", "sql11702663", "dbQCaS1mX6"
 
 
