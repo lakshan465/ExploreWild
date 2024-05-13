@@ -54,7 +54,7 @@ public class RegForm {
         String uname=unameBox.getText();
         String pwd=getHashPwd(pwdBox.getText());
 
-        String sql="INSERT INTO user (`username`, `password`) VALUES('"+uname+"','"+pwd+"')";
+        String sql="INSERT INTO admin (`username`, `password`) VALUES('"+uname+"','"+pwd+"')";
 
         try {
             Connection con=dbConnection.connection();

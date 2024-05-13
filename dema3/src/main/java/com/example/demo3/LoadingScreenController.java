@@ -31,7 +31,7 @@ public class LoadingScreenController {
         task.progressProperty().addListener((obv, ov, nw) -> {
 
             String fs=String.format("%.0f", nw.doubleValue()*100);
-            System.out.println(fs);
+            //System.out.println(fs);
             loadingPercentage.setText(fs+"%");
 
             recSub.setWidth(recMain.getWidth()*nw.doubleValue());
