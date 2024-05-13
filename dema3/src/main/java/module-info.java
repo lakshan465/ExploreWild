@@ -2,6 +2,7 @@ module com.example.demo3 {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires javafx.web;
 
 
     opens com.example.demo3 to javafx.fxml;
