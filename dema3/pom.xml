@@ -42,6 +42,19 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+<!--        gpt start-->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+        </dependency>
+
+        <!-- Add other JavaFX modules as needed -->
+
+<!--        gpt end-->
 
 <!--        <dependency>-->
 <!--            <groupId>com.gluonhq</groupId>-->

@@ -31,6 +31,9 @@ public class LoginController implements Initializable {
     private Button loginBtn;
 
     @FXML
+    private Button loginBtn1;
+
+    @FXML
     private AnchorPane mainForm;
 
     @FXML
@@ -210,13 +213,15 @@ public class LoginController implements Initializable {
         return null;
     }
 
-    @FXML
-    void registerFormLoad() throws IOException {
+
+    public void registerFormLoad() throws IOException {
         FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/example/demo3/RegForm.fxml"));
         Scene scene=new Scene(loader.load());
         Stage stage=new Stage();
         stage.setScene(scene);
         stage.show();
+
+        loginBtn1.getScene().getWindow().hide();
 
     }
 

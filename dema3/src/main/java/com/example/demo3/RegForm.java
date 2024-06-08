@@ -1,9 +1,15 @@
 package com.example.demo3;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
@@ -12,6 +18,9 @@ import java.sql.SQLException;
 
 public class RegForm {
 
+
+    @FXML
+    private ImageView back;
     @FXML
     private PasswordField confirmPwdBox;
 
@@ -20,8 +29,17 @@ public class RegForm {
 
     @FXML
     private TextField unameBox;
+    @FXML
+    private Button backBtn;
 
-
+    public void print() throws IOException {
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/example/demo3/login.fxml"));
+        Scene scene=new Scene(loader.load());
+        Stage stage=new Stage();
+        stage.setScene(scene);
+        stage.show();
+        back.getScene().getWindow().hide();
+    }
 
 
     String getHashPwd(String pwd) {
@@ -65,9 +83,17 @@ public class RegForm {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        back.getScene().getWindow().hide();
 
     }
+//    void backToLogin() throws IOException {
+//        FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/example/demo3/login.fxml"));
+//        Scene scene=new Scene(loader.load());
+//        Stage stage=new Stage();
+//        stage.setScene(scene);
+//        stage.show();
+//
+//    }
 
     @FXML
     void regBtnClicked(){
