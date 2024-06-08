@@ -14,7 +14,7 @@ public class Main extends Application {
 
         //should uncomment after testing
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("LoadingScreen.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 600, 306);
+        Scene scene = new Scene(fxmlLoader.load(), 525, 360);
 
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
