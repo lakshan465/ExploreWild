@@ -70,7 +70,7 @@
             </AnchorPane>
             <AnchorPane layoutX="350.0" layoutY="7.0" prefHeight="600.0" prefWidth="600.0">
                <children>
-                  <AnchorPane fx:id="anc_live" layoutX="2.0" layoutY="45.0" prefHeight="560.0" prefWidth="600.0" styleClass="right-form">
+                  <AnchorPane fx:id="anc_live" layoutX="2.0" layoutY="45.0" prefHeight="560.0" prefWidth="600.0" styleClass="right-form" visible="false">
                      <children>
                         <AnchorPane layoutX="63.0" layoutY="67.0" prefHeight="157.0" prefWidth="486.0" stylesheets="@AdminCss.css">
                            <children>
@@ -206,26 +206,35 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="anc_task" layoutX="91.0" layoutY="31.0" prefHeight="560.0" prefWidth="602.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                  <AnchorPane fx:id="anc_task" layoutX="91.0" layoutY="31.0" prefHeight="560.0" prefWidth="602.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
                      <children>
                         <AnchorPane layoutX="61.0" layoutY="75.0" prefHeight="253.0" prefWidth="504.0" stylesheets="@AdminCss.css">
                            <children>
-                              <Label layoutX="68.0" layoutY="40.0" text="Task ID">
+                              <Label layoutX="68.0" layoutY="47.0" text="Task ID">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField fx:id="txt_task_id" layoutX="130.0" layoutY="31.0" prefHeight="39.0" prefWidth="173.0" />
-                              <Label layoutX="21.0" layoutY="87.0" text="Zoo keeper ID">
+                              <TextField fx:id="txt_task_id" layoutX="130.0" layoutY="42.0" prefHeight="28.0" prefWidth="173.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></TextField>
+                              <Label layoutX="21.0" layoutY="98.0" text="Zoo keeper ID">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField fx:id="txt_keeper_id" layoutX="130.0" layoutY="79.0" prefHeight="37.0" prefWidth="173.0" />
+                              <TextField fx:id="txt_keeper_id" layoutX="130.0" layoutY="95.0" prefHeight="26.0" prefWidth="173.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></TextField>
                               <Button fx:id="add_task_btn" layoutX="364.0" layoutY="24.0" mnemonicParsing="false" onAction="#addTask" prefHeight="25.0" prefWidth="76.0" styleClass="add-btn" stylesheets="@loginCss.css" text="Add" />
                               <Label layoutX="39.0" layoutY="140.0" text="Description">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <TextField fx:id="txt_description" layoutX="129.0" layoutY="127.0" prefHeight="47.0" prefWidth="333.0" />
+                              <TextField fx:id="txt_description" layoutX="129.0" layoutY="142.0" prefHeight="32.0" prefWidth="333.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></TextField>
                               <Button fx:id="Delete_task_btn" layoutX="364.0" layoutY="57.0" mnemonicParsing="false" onAction="#deleteTask" prefHeight="26.0" prefWidth="76.0" styleClass="delete-btn" stylesheets="@loginCss.css" text="Delete" />
                               <Button fx:id="Search_task_btn" layoutX="364.0" layoutY="95.0" mnemonicParsing="false" onAction="#searchTask" prefHeight="26.0" prefWidth="76.0" styleClass="search-btn" stylesheets="@loginCss.css" text="Search" />
                               <Button fx:id="add_task_btn1" layoutX="281.0" layoutY="198.0" mnemonicParsing="false" onAction="#searchByPending" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Show Pending task" />
@@ -271,16 +280,16 @@
                      <children>
                         <AnchorPane layoutX="62.0" layoutY="113.0" prefHeight="173.0" prefWidth="480.0" stylesheets="@AdminCss.css">
                            <children>
-                              <Label layoutX="103.0" layoutY="40.0" text="Coustomer ID">
+                              <Label layoutX="104.0" layoutY="45.0" text="Coustomer ID">
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <Label layoutX="99.0" layoutY="95.0" prefHeight="21.0" prefWidth="107.0" text="New Password">
+                              <Label layoutX="96.0" layoutY="91.0" prefHeight="21.0" prefWidth="107.0" text="New Password">
                                  <font>
                                     <Font name="Noto Sans Regular" size="15.0" />
                                  </font></Label>
-                              <TextField fx:id="cuz_id_chng_pwd" layoutX="247.0" layoutY="32.0" prefHeight="37.0" prefWidth="166.0" />
-                              <TextField fx:id="cuz_pwd_chng_pwd" layoutX="247.0" layoutY="87.0" prefHeight="37.0" prefWidth="166.0" />
+                              <TextField fx:id="cuz_id_chng_pwd" layoutX="247.0" layoutY="41.0" prefHeight="28.0" prefWidth="166.0" />
+                              <TextField fx:id="cuz_pwd_chng_pwd" layoutX="247.0" layoutY="87.0" prefHeight="28.0" prefWidth="166.0" />
                            </children>
                            <styleClass>
                               <String fx:value="shadow" />
@@ -295,14 +304,14 @@
                         </Label>
                         <AnchorPane layoutX="62.0" layoutY="311.0" onDragDetected="#changePwdCuz" prefHeight="157.0" prefWidth="480.0" stylesheets="@AdminCss.css">
                            <children>
-                              <TextField fx:id="keeper_id_chng_pwd" layoutX="247.0" layoutY="23.0" prefHeight="37.0" prefWidth="166.0" />
-                              <TextField fx:id="keeper_pwd_chng_pwd" layoutX="247.0" layoutY="87.0" prefHeight="37.0" prefWidth="166.0" />
-                              <Label layoutX="100.0" layoutY="42.0" prefHeight="21.0" prefWidth="107.0" text="Zoo Keeper ID">
+                              <TextField fx:id="keeper_id_chng_pwd" layoutX="247.0" layoutY="34.0" prefHeight="26.0" prefWidth="166.0" />
+                              <TextField fx:id="keeper_pwd_chng_pwd" layoutX="247.0" layoutY="87.0" prefHeight="28.0" prefWidth="166.0" />
+                              <Label layoutX="100.0" layoutY="37.0" prefHeight="21.0" prefWidth="107.0" text="Zoo Keeper ID">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="98.0" layoutY="95.0" prefHeight="21.0" prefWidth="107.0" text="New Password">
+                              <Label layoutX="100.0" layoutY="91.0" prefHeight="21.0" prefWidth="107.0" text="New Password">
                                  <font>
                                     <Font name="Noto Sans Regular" size="15.0" />
                                  </font>

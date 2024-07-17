@@ -53,6 +53,7 @@ public class LoginController implements Initializable {
 
     public void adminLogin() {
         try {
+            int flag=0;
 
             if (unameTxt.getText().isEmpty() || pwdTxt.getText().isEmpty()) {
                 //Forced to Fill all text box
@@ -89,6 +90,7 @@ public class LoginController implements Initializable {
 
                 ResultSet resultAdmin = preAdmin.executeQuery();
                 if (resultAdmin.next()) {
+                    flag++;
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("login Successful!");
                     alert.setHeaderText(null);
@@ -132,6 +134,7 @@ public class LoginController implements Initializable {
 
                 ResultSet resultStaff = preStaff.executeQuery();
                 if (resultStaff.next()) {
+                    flag++;
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("login Successful!");
                     alert.setHeaderText(null);
@@ -159,6 +162,9 @@ public class LoginController implements Initializable {
 
                 ResultSet resultUser = preUser.executeQuery();
                 if (resultUser.next()) {
+
+                    flag++;
+
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("login Successful!");
                     alert.setHeaderText(null);
@@ -180,6 +186,16 @@ public class LoginController implements Initializable {
                     stage.setScene(scene);
                     stage.show();
                     stage.setResizable(false);
+                }
+                if( flag==0){
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error massage !");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Enterd UserName and Password not match!");
+                    alert.showAndWait();
+                    unameTxt.setText("");
+                    pwdTxt.setText("");
                 }
                 conn.close();
             }

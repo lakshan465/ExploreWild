@@ -57,19 +57,36 @@
             </AnchorPane>
             <AnchorPane prefHeight="600.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="350.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane fx:id="anc_ticket" layoutX="164.0" layoutY="24.0" prefHeight="600.0" prefWidth="550.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                  <AnchorPane fx:id="anc_ticket" layoutX="164.0" layoutY="24.0" prefHeight="600.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                      <children>
                         <AnchorPane layoutX="46.0" layoutY="346.0" prefHeight="200.0" prefWidth="460.0" stylesheets="@AdminCss.css">
                            <children>
-                              <Label layoutX="103.0" layoutY="23.0" text="Total" />
-                              <Label layoutX="143.0" layoutY="23.0" text="Rs." />
-                              <Label fx:id="label_total" layoutX="175.0" layoutY="23.0" text="xxxx" />
-                              <Label layoutX="122.0" layoutY="55.0" text="Amount" />
-                              <TextField fx:id="txt_payAmount" layoutX="238.0" layoutY="46.0" prefHeight="35.0" prefWidth="149.0" styleClass="choice" stylesheets="@AdminCss.css" />
-                              <Label layoutX="89.0" layoutY="113.0" text="Balance" />
-                              <Label layoutX="143.0" layoutY="113.0" text="Rs." />
-                              <Label fx:id="label_balance" layoutX="175.0" layoutY="113.0" text="xxxx" />
-                              <Button fx:id="btn_pay" layoutX="213.0" layoutY="155.0" mnemonicParsing="false" onAction="#pay" text="Pay" />
+                              <Label layoutX="181.0" layoutY="24.0" stylesheets="@loginCss.css" text="Total">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <Label layoutX="221.0" layoutY="24.0" stylesheets="@loginCss.css" text="Rs.">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <Label fx:id="label_total" layoutX="253.0" layoutY="24.0" stylesheets="@loginCss.css" text="xxxx">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <TextField fx:id="txt_payAmount" layoutX="137.0" layoutY="53.0" prefHeight="35.0" prefWidth="186.0" promptText="Amount" styleClass="choice" stylesheets="@AdminCss.css" />
+                              <Label layoutX="164.0" layoutY="114.0" stylesheets="@loginCss.css" text="Balance">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <Label layoutX="218.0" layoutY="114.0" stylesheets="@loginCss.css" text="Rs.">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <Label fx:id="label_balance" layoutX="250.0" layoutY="114.0" stylesheets="@loginCss.css" text="xxxx">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <Button fx:id="btn_pay" layoutX="205.0" layoutY="149.0" mnemonicParsing="false" onAction="#pay" prefHeight="32.0" prefWidth="51.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Pay" />
                            </children>
                            <styleClass>
                               <String fx:value="shadow" />
@@ -79,14 +96,11 @@
                         </AnchorPane>
                         <AnchorPane layoutX="27.0" layoutY="69.0" prefHeight="258.0" prefWidth="497.0" stylesheets="@AdminCss.css">
                            <children>
-                              <Label layoutX="82.0" layoutY="56.0" text="Name" />
-                              <TextField fx:id="txt_fname" layoutX="167.0" layoutY="44.0" prefHeight="40.0" prefWidth="149.0" promptText="First name" styleClass="choice" stylesheets="@AdminCss.css" />
-                              <TextField fx:id="txt_Lname" layoutX="323.0" layoutY="44.0" prefHeight="40.0" prefWidth="149.0" promptText="Last Name" styleClass="choice" stylesheets="@AdminCss.css" />
-                              <TextField fx:id="txt_parent" layoutX="323.0" layoutY="97.0" prefHeight="40.0" prefWidth="149.0" styleClass="choice" stylesheets="@AdminCss.css" />
-                              <Label layoutX="29.0" layoutY="97.0" text="Number of Visiting Parent" />
-                              <Label layoutX="77.0" layoutY="154.0" text="Number of Visiting Kids" />
-                              <TextField fx:id="txt_child" layoutX="323.0" layoutY="151.0" prefHeight="40.0" prefWidth="149.0" styleClass="choice" stylesheets="@AdminCss.css" />
-                              <Button fx:id="btn_calculate" layoutX="217.0" layoutY="212.0" mnemonicParsing="false" onAction="#calculate" text="Calculate" />
+                              <TextField fx:id="txt_fname" layoutX="68.0" layoutY="44.0" prefHeight="40.0" prefWidth="149.0" promptText="First name" styleClass="choice" stylesheets="@AdminCss.css" />
+                              <TextField fx:id="txt_Lname" layoutX="280.0" layoutY="44.0" prefHeight="40.0" prefWidth="149.0" promptText="Last Name" styleClass="choice" stylesheets="@AdminCss.css" />
+                              <TextField fx:id="txt_parent" layoutX="68.0" layoutY="111.0" prefHeight="40.0" prefWidth="174.0" promptText="Number of Visiting Parent" styleClass="choice" stylesheets="@AdminCss.css" />
+                              <TextField fx:id="txt_child" layoutX="280.0" layoutY="111.0" prefHeight="40.0" prefWidth="163.0" promptText="Number of Visiting Kids" styleClass="choice" stylesheets="@AdminCss.css" />
+                              <Button fx:id="btn_calculate" layoutX="202.0" layoutY="185.0" mnemonicParsing="false" onAction="#calculate" prefHeight="40.0" prefWidth="94.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Calculate" />
                            </children>
                            <styleClass>
                               <String fx:value="shadow" />
@@ -107,21 +121,21 @@
                         <Line endX="185.0" layoutX="253.0" layoutY="54.0" startX="-146.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="anc_tskNissue" prefHeight="600.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+                  <AnchorPane fx:id="anc_tskNissue" prefHeight="600.0" prefWidth="550.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
                      <children>
                         <AnchorPane layoutX="26.0" layoutY="71.0" prefHeight="310.0" prefWidth="497.0" stylesheets="@AdminCss.css">
                            <children>
-                              <TableView fx:id="table_task" layoutX="25.0" layoutY="96.0" prefHeight="200.0" prefWidth="447.0">
+                              <TableView fx:id="table_task" layoutX="25.0" layoutY="128.0" prefHeight="168.0" prefWidth="447.0">
                                 <columns>
                                   <TableColumn fx:id="taskid_col" prefWidth="84.0" text="TaskID" />
                                   <TableColumn fx:id="status_col" prefWidth="85.0" text="Status" />
                                     <TableColumn fx:id="description_col" prefWidth="277.0" text="Description" />
                                 </columns>
                               </TableView>
-                              <Button fx:id="btn_done" layoutX="116.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#done" text="Done" />
-                              <Button fx:id="btn_showComplateTask" layoutX="292.0" layoutY="61.0" mnemonicParsing="false" onAction="#searchByDone" text="Show My Complate Task" />
-                              <Button fx:id="btn_showPendingTask" layoutX="292.0" layoutY="23.0" mnemonicParsing="false" onAction="#searchByPending" prefHeight="25.0" prefWidth="146.0" text="Show My Pending Task" />
-                              <TextField fx:id="txt_taskId" layoutX="64.0" layoutY="23.0" promptText="Enter Completed Task Id Here" />
+                              <Button fx:id="btn_done" layoutX="116.0" layoutY="74.0" mnemonicParsing="false" onMouseClicked="#done" styleClass="add-btn" stylesheets="@loginCss.css" text="Done" />
+                              <Button fx:id="btn_showComplateTask" layoutX="292.0" layoutY="61.0" mnemonicParsing="false" onAction="#searchByDone" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Show My Complate Task" />
+                              <Button fx:id="btn_showPendingTask" layoutX="292.0" layoutY="23.0" mnemonicParsing="false" onAction="#searchByPending" prefHeight="25.0" prefWidth="146.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Show My Pending Task" />
+                              <TextField fx:id="txt_taskId" layoutX="64.0" layoutY="23.0" prefHeight="35.0" prefWidth="163.0" promptText="Enter Completed Task Id Here" />
                            </children>
                            <styleClass>
                               <String fx:value="white-bg" />
@@ -131,7 +145,7 @@
                         <AnchorPane layoutX="40.0" layoutY="397.0" prefHeight="94.0" prefWidth="472.0" stylesheets="@AdminCss.css">
                            <children>
                               <TextArea fx:id="txt_issueReport" layoutX="29.0" layoutY="20.0" prefHeight="55.0" prefWidth="313.0" promptText="Report Issue Here" />
-                              <Button fx:id="btn_send" layoutX="382.0" layoutY="35.0" mnemonicParsing="false" onAction="#reportIssue" onMouseClicked="#reportIssueWithAlert" text="Send" />
+                              <Button fx:id="btn_send" layoutX="382.0" layoutY="35.0" mnemonicParsing="false" onAction="#reportIssue" onMouseClicked="#reportIssueWithAlert" styleClass="add-btn" stylesheets="@loginCss.css" text="Send" />
                            </children>
                            <styleClass>
                               <String fx:value="white-bg" />
@@ -146,7 +160,6 @@
                         <ImageView fitHeight="30.0" fitWidth="40.0" layoutX="175.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true" />
                         <Line endX="180.0" layoutX="276.0" layoutY="49.0" startX="-193.0" />
                      </children></AnchorPane>
-                  <Button fx:id="btn_close" layoutX="495.0" layoutY="8.0" mnemonicParsing="false" onAction="#close" text="X" AnchorPane.bottomAnchor="567.0" AnchorPane.leftAnchor="495.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="8.0" />
                </children>
             </AnchorPane>
          </children>

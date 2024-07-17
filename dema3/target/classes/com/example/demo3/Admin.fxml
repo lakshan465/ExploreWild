@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
@@ -156,17 +157,17 @@
                                     <String fx:value="white-bg" />
                                  </styleClass>
                               </AnchorPane>
-                              <AnchorPane layoutX="20.0" layoutY="240.0" prefHeight="57.0" prefWidth="534.0" stylesheets="@AdminCss.css" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
+                              <AnchorPane layoutX="20.0" layoutY="248.0" prefHeight="57.0" prefWidth="534.0" stylesheets="@AdminCss.css" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0">
                                  <children>
-                                    <Button layoutX="43.0" layoutY="17.0" mnemonicParsing="false" onAction="#addAnimal" text="Add" />
-                                    <Button layoutX="161.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#deleteAnimal" text="Delete" />
-                                    <Button layoutX="282.0" layoutY="16.0" mnemonicParsing="false" onAction="#search" text="Search" />
-                                    <Button layoutX="406.0" layoutY="17.0" mnemonicParsing="false" onAction="#addAnimalUpdate" text="Update" />
+                                    <Button layoutX="43.0" layoutY="17.0" mnemonicParsing="false" onAction="#addAnimal" prefHeight="26.0" prefWidth="76.0" styleClass="add-btn" stylesheets="@loginCss.css" text="Add" />
+                                    <Button layoutX="161.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#deleteAnimal" prefHeight="26.0" prefWidth="76.0" styleClass="delete-btn" stylesheets="@loginCss.css" text="Delete" />
+                                    <Button layoutX="282.0" layoutY="16.0" mnemonicParsing="false" onAction="#search" prefHeight="26.0" prefWidth="76.0" styleClass="search-btn" stylesheets="@loginCss.css" text="Search" />
+                                    <Button layoutX="401.0" layoutY="17.0" mnemonicParsing="false" onAction="#addAnimalUpdate" prefHeight="26.0" prefWidth="76.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Update" />
                                  </children>
                                  <styleClass>
-                                    <String fx:value="shadow" />
-                                    <String fx:value="white-bg" />
                                     <String fx:value="ancControll" />
+                                    <String fx:value="white-bg" />
+                                    <String fx:value="shadow" />
                                  </styleClass>
                               </AnchorPane>
                               <Label layoutX="239.0" layoutY="12.0" text="Animal Data">
@@ -205,21 +206,30 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="anc_task" layoutX="91.0" layoutY="31.0" prefHeight="560.0" prefWidth="602.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                  <AnchorPane fx:id="anc_task" layoutX="91.0" layoutY="31.0" prefHeight="560.0" prefWidth="602.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
                      <children>
-                        <AnchorPane layoutX="61.0" layoutY="75.0" prefHeight="199.0" prefWidth="504.0" stylesheets="@AdminCss.css">
+                        <AnchorPane layoutX="61.0" layoutY="75.0" prefHeight="253.0" prefWidth="504.0" stylesheets="@AdminCss.css">
                            <children>
-                              <Label layoutX="52.0" layoutY="32.0" text="Task ID" />
-                              <TextField fx:id="txt_task_id" layoutX="135.0" layoutY="28.0" />
-                              <Label layoutX="40.0" layoutY="68.0" text="Zoo keeper ID" />
-                              <TextField fx:id="txt_keeper_id" layoutX="135.0" layoutY="64.0" />
-                              <Button fx:id="add_task_btn" layoutX="366.0" layoutY="28.0" mnemonicParsing="false" onAction="#addTask" text="Add" />
-                              <Label layoutX="40.0" layoutY="106.0" text="Description" />
-                              <TextField fx:id="txt_description" layoutX="135.0" layoutY="102.0" />
-                              <Button fx:id="Delete_task_btn" layoutX="392.0" layoutY="73.0" mnemonicParsing="false" onAction="#deleteTask" text="Delete" />
-                              <Button fx:id="Search_task_btn" layoutX="333.0" layoutY="73.0" mnemonicParsing="false" onAction="#searchTask" text="Search" />
-                              <Button fx:id="add_task_btn1" layoutX="333.0" layoutY="111.0" mnemonicParsing="false" onAction="#searchByPending" text="Show Pending task" />
-                              <Button fx:id="add_task_btn11" layoutX="333.0" layoutY="151.0" mnemonicParsing="false" onAction="#searchByDone" text="Show Finished task" />
+                              <Label layoutX="68.0" layoutY="47.0" text="Task ID">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <TextField fx:id="txt_task_id" layoutX="130.0" layoutY="42.0" prefHeight="28.0" prefWidth="173.0" />
+                              <Label layoutX="21.0" layoutY="98.0" text="Zoo keeper ID">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <TextField fx:id="txt_keeper_id" layoutX="130.0" layoutY="95.0" prefHeight="26.0" prefWidth="173.0" />
+                              <Button fx:id="add_task_btn" layoutX="364.0" layoutY="24.0" mnemonicParsing="false" onAction="#addTask" prefHeight="25.0" prefWidth="76.0" styleClass="add-btn" stylesheets="@loginCss.css" text="Add" />
+                              <Label layoutX="39.0" layoutY="140.0" text="Description">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <TextField fx:id="txt_description" layoutX="129.0" layoutY="142.0" prefHeight="32.0" prefWidth="333.0" />
+                              <Button fx:id="Delete_task_btn" layoutX="364.0" layoutY="57.0" mnemonicParsing="false" onAction="#deleteTask" prefHeight="26.0" prefWidth="76.0" styleClass="delete-btn" stylesheets="@loginCss.css" text="Delete" />
+                              <Button fx:id="Search_task_btn" layoutX="364.0" layoutY="95.0" mnemonicParsing="false" onAction="#searchTask" prefHeight="26.0" prefWidth="76.0" styleClass="search-btn" stylesheets="@loginCss.css" text="Search" />
+                              <Button fx:id="add_task_btn1" layoutX="281.0" layoutY="198.0" mnemonicParsing="false" onAction="#searchByPending" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Show Pending task" />
+                              <Button fx:id="add_task_btn11" layoutX="105.0" layoutY="198.0" mnemonicParsing="false" onAction="#searchByDone" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Show Finished task" />
                            </children>
                            <styleClass>
                               <String fx:value="shadow" />
@@ -227,9 +237,9 @@
                               <String fx:value="white-bg" />
                            </styleClass>
                         </AnchorPane>
-                        <AnchorPane layoutX="73.0" layoutY="280.0" prefHeight="260.0" prefWidth="480.0" stylesheets="@AdminCss.css">
+                        <AnchorPane layoutX="73.0" layoutY="345.0" prefHeight="199.0" prefWidth="480.0" stylesheets="@AdminCss.css">
                            <children>
-                              <TableView fx:id="task_table_view" layoutX="11.0" layoutY="18.0" onMouseClicked="#addTaskSelect" prefHeight="229.0" prefWidth="457.0">
+                              <TableView fx:id="task_table_view" layoutX="12.0" layoutY="15.0" onMouseClicked="#addTaskSelect" prefHeight="173.0" prefWidth="457.0">
                                  <columns>
                                     <TableColumn fx:id="task_id_col" prefWidth="61.0" text="Task id" />
                                     <TableColumn fx:id="keeper_id_col" minWidth="0.0" prefWidth="76.0" text="Keeper ID" />
@@ -257,14 +267,20 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="anc_ChangePwd" layoutY="48.0" prefHeight="544.0" prefWidth="602.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
+                  <AnchorPane fx:id="anc_ChangePwd" layoutY="48.0" prefHeight="544.0" prefWidth="602.0" visible="false" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="48.0">
                      <children>
-                        <AnchorPane layoutX="62.0" layoutY="160.0" prefHeight="150.0" prefWidth="480.0" stylesheets="@AdminCss.css">
+                        <AnchorPane layoutX="62.0" layoutY="113.0" prefHeight="173.0" prefWidth="480.0" stylesheets="@AdminCss.css">
                            <children>
-                              <Label layoutX="107.0" layoutY="36.0" text="Coustermer id" />
-                              <Label layoutX="127.0" layoutY="91.0" prefHeight="17.0" prefWidth="55.0" text="New Pwd" />
-                              <TextField fx:id="cuz_id_chng_pwd" layoutX="247.0" layoutY="32.0" />
-                              <TextField fx:id="cuz_pwd_chng_pwd" layoutX="247.0" layoutY="87.0" />
+                              <Label layoutX="104.0" layoutY="45.0" text="Coustomer ID">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font></Label>
+                              <Label layoutX="96.0" layoutY="91.0" prefHeight="21.0" prefWidth="107.0" text="New Password">
+                                 <font>
+                                    <Font name="Noto Sans Regular" size="15.0" />
+                                 </font></Label>
+                              <TextField fx:id="cuz_id_chng_pwd" layoutX="247.0" layoutY="41.0" prefHeight="28.0" prefWidth="166.0" />
+                              <TextField fx:id="cuz_pwd_chng_pwd" layoutX="247.0" layoutY="87.0" prefHeight="28.0" prefWidth="166.0" />
                            </children>
                            <styleClass>
                               <String fx:value="shadow" />
@@ -272,17 +288,25 @@
                               <String fx:value="white-bg" />
                            </styleClass>
                         </AnchorPane>
-                        <Label layoutX="302.0" layoutY="87.0" text="Change pwd">
+                        <Label layoutX="249.0" layoutY="14.0" prefHeight="47.0" prefWidth="197.0" text="Change Password" textAlignment="CENTER">
                            <font>
-                              <Font name="System Bold" size="17.0" />
+                              <Font name="System Bold" size="21.0" />
                            </font>
                         </Label>
-                        <AnchorPane layoutX="62.0" layoutY="334.0" onDragDetected="#changePwdCuz" prefHeight="150.0" prefWidth="480.0" stylesheets="@AdminCss.css">
+                        <AnchorPane layoutX="62.0" layoutY="311.0" onDragDetected="#changePwdCuz" prefHeight="157.0" prefWidth="480.0" stylesheets="@AdminCss.css">
                            <children>
-                              <Label layoutX="107.0" layoutY="27.0" text="Zoo keeper ID" />
-                              <Label layoutX="133.0" layoutY="87.0" text="New Pwd" />
-                              <TextField fx:id="keeper_id_chng_pwd" layoutX="247.0" layoutY="23.0" />
-                              <TextField fx:id="keeper_pwd_chng_pwd" layoutX="247.0" layoutY="87.0" />
+                              <TextField fx:id="keeper_id_chng_pwd" layoutX="247.0" layoutY="34.0" prefHeight="26.0" prefWidth="166.0" />
+                              <TextField fx:id="keeper_pwd_chng_pwd" layoutX="247.0" layoutY="87.0" prefHeight="28.0" prefWidth="166.0" />
+                              <Label layoutX="100.0" layoutY="37.0" prefHeight="21.0" prefWidth="107.0" text="Zoo Keeper ID">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="100.0" layoutY="91.0" prefHeight="21.0" prefWidth="107.0" text="New Password">
+                                 <font>
+                                    <Font name="Noto Sans Regular" size="15.0" />
+                                 </font>
+                              </Label>
                            </children>
                            <styleClass>
                               <String fx:value="shadow" />
@@ -290,16 +314,20 @@
                               <String fx:value="white-bg" />
                            </styleClass>
                         </AnchorPane>
-                        <Line endX="264.0" layoutX="292.0" layoutY="145.0" startX="-246.0" />
-                        <ImageView fitHeight="33.0" fitWidth="40.0" layoutX="251.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
+                        <Line endX="264.0" layoutX="293.0" layoutY="76.0" startX="-246.0" />
+                        <ImageView fitHeight="67.0" fitWidth="76.0" layoutX="155.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@img/user-lock-solid.png" />
                            </image>
                         </ImageView>
-                        <Button layoutX="291.0" layoutY="499.0" mnemonicParsing="false" onAction="#changePwdCuz" text="Change" />
+                        <Button layoutX="241.0" layoutY="492.0" mnemonicParsing="false" onAction="#changePwdCuz" prefHeight="32.0" prefWidth="160.0" styleClass="login-btnLK" text="Change Password">
+                           <stylesheets>
+                              <URL value="@CoWorker.css" />
+                              <URL value="@AdminCss.css" />
+                              <URL value="@loginCss.css" />
+                           </stylesheets></Button>
                      </children>
                   </AnchorPane>
-                  <Button layoutX="536.0" layoutY="19.0" mnemonicParsing="false" onAction="#close" styleClass="close" stylesheets="@loginCss.css" text="X" />
                </children>
             </AnchorPane>
          </children>

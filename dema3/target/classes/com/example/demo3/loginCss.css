@@ -78,3 +78,30 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/CascadeStyleSheet.css to ed
 .logout-btn:hover{
     -fx-background-color: linear-gradient(to bottom right,  #ed588a,#de2160);
 }
+
+.add-btn{
+    -fx-background-color: linear-gradient(to bottom right, #600794, #07348f);
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+}
+
+.search-btn{
+    -fx-background-color: linear-gradient(to bottom right, #56e627, #1d6e03);
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+}
+
+.delete-btn{
+    -fx-background-color: linear-gradient(to bottom right, #f562f0, #a8080e);
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+    -fx-font-size:14px;
+    -fx-font-family:"Arial";
+}
