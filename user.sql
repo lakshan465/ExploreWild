@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 08, 2024 at 09:53 AM
+-- Generation Time: Jul 17, 2024 at 10:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -38,13 +38,12 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `password`) VALUES
-(7, 'Lakshan', '321c'),
 (8, 'Oshan', '321c'),
 (9, 'Hansa', '321c'),
 (10, 'Kaveesha', '321c'),
 (11, 'Thimathi', '321c'),
 (12, 'Dinithi', '321c'),
-(13, 'Customer', 'f2a47efc13c9e8bd5cdea17a738b48114eeb5589\r\n'),
+(13, 'Customer', 'd5eea66f2b1ad0f5d7f446d66d797b35335efb3c'),
 (14, 'Customer', '0e85749a6f40d4614b87411e141fe8109099bc4f');
 
 --

@@ -133,10 +133,26 @@
                   <Line endX="185.0" layoutX="253.0" layoutY="54.0" startX="-146.0" />
                   <AnchorPane layoutX="35.0" layoutY="85.0" prefHeight="258.0" prefWidth="497.0" stylesheets="@AdminCss.css">
                      <children>
-                        <TextField fx:id="txt_fname" layoutX="68.0" layoutY="44.0" prefHeight="40.0" prefWidth="149.0" promptText="First name" styleClass="choice" stylesheets="@AdminCss.css" />
-                        <TextField fx:id="txt_Lname" layoutX="280.0" layoutY="44.0" prefHeight="40.0" prefWidth="149.0" promptText="Last Name" styleClass="choice" stylesheets="@AdminCss.css" />
-                        <TextField fx:id="txt_parent" layoutX="68.0" layoutY="111.0" prefHeight="40.0" prefWidth="174.0" promptText="Number of Visiting Parent" styleClass="choice" stylesheets="@AdminCss.css" />
-                        <TextField fx:id="txt_child" layoutX="280.0" layoutY="111.0" prefHeight="40.0" prefWidth="163.0" promptText="Number of Visiting Kids" styleClass="choice" stylesheets="@AdminCss.css" />
+                        <TextField fx:id="txt_fname" layoutX="68.0" layoutY="44.0" prefHeight="40.0" prefWidth="149.0" promptText="First name" styleClass="choice" stylesheets="@AdminCss.css">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="txt_Lname" layoutX="280.0" layoutY="44.0" prefHeight="40.0" prefWidth="149.0" promptText="Last Name" styleClass="choice" stylesheets="@AdminCss.css">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="txt_parent" layoutX="42.0" layoutY="111.0" prefHeight="40.0" prefWidth="200.0" promptText="Number of Visiting Parent" styleClass="choice" stylesheets="@AdminCss.css">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="txt_child" layoutX="257.0" layoutY="111.0" prefHeight="40.0" prefWidth="186.0" promptText="Number of Visiting Kids" styleClass="choice" stylesheets="@AdminCss.css">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
                         <Button fx:id="btn_calculate" layoutX="202.0" layoutY="185.0" mnemonicParsing="false" onAction="#calculate" prefHeight="40.0" prefWidth="94.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Calculate" />
                      </children>
                      <styleClass>
@@ -162,7 +178,11 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="txt_payAmount" layoutX="137.0" layoutY="53.0" prefHeight="35.0" prefWidth="186.0" promptText="Amount" styleClass="choice" stylesheets="@AdminCss.css" />
+                        <TextField fx:id="txt_payAmount" layoutX="137.0" layoutY="53.0" prefHeight="35.0" prefWidth="186.0" promptText="Amount" styleClass="choice" stylesheets="@AdminCss.css">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </TextField>
                         <Label layoutX="164.0" layoutY="114.0" stylesheets="@loginCss.css" text="Balance">
                            <font>
                               <Font size="15.0" />
