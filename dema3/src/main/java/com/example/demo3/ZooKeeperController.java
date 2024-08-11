@@ -22,6 +22,15 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+
+//import for pay thread code stArt..........
+import javafx.application.Platform;
+import javafx.scene.control.Button;
+import javafx.scene.control.Alert;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+//import for pay thread code end..........
 public class ZooKeeperController implements Initializable {
 
 
@@ -215,7 +224,7 @@ public class ZooKeeperController implements Initializable {
     //titcket
 
     public void calculate() {//calculate cost based on members, no sql quarres execute in this function
-
+        System.out.println("cal function");
 
         if (txt_fname.getText().isEmpty() || txt_Lname.getText().isEmpty() || txt_parent.getText().isEmpty() || txt_child.getText().isEmpty()) {
             Alert alert;
@@ -240,81 +249,208 @@ public class ZooKeeperController implements Initializable {
         }
     }
 
-    public void pay() throws SQLException {//making balance and quereis execute for two tables
+    //pay function without thread start.....................
+
+//    public void pay() throws SQLException {//making balance and quereis execute for two tables
+//        System.out.println("pay function");
+//        if (txt_fname.getText().isEmpty() || txt_Lname.getText().isEmpty() || txt_parent.getText().isEmpty() || txt_child.getText().isEmpty()) {
+//            Alert alert;
+//
+//            alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("ERROR Message");
+//            alert.setHeaderText(null);
+//            alert.setContentText("Fill empty text field!");
+//            alert.showAndWait();
+//
+//        } else {
+//
+//
+//            int payment = Integer.parseInt(txt_payAmount.getText());
+//
+//            int numParent = Integer.parseInt(txt_parent.getText());
+//            int numChild = Integer.parseInt(txt_child.getText());
+//
+//            int total = numParent * 500 + numChild * 200;
+//
+//            label_balance.setText(String.valueOf(payment - total));
+//
+//            String sql = "INSERT INTO `ticket` ( `Fname`, `Lname`, `parentCount`, `kidCount`) VALUES ( ?, ?, ?, ?)";
+//            String sql2 = "INSERT INTO `revenue` (`Fname`, `total`) VALUES (?, ?)";
+//
+//            try {
+//                con.setAutoCommit(false); //step one
+//
+//
+//                ps = con.prepareStatement(sql);
+//                ps.setString(1, txt_fname.getText());
+//                ps.setString(2, txt_Lname.getText());
+//                ps.setInt(3, Integer.parseInt(txt_parent.getText()));
+//                ps.setInt(4, Integer.parseInt(txt_child.getText()));
+//
+//                ps.executeUpdate();
+//
+//                ps = con.prepareStatement(sql2);
+//                ps.setString(1, txt_fname.getText());
+//                ps.setInt(2, total);
+//
+//                ps.executeUpdate();
+//                //con.commit(); //step two
+//                System.out.println("payment is "+payment+" total is "+total);
+//
+//                if (payment < total) {
+//                    con.rollback();
+//
+//                    Alert alert;
+//
+//                    alert = new Alert(Alert.AlertType.ERROR);
+//                    alert.setTitle("ERROR Message");
+//                    alert.setHeaderText(null);
+//                    alert.setContentText("payment not sufficient!");
+//                    alert.showAndWait();
+//                    clearAmount();
+//
+//                }else {
+//                    // Commit should happen only if the payment is sufficient
+//                    con.commit();
+//                    clearAll();
+//                }
+//
+//            } catch (SQLException e) {
+//                e.printStackTrace();
+//                if (con != null) {
+//                    try {
+//                        con.rollback(); //step three
+//                    } catch (SQLException ex) {
+//                        throw new RuntimeException(ex);
+//                    }
+//                }
+//            }
+//        }
+//
+//    }
+
+    //pay function without thread end.....................
+
+    //......................................................using thread....
+    //code start
 
 
-        if (txt_fname.getText().isEmpty() || txt_Lname.getText().isEmpty() || txt_parent.getText().isEmpty() || txt_child.getText().isEmpty()) {
-            Alert alert;
+    public class PaymentHandler {
+        private Connection con;
+        private PreparedStatement ps;
+        private Button payButton; // Add a reference to the pay button
 
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("ERROR Message");
-            alert.setHeaderText(null);
-            alert.setContentText("Fill empaty text field!");
-            alert.showAndWait();
-
-        } else {
-
-
-            int payment = Integer.parseInt(txt_payAmount.getText());
-
-            int numParent = Integer.parseInt(txt_parent.getText());
-            int numChild = Integer.parseInt(txt_child.getText());
-
-            int total = numParent * 500 + numChild * 200;
-
-            label_balance.setText(String.valueOf(payment - total));
-
-            String sql = "INSERT INTO `ticket` ( `Fname`, `Lname`, `parentCount`, `kidCount`) VALUES ( ?, ?, ?, ?)";
-            String sql2 = "INSERT INTO `revenue` (`Fname`, `total`) VALUES (?, ?)";
-
-            try {
-                con.setAutoCommit(false); //step one
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-
-                ps = con.prepareStatement(sql);
-                ps.setString(1, txt_fname.getText());
-                ps.setString(2, txt_Lname.getText());
-                ps.setInt(3, Integer.parseInt(txt_parent.getText()));
-                ps.setInt(4, Integer.parseInt(txt_child.getText()));
-
-                ps.executeUpdate();
-
-                ps = con.prepareStatement(sql2);
-                ps.setString(1, txt_fname.getText());
-                ps.setInt(2, total);
-
-                ps.executeUpdate();
-                con.commit(); //step two
-
-                if (payment < total) {
-                    con.rollback();
-
-                    Alert alert;
-
-                    alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("ERROR Message");
-                    alert.setHeaderText(null);
-                    alert.setContentText("payment not sufficient!");
-                    alert.showAndWait();
-                    clear();
-
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                if (con != null) {
-                    try {
-                        con.rollback(); //step three
-                    } catch (SQLException ex) {
-                        throw new RuntimeException(ex);
-                    }
-                }
-            }
+        public PaymentHandler(Connection con, Button payButton) {
+            this.con = con;
+            this.payButton = payButton;
         }
 
+        public void pay() throws SQLException {
+            System.out.println("pay function");
+
+            if (txt_fname.getText().isEmpty() || txt_Lname.getText().isEmpty() || txt_parent.getText().isEmpty() || txt_child.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("ERROR Message");
+                alert.setHeaderText(null);
+                alert.setContentText("Fill empty text field!");
+                alert.showAndWait();
+            } else {
+                int payment = Integer.parseInt(txt_payAmount.getText());
+                int numParent = Integer.parseInt(txt_parent.getText());
+                int numChild = Integer.parseInt(txt_child.getText());
+                int total = numParent * 500 + numChild * 200;
+
+                label_balance.setText(String.valueOf(payment - total));
+
+                String sql = "INSERT INTO `ticket` ( `Fname`, `Lname`, `parentCount`, `kidCount`) VALUES (?, ?, ?, ?)";
+                String sql2 = "INSERT INTO `revenue` (`Fname`, `total`) VALUES (?, ?)";
+
+                try {
+                    con.setAutoCommit(false); // Disable auto-commit
+
+                    ps = con.prepareStatement(sql);
+                    ps.setString(1, txt_fname.getText());
+                    ps.setString(2, txt_Lname.getText());
+                    ps.setInt(3, Integer.parseInt(txt_parent.getText()));
+                    ps.setInt(4, Integer.parseInt(txt_child.getText()));
+                    ps.executeUpdate();
+
+                    ps = con.prepareStatement(sql2);
+                    ps.setString(1, txt_fname.getText());
+                    ps.setInt(2, total);
+                    ps.executeUpdate();
+
+                    System.out.println("payment is " + payment + " total is " + total);
+
+                    if (payment < total) {
+                        con.rollback(); // Rollback if payment is insufficient
+
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("ERROR Message");
+                        alert.setHeaderText(null);
+                        alert.setContentText("payment not sufficient!");
+                        alert.showAndWait();
+                        clearAmount();
+                    } else {
+                        con.commit(); // Commit if payment is sufficient
+                        clearAll();
+                    }
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    if (con != null) {
+                        try {
+                            con.rollback(); // Rollback in case of an exception
+                        } catch (SQLException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                } finally {
+                    // Ensure the button is re-enabled after the operation
+                    Platform.runLater(() -> payButton.setDisable(false));
+                }
+            }
+
+            // Disable the button for 10 seconds to prevent multiple submissions
+            payButton.setDisable(true);
+            new Thread(() -> {
+                try {
+                    Thread.sleep(10000); // 10 seconds
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                Platform.runLater(() -> payButton.setDisable(false)); // Re-enable the button
+            }).start();
+        }
+
+//        private void clearAmount() {
+//            // Implementation for clearing the amount field
+//        }
+//
+//        private void clearAll() {
+//            // Implementation for clearing all fields
+//        }
+    }
+    //......................................................using thread....
+    //code end
+
+
+    public void clearAmount() {
+
+//        txt_fname.setText("");
+//        txt_Lname.setText("");
+//        txt_parent.setText("");
+//        txt_child.setText("");
+        txt_payAmount.setText("");
+    }
+
+    public void clearAll() {
+
+        txt_fname.setText("");
+        txt_Lname.setText("");
+        txt_parent.setText("");
+        txt_child.setText("");
+        txt_payAmount.setText("");
     }
 
     //ticket end

@@ -83,13 +83,17 @@ public class LoginController implements Initializable {
 
                 preStaff.setString(1, unameTxt.getText());
                 preStaff.setString(2,getHashPwd(pwdTxt.getText()));
-
+                //System.out.println("sff");
                 preUser.setString(1, unameTxt.getText());
                 preUser.setString(2, getHashPwd(pwdTxt.getText()));
 
 
                 ResultSet resultAdmin = preAdmin.executeQuery();
+//                System.out.println("before if "+resultAdmin.next());
+//                boolean ra=resultAdmin.next();
+//                System.out.println(ra);
                 if (resultAdmin.next()) {
+                    System.out.println("resultAdmin.next() is ok");
                     flag++;
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("login Successful!");
@@ -102,19 +106,6 @@ public class LoginController implements Initializable {
                     //based on username admin name wil change
                     AdminController.name= unameTxt.getText();
 
-
-
-
-
-
-
-//                    String name =unameTxt.getText();
-//                    AdminController ad = new AdminController();
-//                    public Label una;
-//                    una.setText(name);
-//                    ad.static_admin_name = una;
-//                    System.out.println("next window load");
-//                    resultAdmin.close();
 
                     //hide login window
                     loginBtn.getScene().getWindow().hide();
@@ -220,7 +211,7 @@ public class LoginController implements Initializable {
 
             }
 
-
+            System.out.println(sb.toString());
             return sb.toString();
 
         } catch (NoSuchAlgorithmException e) {

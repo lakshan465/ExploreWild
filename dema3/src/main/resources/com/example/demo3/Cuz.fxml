@@ -2,7 +2,6 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -16,7 +15,6 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo3.CuzController">
    <children>
@@ -91,25 +89,19 @@
             </AnchorPane>
             <AnchorPane fx:id="anc_liveFeed" layoutX="332.8" prefHeight="600.0" prefWidth="567.0" stylesheets="@AdminCss.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="333.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <AnchorPane layoutX="-1.0" layoutY="2.0" prefHeight="591.0" prefWidth="567.0">
-                     <children>
-                        <Text fill="#bf0a0a" layoutX="228.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LiveFeed" wrappingWidth="112.0">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Text>
-                        <Button fx:id="playBtn" layoutX="170.0" layoutY="482.0" mnemonicParsing="false" onAction="#playBtn" prefHeight="48.0" prefWidth="206.0" text="Watch">
-                           <font>
-                              <Font size="25.0" />
-                           </font>
-                        </Button>
-                        <ChoiceBox layoutX="198.0" layoutY="283.0" prefWidth="150.0" />
-                        <Text layoutX="103.0" layoutY="239.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose Animal To Watch" wrappingWidth="361.60003051757826">
-                           <font>
-                              <Font size="32.0" />
-                           </font>
-                        </Text>
-                     </children></AnchorPane>
+                  <AnchorPane layoutX="-1.0" layoutY="2.0" prefHeight="591.0" prefWidth="567.0" visible="false" />
+                  <Label layoutX="236.0" layoutY="35.0" prefHeight="32.0" prefWidth="112.0" text="Live Feed" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+                  <Line endX="185.0" layoutX="241.0" layoutY="67.0" startX="-146.0" />
+                  <ImageView fitHeight="28.0" fitWidth="28.0" layoutX="195.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/video-solid.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="webBtn" layoutX="240.0" layoutY="181.0" mnemonicParsing="false" onAction="#playBtn" text="Button" />
                </children>
             </AnchorPane>
             <AnchorPane fx:id="anc_map" layoutX="332.0" prefHeight="600.0" prefWidth="550.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="332.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="0.0">
@@ -198,7 +190,7 @@
                               <Font size="15.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btn_pay" layoutX="205.0" layoutY="149.0" mnemonicParsing="false" onAction="#pay" prefHeight="32.0" prefWidth="51.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Pay" />
+                        <Button fx:id="btn_pay" layoutX="205.0" layoutY="149.0" mnemonicParsing="false" onAction="#payment" prefHeight="32.0" prefWidth="51.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Pay" />
                      </children>
                      <styleClass>
                         <String fx:value="shadow" />

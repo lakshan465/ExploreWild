@@ -72,7 +72,7 @@ public class RegForm {
         String uname=unameBox.getText();
         String pwd=getHashPwd(pwdBox.getText());
 
-        String sql="INSERT INTO admin (`username`, `password`) VALUES('"+uname+"','"+pwd+"')";
+        String sql="INSERT INTO user (`username`, `password`) VALUES('"+uname+"','"+pwd+"')";
 
         try {
             Connection con=dbConnection.connection();
@@ -96,7 +96,7 @@ public class RegForm {
 //    }
 
     @FXML
-    void regBtnClicked(){
+    void regBtnClicked() throws IOException {
         if(unameBox.getText().isEmpty() || pwdBox.getText().isEmpty() ||confirmPwdBox.getText().isEmpty()){
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -109,6 +109,14 @@ public class RegForm {
             alert.setTitle("Registerd!");
             alert.setContentText("Close this window!");
             alert.showAndWait();
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo3/LoadingScreen.fxml"));
+
+            Scene scene = new Scene(fxmlLoader.load(), 525, 360);
+            Stage stage = new Stage();
+
+            stage.setScene(scene);
+            stage.show();
+            stage.setResizable(false);
         }
     }
 
