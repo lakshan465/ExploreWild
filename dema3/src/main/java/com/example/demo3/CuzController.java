@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.web.WebView;
+//import javafx.scene.web.WebView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -464,23 +464,23 @@ public class CuzController implements Initializable {
     //Live Feed
 
     public void playBtn() {
-        WebView webView = new WebView();
-        try {
-            webView.getEngine().load("https://www.youtube.com/watch?v=gTz_7tKUfYM");
-            webView.setPrefSize(700, 500);
-
-            Scene scene = new Scene(webView);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-
-            stage.setOnCloseRequest(windowEvent -> {
-                stage.close();
-            });
-        } catch (Exception e) {
-            System.out.println("Error loading video: " + e.getMessage());
-            // You can also handle the exception in other ways, e.g., display an error message to the user
-        }
+//        WebView webView = new WebView();
+//        try {
+//            webView.getEngine().load("https://www.youtube.com/watch?v=gTz_7tKUfYM");
+//            webView.setPrefSize(700, 500);
+//
+//            Scene scene = new Scene(webView);
+//            Stage stage = new Stage();
+//            stage.setScene(scene);
+//            stage.show();
+//
+//            stage.setOnCloseRequest(windowEvent -> {
+//                stage.close();
+//            });
+//        } catch (Exception e) {
+//            System.out.println("Error loading video: " + e.getMessage());
+//            // You can also handle the exception in other ways, e.g., display an error message to the user
+//        }
     }
 
 //    con.close();
