@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 29, 2024 at 01:40 PM
+-- Generation Time: Sep 02, 2024 at 06:06 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -69,15 +69,9 @@ INSERT INTO `animal` (`animal_id`, `animal_type`, `cage_id`, `sex`) VALUES
 --
 
 CREATE TABLE `current_cus` (
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `current_cus`
---
-
-INSERT INTO `current_cus` (`id`) VALUES
-(1);
+  `id` int(100) NOT NULL,
+  `number` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -86,15 +80,16 @@ INSERT INTO `current_cus` (`id`) VALUES
 --
 
 CREATE TABLE `current_keepers` (
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(100) NOT NULL,
+  `number` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `current_keepers`
 --
 
-INSERT INTO `current_keepers` (`id`) VALUES
-(1);
+INSERT INTO `current_keepers` (`id`, `number`) VALUES
+(3, 1);
 
 -- --------------------------------------------------------
 
@@ -737,13 +732,13 @@ ALTER TABLE `animal`
 -- AUTO_INCREMENT for table `current_cus`
 --
 ALTER TABLE `current_cus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `current_keepers`
 --
 ALTER TABLE `current_keepers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `issue`
