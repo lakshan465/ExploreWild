@@ -307,12 +307,12 @@ public class ZooKeeperController implements Initializable {
 //                    alert.setHeaderText(null);
 //                    alert.setContentText("payment not sufficient!");
 //                    alert.showAndWait();
-//                    clearAmount();
+//
 //
 //                }else {
 //                    // Commit should happen only if the payment is sufficient
 //                    con.commit();
-//                    clearAll();
+//
 //                }
 //
 //            } catch (SQLException e) {
@@ -333,7 +333,92 @@ public class ZooKeeperController implements Initializable {
 
     //......................................................using thread....
     //code start
+    public void payment(ActionEvent event) {
+        System.out.println("pay function");
 
+        if (txt_fname.getText().isEmpty() || txt_Lname.getText().isEmpty() || txt_parent.getText().isEmpty() || txt_child.getText().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("ERROR Message");
+            alert.setHeaderText(null);
+            alert.setContentText("Fill empty text field!");
+            alert.showAndWait();
+        } else {
+            int payment = Integer.parseInt(txt_payAmount.getText());
+            int numParent = Integer.parseInt(txt_parent.getText());
+            int numChild = Integer.parseInt(txt_child.getText());
+            int total = numParent * 500 + numChild * 200;
+
+            label_balance.setText(String.valueOf(payment - total));
+
+            String sql = "INSERT INTO `ticket` ( `Fname`, `Lname`, `parentCount`, `kidCount`) VALUES (?, ?, ?, ?)";
+            String sql2 = "INSERT INTO `revenue` (`Fname`, `total`) VALUES (?, ?)";
+
+            try {
+                con.setAutoCommit(false); // Disable auto-commit
+
+                ps = con.prepareStatement(sql);
+                ps.setString(1, txt_fname.getText());
+                ps.setString(2, txt_Lname.getText());
+                ps.setInt(3, Integer.parseInt(txt_parent.getText()));
+                ps.setInt(4, Integer.parseInt(txt_child.getText()));
+                ps.executeUpdate();
+
+                ps = con.prepareStatement(sql2);
+                ps.setString(1, txt_fname.getText());
+                ps.setInt(2, total);
+                ps.executeUpdate();
+
+                System.out.println("payment is " + payment + " total is " + total);
+
+                if (payment < total) {
+                    con.rollback(); // Rollback if payment is insufficient
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("ERROR Message");
+                    alert.setHeaderText(null);
+                    alert.setContentText("payment not sufficient!");
+                    alert.showAndWait();
+
+                } else {
+                    con.commit(); // Commit if payment is sufficient
+
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                if (con != null) {
+                    try {
+                        con.rollback(); // Rollback in case of an exception
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                }
+            } finally {
+                // Ensure the button is re-enabled after the operation
+//                Platform.runLater(() -> btn_pay.setDisable(false));
+                btn_pay.setDisable(true);
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(5000); // 5 seconds
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Platform.runLater(() -> btn_pay.setDisable(false)); // Re-enable the button
+                }).start();
+            }
+        }
+
+        // Disable the button for 10 seconds to prevent multiple submissions
+//        btn_pay.setDisable(true);
+//        new Thread(() -> {
+//            try {
+//                Thread.sleep(5000); // 5 seconds
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            Platform.runLater(() -> btn_pay.setDisable(false)); // Re-enable the button
+//        }).start();
+    }
 
     public class PaymentHandler {
         private Connection con;
@@ -345,7 +430,7 @@ public class ZooKeeperController implements Initializable {
             this.payButton = payButton;
         }
 
-        public void pay() throws SQLException {
+        public void pay(ActionEvent event) {
             System.out.println("pay function");
 
             if (txt_fname.getText().isEmpty() || txt_Lname.getText().isEmpty() || txt_parent.getText().isEmpty() || txt_child.getText().isEmpty()) {
@@ -390,10 +475,10 @@ public class ZooKeeperController implements Initializable {
                         alert.setHeaderText(null);
                         alert.setContentText("payment not sufficient!");
                         alert.showAndWait();
-                        clearAmount();
+
                     } else {
                         con.commit(); // Commit if payment is sufficient
-                        clearAll();
+
                     }
 
                 } catch (SQLException e) {
@@ -407,42 +492,40 @@ public class ZooKeeperController implements Initializable {
                     }
                 } finally {
                     // Ensure the button is re-enabled after the operation
-                    Platform.runLater(() -> payButton.setDisable(false));
+//                    Platform.runLater(() -> payButton.setDisable(false));
+                    payButton.setDisable(true);
+                    new Thread(() -> {
+                        try {
+                            Thread.sleep(10000); // 10 seconds
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        Platform.runLater(() -> payButton.setDisable(false)); // Re-enable the button
+                    }).start();
                 }
             }
 
             // Disable the button for 10 seconds to prevent multiple submissions
-            payButton.setDisable(true);
-            new Thread(() -> {
-                try {
-                    Thread.sleep(10000); // 10 seconds
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Platform.runLater(() -> payButton.setDisable(false)); // Re-enable the button
-            }).start();
+//            payButton.setDisable(true);
+//            new Thread(() -> {
+//                try {
+//                    Thread.sleep(10000); // 10 seconds
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                Platform.runLater(() -> payButton.setDisable(false)); // Re-enable the button
+//            }).start();
         }
 
-//        private void clearAmount() {
-//            // Implementation for clearing the amount field
-//        }
+
 //
-//        private void clearAll() {
-//            // Implementation for clearing all fields
-//        }
+
     }
     //......................................................using thread....
     //code end
 
 
-    public void clearAmount() {
 
-//        txt_fname.setText("");
-//        txt_Lname.setText("");
-//        txt_parent.setText("");
-//        txt_child.setText("");
-        txt_payAmount.setText("");
-    }
 
     public void clearAll() {
 
@@ -451,6 +534,8 @@ public class ZooKeeperController implements Initializable {
         txt_parent.setText("");
         txt_child.setText("");
         txt_payAmount.setText("");
+        label_balance.setText("xxxx");
+        label_total.setText("xxxx");
     }
 
     //ticket end
@@ -514,6 +599,11 @@ public class ZooKeeperController implements Initializable {
 
     public void logout() {
         try {
+
+            String logoutstaff = "DELETE FROM current_keepers LIMIT 2";
+            PreparedStatement logoutstaffps = con.prepareStatement(logoutstaff);
+            logoutstaffps.execute();
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
@@ -535,6 +625,8 @@ public class ZooKeeperController implements Initializable {
 
         } catch (IOException e) {
             throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
 
     }
@@ -554,6 +646,11 @@ public class ZooKeeperController implements Initializable {
         }
     }
 
+    public void clearForm(){
+        clearAll();
+
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showGetTaskData();

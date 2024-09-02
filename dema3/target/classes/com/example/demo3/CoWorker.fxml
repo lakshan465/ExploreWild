@@ -89,7 +89,8 @@
                                  <font>
                                     <Font size="15.0" />
                                  </font></Label>
-                              <Button fx:id="btn_pay" layoutX="205.0" layoutY="149.0" mnemonicParsing="false" onAction="#pay" prefHeight="32.0" prefWidth="51.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Pay" />
+                              <Button fx:id="btn_pay" layoutX="205.0" layoutY="149.0" mnemonicParsing="false" onAction="#payment" prefHeight="32.0" prefWidth="51.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Pay" />
+                              <Button fx:id="btn_calculate1" layoutX="355.0" layoutY="149.0" mnemonicParsing="false" onAction="#clearForm" prefHeight="40.0" prefWidth="94.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Clear All" />
                            </children>
                            <styleClass>
                               <String fx:value="shadow" />
@@ -149,7 +150,7 @@
                               </TableView>
                               <Button fx:id="btn_done" layoutX="116.0" layoutY="74.0" mnemonicParsing="false" onMouseClicked="#done" styleClass="add-btn" stylesheets="@loginCss.css" text="Done" />
                               <Button fx:id="btn_showComplateTask" layoutX="292.0" layoutY="61.0" mnemonicParsing="false" onAction="#searchByDone" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Show My Complate Task" />
-                              <Button fx:id="btn_showPendingTask" layoutX="292.0" layoutY="23.0" mnemonicParsing="false" onAction="#searchByPending" prefHeight="25.0" prefWidth="146.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Show My Pending Task" />
+                              <Button fx:id="btn_showPendingTask" layoutX="292.0" layoutY="23.0" mnemonicParsing="false" onAction="#searchByPending" prefHeight="26.0" prefWidth="174.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Show My Pending Task" />
                               <TextField fx:id="txt_taskId" layoutX="64.0" layoutY="23.0" prefHeight="35.0" prefWidth="163.0" promptText="Enter Completed Task Id Here" />
                            </children>
                            <styleClass>
