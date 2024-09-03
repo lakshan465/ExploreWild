@@ -2,9 +2,6 @@
   <library name="javafx-sdk-21.0">
     <CLASSES />
     <JAVADOC />
-    <SOURCES>
-      <root url="file://D:/Projects/jarFiles/javafx/javafx-sdk-21.0.1" />
-    </SOURCES>
-    <jarDirectory url="file://D:/Projects/jarFiles/javafx/javafx-sdk-21.0.1" recursive="false" type="SOURCES" />
+    <SOURCES />
   </library>
 </component>
