@@ -101,14 +101,7 @@ public class CuzController implements Initializable {
     PreparedStatement ps;
     static String  name;
 
-    public void clearAmount() {
 
-//        txt_fname.setText("");
-//        txt_Lname.setText("");
-//        txt_parent.setText("");
-//        txt_child.setText("");
-        txt_payAmount.setText("");
-    }
 
     public void clearAll() {
 
@@ -142,6 +135,12 @@ public class CuzController implements Initializable {
     }
     public void logout() {
         try {
+
+            String logoutuser = "DELETE FROM current_cus LIMIT 2";
+            PreparedStatement logoutuserps = con.prepareStatement(logoutuser);
+            logoutuserps.execute();
+
+
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Error Message");
             alert.setHeaderText(null);
@@ -162,6 +161,8 @@ public class CuzController implements Initializable {
 
 
         } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
@@ -243,10 +244,10 @@ public class CuzController implements Initializable {
                     alert.setHeaderText(null);
                     alert.setContentText("payment not sufficient!");
                     alert.showAndWait();
-                    clearAmount();
+
                 } else {
                     con.commit(); // Commit if payment is sufficient
-                    clearAll();
+
                 }
 
             } catch (SQLException e) {
@@ -260,20 +261,29 @@ public class CuzController implements Initializable {
                 }
             } finally {
                 // Ensure the button is re-enabled after the operation
-                Platform.runLater(() -> btn_pay.setDisable(false));
+//                Platform.runLater(() -> btn_pay.setDisable(false));
+                btn_pay.setDisable(true);
+                new Thread(() -> {
+                    try {
+                        Thread.sleep(5000); // 5 seconds
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    Platform.runLater(() -> btn_pay.setDisable(false)); // Re-enable the button
+                }).start();
             }
         }
 
         // Disable the button for 10 seconds to prevent multiple submissions
-        btn_pay.setDisable(true);
-        new Thread(() -> {
-            try {
-                Thread.sleep(5000); // 5 seconds
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Platform.runLater(() -> btn_pay.setDisable(false)); // Re-enable the button
-        }).start();
+//        btn_pay.setDisable(true);
+//        new Thread(() -> {
+//            try {
+//                Thread.sleep(5000); // 5 seconds
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//            Platform.runLater(() -> btn_pay.setDisable(false)); // Re-enable the button
+//        }).start();
     }
 
     public class PaymentHandler {
@@ -346,12 +356,12 @@ public class CuzController implements Initializable {
 //                    alert.setHeaderText(null);
 //                    alert.setContentText("payment not sufficient!");
 //                    alert.showAndWait();
-//                    clearAmount();
+//
 //
 //                }else {
 //                    // Commit should happen only if the payment is sufficient
 //                    con.commit();
-//                    clearAll();
+//
 //                }
 //
 //            } catch (SQLException e) {
@@ -372,118 +382,94 @@ public class CuzController implements Initializable {
         //    public void pay() throws SQLException {//making balance and quereis execute for two tables
 
 
-        public void payment() throws SQLException {
-            System.out.println("pay function");
-
-            if (txt_fname.getText().isEmpty() || txt_Lname.getText().isEmpty() || txt_parent.getText().isEmpty() || txt_child.getText().isEmpty()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("ERROR Message");
-                alert.setHeaderText(null);
-                alert.setContentText("Fill empty text field!");
-                alert.showAndWait();
-            } else {
-                int payment = Integer.parseInt(txt_payAmount.getText());
-                int numParent = Integer.parseInt(txt_parent.getText());
-                int numChild = Integer.parseInt(txt_child.getText());
-                int total = numParent * 500 + numChild * 200;
-
-                label_balance.setText(String.valueOf(payment - total));
-
-                String sql = "INSERT INTO `ticket` ( `Fname`, `Lname`, `parentCount`, `kidCount`) VALUES (?, ?, ?, ?)";
-                String sql2 = "INSERT INTO `revenue` (`Fname`, `total`) VALUES (?, ?)";
-
-                try {
-                    con.setAutoCommit(false); // Disable auto-commit
-
-                    ps = con.prepareStatement(sql);
-                    ps.setString(1, txt_fname.getText());
-                    ps.setString(2, txt_Lname.getText());
-                    ps.setInt(3, Integer.parseInt(txt_parent.getText()));
-                    ps.setInt(4, Integer.parseInt(txt_child.getText()));
-                    ps.executeUpdate();
-
-                    ps = con.prepareStatement(sql2);
-                    ps.setString(1, txt_fname.getText());
-                    ps.setInt(2, total);
-                    ps.executeUpdate();
-
-                    System.out.println("payment is " + payment + " total is " + total);
-
-                    if (payment < total) {
-                        con.rollback(); // Rollback if payment is insufficient
-
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setTitle("ERROR Message");
-                        alert.setHeaderText(null);
-                        alert.setContentText("payment not sufficient!");
-                        alert.showAndWait();
-                        clearAmount();
-                    } else {
-                        con.commit(); // Commit if payment is sufficient
-                        clearAll();
-                    }
-
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                    if (con != null) {
-                        try {
-                            con.rollback(); // Rollback in case of an exception
-                        } catch (SQLException ex) {
-                            throw new RuntimeException(ex);
-                        }
-                    }
-                } finally {
-                    // Ensure the button is re-enabled after the operation
-                    Platform.runLater(() -> btn_pay.setDisable(false));
-                }
-            }
-
-            // Disable the button for 10 seconds to prevent multiple submissions
-            btn_pay.setDisable(true);
-            new Thread(() -> {
-                try {
-                    Thread.sleep(10000); // 10 seconds
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Platform.runLater(() -> btn_pay.setDisable(false)); // Re-enable the button
-            }).start();
-        }
-
-//        private void clearAmount() {
-//            // Implementation for clearing the amount field
-//        }
+//        public void payment() throws SQLException {
+//            System.out.println("pay function");
 //
-//        private void clearAll() {
-//            // Implementation for clearing all fields
+//            if (txt_fname.getText().isEmpty() || txt_Lname.getText().isEmpty() || txt_parent.getText().isEmpty() || txt_child.getText().isEmpty()) {
+//                Alert alert = new Alert(Alert.AlertType.ERROR);
+//                alert.setTitle("ERROR Message");
+//                alert.setHeaderText(null);
+//                alert.setContentText("Fill empty text field!");
+//                alert.showAndWait();
+//            } else {
+//                int payment = Integer.parseInt(txt_payAmount.getText());
+//                int numParent = Integer.parseInt(txt_parent.getText());
+//                int numChild = Integer.parseInt(txt_child.getText());
+//                int total = numParent * 500 + numChild * 200;
+//
+//                label_balance.setText(String.valueOf(payment - total));
+//
+//                String sql = "INSERT INTO `ticket` ( `Fname`, `Lname`, `parentCount`, `kidCount`) VALUES (?, ?, ?, ?)";
+//                String sql2 = "INSERT INTO `revenue` (`Fname`, `total`) VALUES (?, ?)";
+//
+//                try {
+//                    con.setAutoCommit(false); // Disable auto-commit
+//
+//                    ps = con.prepareStatement(sql);
+//                    ps.setString(1, txt_fname.getText());
+//                    ps.setString(2, txt_Lname.getText());
+//                    ps.setInt(3, Integer.parseInt(txt_parent.getText()));
+//                    ps.setInt(4, Integer.parseInt(txt_child.getText()));
+//                    ps.executeUpdate();
+//
+//                    ps = con.prepareStatement(sql2);
+//                    ps.setString(1, txt_fname.getText());
+//                    ps.setInt(2, total);
+//                    ps.executeUpdate();
+//
+//                    System.out.println("payment is " + payment + " total is " + total);
+//
+//                    if (payment < total) {
+//                        con.rollback(); // Rollback if payment is insufficient
+//
+//                        Alert alert = new Alert(Alert.AlertType.ERROR);
+//                        alert.setTitle("ERROR Message");
+//                        alert.setHeaderText(null);
+//                        alert.setContentText("payment not sufficient!");
+//                        alert.showAndWait();
+//
+//                    } else {
+//                        con.commit(); // Commit if payment is sufficient
+//
+//                    }
+//
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                    if (con != null) {
+//                        try {
+//                            con.rollback(); // Rollback in case of an exception
+//                        } catch (SQLException ex) {
+//                            throw new RuntimeException(ex);
+//                        }
+//                    }
+//                } finally {
+//                    // Ensure the button is re-enabled after the operation
+//                    Platform.runLater(() -> btn_pay.setDisable(false));
+//                }
+//            }
+//
+//            // Disable the button for 10 seconds to prevent multiple submissions
+//            btn_pay.setDisable(true);
+//            new Thread(() -> {
+//                try {
+//                    Thread.sleep(10000); // 10 seconds
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                Platform.runLater(() -> btn_pay.setDisable(false)); // Re-enable the button
+//            }).start();
 //        }
+
+
     }
     //......................................................using thread....
     //code end
-
+public void clearForm(){
+        clearAll();
+}
     //Live Feed
 
-    public void playBtn() {
-//        WebView webView = new WebView();
-//        try {
-//            webView.getEngine().load("https://www.youtube.com/watch?v=gTz_7tKUfYM");
-//            webView.setPrefSize(700, 500);
-//
-//            Scene scene = new Scene(webView);
-//            Stage stage = new Stage();
-//            stage.setScene(scene);
-//            stage.show();
-//
-//            stage.setOnCloseRequest(windowEvent -> {
-//                stage.close();
-//            });
-//        } catch (Exception e) {
-//            System.out.println("Error loading video: " + e.getMessage());
-//            // You can also handle the exception in other ways, e.g., display an error message to the user
-//        }
-    }
 
-//    con.close();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
