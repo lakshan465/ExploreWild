@@ -136,7 +136,7 @@ public class CuzController implements Initializable {
     public void logout() {
         try {
 
-            String logoutuser = "DELETE FROM current_cus LIMIT 2";
+            String logoutuser = "DELETE FROM current_cus LIMIT 1";
             PreparedStatement logoutuserps = con.prepareStatement(logoutuser);
             logoutuserps.execute();
 

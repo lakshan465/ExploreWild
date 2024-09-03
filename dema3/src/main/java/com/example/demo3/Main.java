@@ -24,14 +24,14 @@ public class Main extends Application {
         //stage.setResizable(false);
 
         //teparrly code for testing Strat
-        FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/com/example/demo3/Cuz.fxml"));
-
-        Scene scene2 = new Scene(fxmlLoader2.load(), 862, 560);
-        Stage stage2 = new Stage();
-
-        stage2.setScene(scene2);
-        stage2.show();
-        stage2.setResizable(false);
+//        FXMLLoader fxmlLoader2 = new FXMLLoader(getClass().getResource("/com/example/demo3/Cuz.fxml"));
+//
+//        Scene scene2 = new Scene(fxmlLoader2.load(), 862, 560);
+//        Stage stage2 = new Stage();
+//
+//        stage2.setScene(scene2);
+//        stage2.show();
+//        stage2.setResizable(false);
         //teparrly code for testing END
 
     }
