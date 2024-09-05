@@ -600,7 +600,7 @@ public class ZooKeeperController implements Initializable {
     public void logout() {
         try {
 
-            String logoutstaff = "DELETE FROM current_keepers LIMIT 1";
+            String logoutstaff = "DELETE FROM current_keepers2 LIMIT 1";
             PreparedStatement logoutstaffps = con.prepareStatement(logoutstaff);
             logoutstaffps.execute();
 

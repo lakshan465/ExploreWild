@@ -126,7 +126,7 @@ public class LoginController implements Initializable {
                 ResultSet resultStaff = preStaff.executeQuery();
                 if (resultStaff.next()) {
 
-                    String sqls = "INSERT INTO `current_keepers` (`id`) VALUES (NULL)";
+                    String sqls = "INSERT INTO `current_keepers2` (`id`) VALUES (NULL)";
                     PreparedStatement prelives = conn.prepareStatement(sqls);
                     prelives.execute();
                     flag++;
