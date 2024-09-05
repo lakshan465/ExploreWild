@@ -18,14 +18,32 @@
     -fx-border-width:2px;
     -fx-border-radius:8px;
  }
+ .center .table-column{
+    -fx-alignment:center;
+ }
 
  .table-view .column-header-background{
     -fx-background-color:linear-gradient(to bottom right,#4f937a,#6fa0e8);
     -fx-background-inset: 0 0 0 0;
-    -fx-background-radius 8px 8px 0px 0px;
+    -fx-background-radius :8px 8px 0px 0px;
  }
 
  .table-view .column-header, .filter{
     -fx-background-color:transparent;
     -fx-size:40px;
  }
+
+ .choice{
+    -fx-background-radius:30;
+    -fx-background-color:linear-gradient(to bottom right,#4f937a,#6fa0e8);
+ }
+
+  .anc{
+  -fx-background-radius:30;
+     -fx-background-color:rgba(171, 224, 168,0.5);
+  }
+
+  .ancControll{
+    -fx-background-radius:30;
+       -fx-background-color:rgba(59, 158, 235,0.7);
+  }

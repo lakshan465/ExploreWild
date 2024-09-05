@@ -1,18 +1,21 @@
 package com.example.demo3;
 
+import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import javax.xml.transform.Result;
 
@@ -28,6 +31,9 @@ public class LoginController implements Initializable {
     private Button loginBtn;
 
     @FXML
+    private Button loginBtn1;
+
+    @FXML
     private AnchorPane mainForm;
 
     @FXML
@@ -36,9 +42,9 @@ public class LoginController implements Initializable {
     @FXML
     private TextField unameTxt;
 
-    private Connection connection;
-    private PreparedStatement prepare;
-    private ResultSet result;
+//    private Connection connection;
+//    private PreparedStatement prepare;
+//    private ResultSet result;
 
     public void close() {
 
@@ -47,6 +53,7 @@ public class LoginController implements Initializable {
 
     public void adminLogin() {
         try {
+            int flag=0;
 
             if (unameTxt.getText().isEmpty() || pwdTxt.getText().isEmpty()) {
                 //Forced to Fill all text box
@@ -68,50 +75,168 @@ public class LoginController implements Initializable {
                 PreparedStatement preStaff = conn.prepareStatement(sqlForStaff);
                 PreparedStatement preUser = conn.prepareStatement(sqlForUser);
 
+                //String uname= unameTxt.getText();
+                //String pwd=getHashPwd(pwdTxt.getText());
+
                 preAdmin.setString(1, unameTxt.getText());
-                preAdmin.setString(2, pwdTxt.getText());
+                preAdmin.setString(2, getHashPwd(pwdTxt.getText()) );
 
                 preStaff.setString(1, unameTxt.getText());
-                preStaff.setString(2, pwdTxt.getText());
-
+                preStaff.setString(2,getHashPwd(pwdTxt.getText()));
+                //System.out.println("sff");
                 preUser.setString(1, unameTxt.getText());
-                preUser.setString(2, pwdTxt.getText());
+                preUser.setString(2, getHashPwd(pwdTxt.getText()));
 
 
                 ResultSet resultAdmin = preAdmin.executeQuery();
+//                System.out.println("before if "+resultAdmin.next());
+//                boolean ra=resultAdmin.next();
+//                System.out.println(ra);
                 if (resultAdmin.next()) {
+                    System.out.println("resultAdmin.next() is ok");
+                    flag++;
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("login Successful!");
                     alert.setHeaderText(null);
+                    System.out.println("You login as an Admin!");
                     alert.setContentText("You login as an Admin!");
                     alert.showAndWait();
-                    resultAdmin.close();
+
+
+                    //based on username admin name wil change
+                    AdminController.name= unameTxt.getText();
+
+
+                    //hide login window
+                    loginBtn.getScene().getWindow().hide();
                     //preAdmin.close();
+
                     //load admin window with alert
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo3/Admin.fxml"));
+
+                    Scene scene = new Scene(fxmlLoader.load(), 950, 600);
+                    Stage stage = new Stage();
+
+                    stage.setScene(scene);
+                    stage.show();
+                    stage.setResizable(false);
                 }
 
 
                 ResultSet resultStaff = preStaff.executeQuery();
                 if (resultStaff.next()) {
+
+                    String sqls = "INSERT INTO `current_keepers` (`id`) VALUES (NULL)";
+                    PreparedStatement prelives = conn.prepareStatement(sqls);
+                    prelives.execute();
+                    flag++;
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("login Successful!");
                     alert.setHeaderText(null);
                     alert.setContentText("You login as a Staff member!");
                     alert.showAndWait();
-                    resultStaff.close();
+                    //resultStaff.close();
                     //preStaff.close();
                     //load staff window with alert
 
+                    ZooKeeperController.name = unameTxt.getText();
+
+                    //hide login window
+                    loginBtn.getScene().getWindow().hide();
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo3/CoWorker.fxml"));
+
+                    Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+                    Stage stage = new Stage();
+
+                    stage.setScene(scene);
+                    stage.show();
+                    stage.setResizable(false);
+
                 }
 
-                ResultSet resultUser = preStaff.executeQuery();
+                ResultSet resultUser = preUser.executeQuery();
                 if (resultUser.next()) {
+                    String sqlu = "INSERT INTO `current_cus` (`id`) VALUES (NULL)";
+                    PreparedStatement preliveu = conn.prepareStatement(sqlu);
+                    preliveu.execute();
+
+                    flag++;
+
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("login Successful!");
+                    alert.setHeaderText(null);
+                    System.out.println("You login as Customer!");
+                    alert.setContentText("You login as Customer!");
+                    alert.showAndWait();
                     //load user window with alert
+
+                    CuzController.name= unameTxt.getText();//this take the username and pass that to customer class to show in the interface
+
+                    //hide login window
+                    loginBtn.getScene().getWindow().hide();
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo3/Cuz.fxml"));
+
+                    Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+                    Stage stage = new Stage();
+
+                    stage.setScene(scene);
+                    stage.show();
+                    stage.setResizable(false);
                 }
+                if( flag==0){
+
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error massage !");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Enterd UserName and Password not match!");
+                    alert.showAndWait();
+                    unameTxt.setText("");
+                    pwdTxt.setText("");
+                }
+                conn.close();
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    String getHashPwd(String pwd) {
+        try {
+            MessageDigest md = null;
+
+            md = MessageDigest.getInstance("SHA");
+
+            md.update(pwd.getBytes());
+            byte[] rbt = md.digest();
+            StringBuilder sb = new StringBuilder();
+
+            for (byte b : rbt) {
+
+                sb.append(String.format("%02x", b));
+
+            }
+
+            System.out.println(sb.toString());
+            return sb.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+    public void registerFormLoad() throws IOException {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/example/demo3/RegForm.fxml"));
+        Scene scene=new Scene(loader.load());
+        Stage stage=new Stage();
+        stage.setScene(scene);
+        stage.show();
+
+        loginBtn1.getScene().getWindow().hide();
+
     }
 
     @Override
