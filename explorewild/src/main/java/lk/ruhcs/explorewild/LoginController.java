@@ -198,7 +198,7 @@ public class LoginController implements Initializable {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error massage !");
                     alert.setHeaderText(null);
-                    alert.setContentText("Enterd UserName and Password not match!");
+                    alert.setContentText("Entered UserName and Password not match!");
                     alert.showAndWait();
                     unameTxt.setText("");
                     pwdTxt.setText("");
