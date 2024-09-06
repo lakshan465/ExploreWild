@@ -2,7 +2,7 @@
   <artifact type="jar" name="dema3:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/dema3_jar</output-path>
     <root id="archive" name="dema3.jar">
-      <element id="module-output" name="demo3" />
+      <element id="module-output" name="explorewild" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-controls/17.0.6/javafx-controls-17.0.6-win.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/openjfx/javafx-base/17.0.6/javafx-base-17.0.6-win.jar" path-in-jar="/" />
