@@ -13,7 +13,7 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
 
         //should uncomment after testing
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("LoadingScreen.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/lk.ruhcs.explorewild/LoadingScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 525, 360);
 
         stage.setScene(scene);

@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="@143.198.196.56">
   <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.51">
-    <root id="1">
-      <DefaultCasing>exact</DefaultCasing>
-      <DefaultEngine>InnoDB</DefaultEngine>
-      <DefaultTmpEngine>InnoDB</DefaultTmpEngine>
-      <Grants>explorewild|schema||explorewild||ALTER|G
-explorewild|schema||explorewild||ALTER ROUTINE|G
-explorewild|schema||explorewild||CREATE|G
-explorewild|schema||explorewild||CREATE ROUTINE|G
-explorewild|schema||explorewild||CREATE TEMPORARY TABLES|G
-explorewild|schema||explorewild||CREATE VIEW|G
-explorewild|schema||explorewild||DELETE|G
-explorewild|schema||explorewild||DROP|G
-explorewild|schema||explorewild||EVENT|G
-explorewild|schema||explorewild||EXECUTE|G
-explorewild|schema||explorewild||INDEX|G
-explorewild|schema||explorewild||INSERT|G
-explorewild|schema||explorewild||LOCK TABLES|G
-explorewild|schema||explorewild||REFERENCES|G
-explorewild|schema||explorewild||SELECT|G
-explorewild|schema||explorewild||SHOW VIEW|G
-explorewild|schema||explorewild||TRIGGER|G
-explorewild|schema||explorewild||UPDATE|G</Grants>
-      <ServerVersion>8.0.39</ServerVersion>
-    </root>
+    <root id="1"/>
     <collation id="2" parent="1" name="armscii8_bin">
       <Charset>armscii8</Charset>
     </collation>
