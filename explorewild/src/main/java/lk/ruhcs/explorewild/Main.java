@@ -3,6 +3,7 @@ package lk.ruhcs.explorewild;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -18,7 +19,8 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
-
+        Image icon=new Image("/logo.png");
+        stage.getIcons().add(icon);
 
         stage.show();
         //stage.setResizable(false);

@@ -11,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -138,7 +139,7 @@ public class ZooKeeperController implements Initializable {
         alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("ERROR Message");
         alert.setHeaderText(null);
-        alert.setContentText("Fill empaty text field!");
+        alert.setContentText("Fill empty text field!");
         Optional<ButtonType> option = alert.showAndWait();
         if(option.get().equals(ButtonType.OK)){
             reportIssue();
@@ -225,7 +226,7 @@ public class ZooKeeperController implements Initializable {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("ERROR Message");
             alert.setHeaderText(null);
-            alert.setContentText("Fill empaty text field!");
+            alert.setContentText("Fill empty text field!");
             alert.showAndWait();
 
         } else {
@@ -608,6 +609,8 @@ public class ZooKeeperController implements Initializable {
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
+                Image icon=new Image("/logo.png");
+                stage.getIcons().add(icon);
                 stage.show();
                 System.out.println("logout");
 

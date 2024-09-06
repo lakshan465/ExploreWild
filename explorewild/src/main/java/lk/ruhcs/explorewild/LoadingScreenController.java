@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.Window;
@@ -50,7 +51,8 @@ public class LoadingScreenController {
                 Stage stage=new Stage();
                 stage.setScene(scene);
                 //stage.initStyle(StageStyle.UNDECORATED);
-
+                Image icon=new Image("/logo.png");
+                stage.getIcons().add(icon);
 
                 stage.show();
 
