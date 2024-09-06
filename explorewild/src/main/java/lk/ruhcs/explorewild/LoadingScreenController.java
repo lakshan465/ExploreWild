@@ -40,7 +40,7 @@ public class LoadingScreenController {
                 Stage s=(Stage) window;
                 s.close();
 
-                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/lk.ruhcs.explorewild/login.fxml"));
+                FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("login.fxml"));
                 Scene scene=null;
                 try {
                     scene = new Scene(fxmlLoader.load(), 600, 400);

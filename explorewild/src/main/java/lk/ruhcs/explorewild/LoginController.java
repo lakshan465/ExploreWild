@@ -113,7 +113,7 @@ public class LoginController implements Initializable {
                     //preAdmin.close();
 
                     //load admin window with alert
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/lk.ruhcs.explorewild/Admin.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Admin.fxml"));
 
                     Scene scene = new Scene(fxmlLoader.load(), 950, 600);
                     Stage stage = new Stage();
@@ -145,7 +145,7 @@ public class LoginController implements Initializable {
                     //hide login window
                     loginBtn.getScene().getWindow().hide();
 
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/lk.ruhcs.explorewild/CoWorker.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("CoWorker.fxml"));
 
                     Scene scene = new Scene(fxmlLoader.load(), 900, 600);
                     Stage stage = new Stage();
@@ -177,7 +177,7 @@ public class LoginController implements Initializable {
                     //hide login window
                     loginBtn.getScene().getWindow().hide();
 
-                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/lk.ruhcs.explorewild/Cuz.fxml"));
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Cuz.fxml"));
 
                     Scene scene = new Scene(fxmlLoader.load(), 900, 600);
                     Stage stage = new Stage();
@@ -230,7 +230,7 @@ public class LoginController implements Initializable {
 
 
     public void registerFormLoad() throws IOException {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/lk.ruhcs.explorewild/RegForm.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("RegForm.fxml"));
         Scene scene=new Scene(loader.load());
         Stage stage=new Stage();
         stage.setScene(scene);

@@ -604,7 +604,7 @@ public class ZooKeeperController implements Initializable {
             Optional<ButtonType> option = alert.showAndWait();
 
             if (option.get().equals(ButtonType.OK)) {
-                Parent root = FXMLLoader.load(getClass().getResource("/lk.ruhcs.explorewild/login.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
                 Stage stage = new Stage();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);

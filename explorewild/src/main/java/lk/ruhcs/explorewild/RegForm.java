@@ -33,7 +33,7 @@ public class RegForm {
     private Button backBtn;
 
     public void print() throws IOException {
-                FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/example/demo3/login.fxml"));
+                FXMLLoader loader=new FXMLLoader(getClass().getResource("login.fxml"));
         Scene scene=new Scene(loader.load());
         Stage stage=new Stage();
         stage.setScene(scene);
@@ -87,7 +87,7 @@ public class RegForm {
 
     }
 //    void backToLogin() throws IOException {
-//        FXMLLoader loader=new FXMLLoader(getClass().getResource("/com/example/demo3/login.fxml"));
+//        FXMLLoader loader=new FXMLLoader(getClass().getResource("login.fxml"));
 //        Scene scene=new Scene(loader.load());
 //        Stage stage=new Stage();
 //        stage.setScene(scene);
@@ -109,7 +109,7 @@ public class RegForm {
             alert.setTitle("Registerd!");
             alert.setContentText("Close this window!");
             alert.showAndWait();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo3/LoadingScreen.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoadingScreen.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load(), 525, 360);
             Stage stage = new Stage();
