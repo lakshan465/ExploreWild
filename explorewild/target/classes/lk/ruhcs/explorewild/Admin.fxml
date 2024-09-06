@@ -214,8 +214,7 @@
                                     <Label layoutX="330.0" layoutY="27.0" prefHeight="17.0" prefWidth="86.0" text="Animal Type" />
                                     <Label layoutX="330.0" layoutY="89.0" prefHeight="17.0" prefWidth="62.0" text="Gender" />
                                     <Label layoutX="53.0" layoutY="89.0" prefHeight="17.0" prefWidth="62.0" text="Cage ID" />
-                                    <ComboBox fx:id="cageId" layoutX="109.0" layoutY="85.0"  prefWidth="150.0" styleClass="choice" stylesheets="@AdminCss.css" />
-                                    <TextField fx:id="cage_id" layoutX="53.0" layoutY="110.0" styleClass="choice" stylesheets="@AdminCss.css" />
+                                    <ComboBox fx:id="cageId" layoutX="52.0" layoutY="110.0" prefWidth="150.0" styleClass="choice" stylesheets="@AdminCss.css" />
                                  </children>
                                  <styleClass>
                                     <String fx:value="shadow" />

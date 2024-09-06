@@ -562,7 +562,7 @@ public class AdminController extends User implements Initializable {
 
         String animalIdserch = animal_id.getText();
         String cageIdforserch = cageId.getValue().split("-")[0];
-        System.out.println(cageIdforserch);
+        System.out.println("id = "+cageIdforserch);
         String typeserch = animal_list.getSelectionModel().getSelectedItem();
 
         if (!animal_id.getText().isEmpty()) {
@@ -570,7 +570,7 @@ public class AdminController extends User implements Initializable {
             addAnimalShowListDatabySerach(sql);
         } else if (!cageId.getValue().isEmpty()) {
 
-            String sql = "SELECT * FROM animal WHERE cage_id LIKE '" + cageIdforserch + "'";
+            String sql = "SELECT * FROM animal WHERE cage_id LIKE " + cageIdforserch + " ;";
             System.out.println(sql);
             addAnimalShowListDatabySerach(sql);
         } else {
@@ -634,7 +634,7 @@ public class AdminController extends User implements Initializable {
         animal_id.setText(String.valueOf(animalData.getAnimalId()));
         // ObservableList<String> typeList = FXCollections.observableArrayList(animalData.getType());
         animal_list.setValue(animalData.getType());
-        cage_id.setText(String.valueOf((animalData.getCageId())));
+        //cage_id.setText(String.valueOf((animalData.getCageId())));
 
         cageId.setValue( updateCageBoxItems(animalData.getCageId()) );
         System.out.println(animalData.getCageId());
@@ -780,7 +780,7 @@ public class AdminController extends User implements Initializable {
 
         animal_id.setText("");
         animal_list.getSelectionModel().clearSelection();
-        cage_id.setText("");
+
         cageId.setValue(null);
         gender_list.getSelectionModel().clearSelection();
 
