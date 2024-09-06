@@ -13,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.scene.control.ComboBox;
 
 import java.io.IOException;
 import java.net.URL;
@@ -80,6 +81,8 @@ public class AdminController extends User implements Initializable {
 
     @FXML
     private ChoiceBox<String> animal_list;
+
+
     @FXML
     private TableView<AnimalData> animal_tableView;
 
@@ -87,6 +90,8 @@ public class AdminController extends User implements Initializable {
     private TextField animal_id;
     @FXML
     private TextField cage_id;
+    @FXML
+    private ComboBox<String> cageId;
 
     @FXML
     private TableColumn<AnimalData, Integer> animalId_col;
@@ -163,7 +168,7 @@ public class AdminController extends User implements Initializable {
 
     Connection con, conload, conTask;
     PreparedStatement pre, precuz, prekeeper, preTask;
-    ResultSet resultAnimal, resultTask, resultIssue, resultReloadcuz, resultReloadkeeprer, resultAddAnimal;
+    ResultSet resultAnimal,rs, resultTask, resultIssue, resultReloadcuz, resultReloadkeeprer, resultAddAnimal;
 
 
     //search animal by id or cage id or animal type
@@ -556,14 +561,17 @@ public class AdminController extends User implements Initializable {
     public void search() throws SQLException {//searchAnimal
 
         String animalIdserch = animal_id.getText();
-        String cageIdforserch = cage_id.getText();
+        String cageIdforserch = cageId.getValue().split("-")[0];
+        System.out.println(cageIdforserch);
         String typeserch = animal_list.getSelectionModel().getSelectedItem();
 
         if (!animal_id.getText().isEmpty()) {
             String sql = "SELECT * FROM animal WHERE animal_id LIKE '" + animalIdserch + "'";
             addAnimalShowListDatabySerach(sql);
-        } else if (!cage_id.getText().isEmpty()) {
+        } else if (!cageId.getValue().isEmpty()) {
+
             String sql = "SELECT * FROM animal WHERE cage_id LIKE '" + cageIdforserch + "'";
+            System.out.println(sql);
             addAnimalShowListDatabySerach(sql);
         } else {
             String sql = "SELECT * FROM animal WHERE animal_type LIKE '" + typeserch + "'";
@@ -627,6 +635,11 @@ public class AdminController extends User implements Initializable {
         // ObservableList<String> typeList = FXCollections.observableArrayList(animalData.getType());
         animal_list.setValue(animalData.getType());
         cage_id.setText(String.valueOf((animalData.getCageId())));
+
+        cageId.setValue( updateCageBoxItems(animalData.getCageId()) );
+        System.out.println(animalData.getCageId());
+        System.out.println(updateCageBoxItems(animalData.getCageId()));
+        //cageId.setValue("OK");
         //SingleSelectionModel<String> genList = (SingleSelectionModel<String>) FXCollections.observableArrayList(animalData.getSex());
         gender_list.setValue(animalData.getSex());
 
@@ -640,7 +653,7 @@ public class AdminController extends User implements Initializable {
             Alert alert;
 
             if (animal_list.getSelectionModel().getSelectedItem() == null
-                    || cage_id.getText().isEmpty()
+                    || cageId.getValue().isEmpty()
                     || gender_list.getSelectionModel().getSelectedItem() == null) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error massage");
@@ -651,7 +664,9 @@ public class AdminController extends User implements Initializable {
                 pre = con.prepareStatement(sql);
                 //pre.setString(1, animal_id.getText()); no need bcz its auto incremnt by itself
                 pre.setString(1, animal_list.getSelectionModel().getSelectedItem());
-                pre.setString(2, cage_id.getText());
+                //pre.setString(2, cage_id.getText());
+                pre.setString(2, cageId.getValue().split("-")[0]);
+
                 pre.setString(3, gender_list.getSelectionModel().getSelectedItem());
 
                 pre.executeUpdate();
@@ -712,7 +727,7 @@ public class AdminController extends User implements Initializable {
     public void addAnimalUpdate() {//user need to fill all box other than animal id box
         String sql = "UPDATE animal SET animal_type= '"
                 + animal_list.getSelectionModel().getSelectedItem() + "', cage_id = '"
-                + cage_id.getText() + "', sex = '"
+                + cageId.getValue().split("-")[0] + "', sex = '"
                 + gender_list.getSelectionModel().getSelectedItem() + "' WHERE animal_id = " + animal_id.getText();
 
         con = dbConnection.connection();
@@ -720,7 +735,7 @@ public class AdminController extends User implements Initializable {
             Alert alert;
 
             if (animal_list.getSelectionModel().getSelectedItem() == null
-                    || cage_id.getText().isEmpty()
+                    || cageId.getValue().isEmpty()
                     || gender_list.getSelectionModel().getSelectedItem() == null) {
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error massage");
@@ -766,6 +781,7 @@ public class AdminController extends User implements Initializable {
         animal_id.setText("");
         animal_list.getSelectionModel().clearSelection();
         cage_id.setText("");
+        cageId.setValue(null);
         gender_list.getSelectionModel().clearSelection();
 
     }
@@ -830,7 +846,7 @@ public class AdminController extends User implements Initializable {
         return listData;
     }
 
-    private ObservableList<IssueData> addIssueList;
+    private ObservableList <IssueData> addIssueList;
 
     public void addIssueShowListData() {
         try {
@@ -924,6 +940,66 @@ public class AdminController extends User implements Initializable {
         resultAnimal.close();
         return listData;
 
+    }
+
+    private void setCageBoxItems() {
+        String sql="SELECT * FROM cage ";
+        con=dbConnection.connection();
+
+        try {
+            pre = con.prepareStatement(sql);
+            rs = pre.executeQuery();
+
+            while (rs.next()) {
+                String data = rs.getString("id")+" - "+rs.getString("area");
+                cageId.getItems().add(data);
+            }
+
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+    }
+
+    private String updateCageBoxItems(int id) {
+        String sql="SELECT * FROM cage WHERE id= "+id;
+        System.out.println("SQL="+sql);
+        con=dbConnection.connection();
+        String data="";
+
+        try {
+            pre = con.prepareStatement(sql);
+            rs = pre.executeQuery();
+
+            while (rs.next()) {
+                data =rs.getString("id")+" - "+rs.getString("area");
+                System.out.println(data);
+                //cageId.setValue(data);
+            }
+
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        finally {
+            return data;
+        }
+
+
+
+
+
+
+    }
+
+    public void showSelctedVal(){
+        System.out.println(cageId.getValue().split("-")[0]);
     }
 
     private ObservableList<AnimalData> addAnimalList;
@@ -1140,6 +1216,7 @@ public class AdminController extends User implements Initializable {
             addTaskShowListData();
             genderList();
             animalTypeList();
+            setCageBoxItems();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
