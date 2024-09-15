@@ -1,0 +1,49 @@
+.shadow{
+    -fx-effect : dropshadow(three-pass-box,rgba(0,0,0,0.5),8,0,0,0);
+}
+
+.white-bg{
+    -fx-background-color:#fff;
+    -fx-background-radius:8px;
+}
+.card{
+    -fx-background-color:linear-gradient(to right,#3b534c,#437a72);
+    -fx-background-radius:4px;
+}
+
+ .table-view{
+    -fx-padding:0px;
+    -fx-background-color:transparent;
+    -fx-border-color:linear-gradient(to bottom right,#4f937a,#6fa0e8);
+    -fx-border-width:2px;
+    -fx-border-radius:8px;
+ }
+ .center .table-column{
+    -fx-alignment:center;
+ }
+
+ .table-view .column-header-background{
+    -fx-background-color:linear-gradient(to bottom right,#4f937a,#6fa0e8);
+    -fx-background-inset: 0 0 0 0;
+    -fx-background-radius :8px 8px 0px 0px;
+ }
+
+ .table-view .column-header, .filter{
+    -fx-background-color:transparent;
+    -fx-size:40px;
+ }
+
+ .choice{
+    -fx-background-radius:30;
+    -fx-background-color:linear-gradient(to bottom right,#4f937a,#6fa0e8);
+ }
+
+  .anc{
+  -fx-background-radius:30;
+     -fx-background-color:rgba(171, 224, 168,0.5);
+  }
+
+  .ancControll{
+    -fx-background-radius:30;
+       -fx-background-color:rgba(59, 158, 235,0.7);
+  }
