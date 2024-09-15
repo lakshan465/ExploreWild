@@ -7,7 +7,7 @@
     <groupId>lk.ruhcs</groupId>
     <artifactId>explorewild</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>demo3</name>
+    <name>explorewild</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
