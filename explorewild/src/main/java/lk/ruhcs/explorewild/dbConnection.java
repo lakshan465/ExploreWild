@@ -9,7 +9,7 @@ public class dbConnection {
     private static String USER="explorewild";
     private static String PWD="Exp#World1";
 
-    
+
 
     public static Connection connection() {
 
