@@ -38,6 +38,8 @@ public class RegForm {
         Scene scene=new Scene(loader.load());
         Stage stage=new Stage();
         stage.setScene(scene);
+        Image icon=new Image("/logo.png");
+        stage.getIcons().add(icon);
         stage.show();
         back.getScene().getWindow().hide();
     }
