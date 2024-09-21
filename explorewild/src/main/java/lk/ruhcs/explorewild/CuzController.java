@@ -129,7 +129,7 @@ public class CuzController implements Initializable {
 
             String logoutuser = "DELETE FROM current_cus LIMIT 1";
             PreparedStatement logoutuserps = con.prepareStatement(logoutuser);
-            logoutuserps.execute();
+            logoutuserps.executeUpdate(); // Use executeUpdate() for DELETE statements
 
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);

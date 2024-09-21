@@ -596,7 +596,7 @@ public class ZooKeeperController implements Initializable {
 
             String logoutstaff = "DELETE FROM current_keepers2 LIMIT 1";
             PreparedStatement logoutstaffps = con.prepareStatement(logoutstaff);
-            logoutstaffps.execute();
+            logoutstaffps.executeUpdate(); // Use executeUpdate() for DELETE statements
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Error Message");
