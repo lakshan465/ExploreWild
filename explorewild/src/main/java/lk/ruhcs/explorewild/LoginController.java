@@ -210,7 +210,7 @@ public class LoginController implements Initializable {
         }
     }
 
-    String getHashPwd(String pwd) {
+   static String getHashPwd(String pwd) {
         try {
             MessageDigest md = null;
 

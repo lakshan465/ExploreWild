@@ -142,18 +142,22 @@ public class ZooKeeperController implements Initializable {
         alert.setContentText("Fill empty text field!");
         Optional<ButtonType> option = alert.showAndWait();
         if(option.get().equals(ButtonType.OK)){
-            reportIssue();
+           // reportIssue();
         }
     }
     public void reportIssue() {
-        String sql = "INSERT INTO issue (Description) VALUES (?)"; // Corrected SQL query with parameter placeholder
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, txt_issueReport.getText()); // Set the description value as a parameter
-            ps.executeUpdate(); // Execute the insert statement
-        } catch (SQLException e) {
-            throw new RuntimeException("Error inserting issue", e); // Wrap the SQL exception in a RuntimeException
+        if(txt_issueReport.getText().isEmpty()){
+            reportIssueWithAlert();
+        }else {
+            String sql = "INSERT INTO issue (Description) VALUES (?)"; // Corrected SQL query with parameter placeholder
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setString(1, txt_issueReport.getText()); // Set the description value as a parameter
+                ps.executeUpdate(); // Execute the insert statement
+            } catch (SQLException e) {
+                throw new RuntimeException("Error inserting issue", e); // Wrap the SQL exception in a RuntimeException
+            }
+            txt_issueReport.setText("");
         }
-        txt_issueReport.setText("");
     }
 
 
@@ -167,13 +171,13 @@ public class ZooKeeperController implements Initializable {
 //        }
 //    }
     public void searchByPending() {
-        String sql = "SELECT task_id, status, description FROM task WHERE status = 'Pending' AND task_id = '" + idForName + "'";
+        String sql = "SELECT task_id, status, description FROM task WHERE status = 'Pending' AND zoo_keeper_id = '" + idForName + "'";
         addTaskShowListDataBySerach(sql);
 
     }
 
     public void searchByDone(){
-        String sql = "SELECT task_id, status, description FROM task WHERE status = 'Done' AND task_id = '" + idForName + "'";
+        String sql = "SELECT task_id, status, description FROM task WHERE status = 'Done' AND zoo_keeper_id = '" + idForName + "'";
         addTaskShowListDataBySerach(sql);
     }
 
@@ -245,83 +249,6 @@ public class ZooKeeperController implements Initializable {
 
     //pay function without thread start.....................
 
-//    public void pay() throws SQLException {//making balance and quereis execute for two tables
-//        System.out.println("pay function");
-//        if (txt_fname.getText().isEmpty() || txt_Lname.getText().isEmpty() || txt_parent.getText().isEmpty() || txt_child.getText().isEmpty()) {
-//            Alert alert;
-//
-//            alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("ERROR Message");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Fill empty text field!");
-//            alert.showAndWait();
-//
-//        } else {
-//
-//
-//            int payment = Integer.parseInt(txt_payAmount.getText());
-//
-//            int numParent = Integer.parseInt(txt_parent.getText());
-//            int numChild = Integer.parseInt(txt_child.getText());
-//
-//            int total = numParent * 500 + numChild * 200;
-//
-//            label_balance.setText(String.valueOf(payment - total));
-//
-//            String sql = "INSERT INTO `ticket` ( `Fname`, `Lname`, `parentCount`, `kidCount`) VALUES ( ?, ?, ?, ?)";
-//            String sql2 = "INSERT INTO `revenue` (`Fname`, `total`) VALUES (?, ?)";
-//
-//            try {
-//                con.setAutoCommit(false); //step one
-//
-//
-//                ps = con.prepareStatement(sql);
-//                ps.setString(1, txt_fname.getText());
-//                ps.setString(2, txt_Lname.getText());
-//                ps.setInt(3, Integer.parseInt(txt_parent.getText()));
-//                ps.setInt(4, Integer.parseInt(txt_child.getText()));
-//
-//                ps.executeUpdate();
-//
-//                ps = con.prepareStatement(sql2);
-//                ps.setString(1, txt_fname.getText());
-//                ps.setInt(2, total);
-//
-//                ps.executeUpdate();
-//                //con.commit(); //step two
-//                System.out.println("payment is "+payment+" total is "+total);
-//
-//                if (payment < total) {
-//                    con.rollback();
-//
-//                    Alert alert;
-//
-//                    alert = new Alert(Alert.AlertType.ERROR);
-//                    alert.setTitle("ERROR Message");
-//                    alert.setHeaderText(null);
-//                    alert.setContentText("payment not sufficient!");
-//                    alert.showAndWait();
-//
-//
-//                }else {
-//                    // Commit should happen only if the payment is sufficient
-//                    con.commit();
-//
-//                }
-//
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//                if (con != null) {
-//                    try {
-//                        con.rollback(); //step three
-//                    } catch (SQLException ex) {
-//                        throw new RuntimeException(ex);
-//                    }
-//                }
-//            }
-//        }
-//
-//    }
 
     //pay function without thread end.....................
 
