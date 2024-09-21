@@ -34,7 +34,7 @@ public class RegForm {
     private Button backBtn;
 
     public void print() throws IOException {
-                FXMLLoader loader=new FXMLLoader(getClass().getResource("login.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("login.fxml"));
         Scene scene=new Scene(loader.load());
         Stage stage=new Stage();
         stage.setScene(scene);

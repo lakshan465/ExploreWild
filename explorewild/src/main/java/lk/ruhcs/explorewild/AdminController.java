@@ -560,23 +560,40 @@ public class AdminController extends User implements Initializable {
     //search animal by id or cage id or animal type
     public void search() throws SQLException {//searchAnimal
 
-        String animalIdserch = animal_id.getText();
-        String cageIdforserch = cageId.getValue().split("-")[0];
-        System.out.println("id = "+cageIdforserch);
+        String animalIdserch =null;
+        if(!animal_id.getText().isEmpty()) {
+            animalIdserch = animal_id.getText();
+        }
+        String cageIdforserch=null;
+        if (!(cageId.getValue() ==null)) {
+            cageIdforserch = cageId.getValue().split("-")[0];
+            System.out.println("CageID selected");
+
+        }
+        //System.out.println("id = "+cageIdforserch);
         String typeserch = animal_list.getSelectionModel().getSelectedItem();
 
-        if (!animal_id.getText().isEmpty()) {
-            String sql = "SELECT * FROM animal WHERE animal_id LIKE '" + animalIdserch + "'";
-            addAnimalShowListDatabySerach(sql);
-        } else if (!cageId.getValue().isEmpty()) {
+        //String sql = "SELECT * FROM animal WHERE animal_id LIKE '" + animalIdserch + "' OR " + " cage_id LIKE ' " + cageIdforserch + " ' OR animal_type LIKE ' "  + typeserch + " ' ";
 
-            String sql = "SELECT * FROM animal WHERE cage_id LIKE " + cageIdforserch + " ;";
+        if (!animal_id.getText().isEmpty() || !(cageId.getValue() ==null)) {
+            //System.out.println("id = "+cageIdforserch);
+            String sql = "SELECT * FROM animal WHERE animal_id=" + animalIdserch + " OR  cage_id =" + cageIdforserch ;
             System.out.println(sql);
+            System.out.println("OR Q executed");
             addAnimalShowListDatabySerach(sql);
-        } else {
+        }
+//        else if (!cageId.getValue().isEmpty()) {
+//
+//            String sql = "SELECT * FROM animal WHERE cage_id LIKE " + cageIdforserch + " ;";
+//            System.out.println(sql);
+//            addAnimalShowListDatabySerach(sql);
+//        }
+        else {
             String sql = "SELECT * FROM animal WHERE animal_type LIKE '" + typeserch + "'";
             addAnimalShowListDatabySerach(sql);
         }
+
+
         addPetClear();
     }//(typeserch != null)
 
