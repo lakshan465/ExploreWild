@@ -75,7 +75,18 @@ public class RegForm {
         String uname=unameBox.getText();
         String pwd=getHashPwd(pwdBox.getText());
 
-
+//        if (pwdBox.getText().equals(confirmPwdBox.getText())) {
+//            System.out.println("Passwords match!");
+//        } else {
+//            Alert alert;
+//            alert = new Alert(Alert.AlertType.ERROR);
+//            alert.setTitle("Error massage");
+//            alert.setContentText("Passwords do not match!");
+//            alert.showAndWait();//user can add data without filling animal_id box
+//            pwdBox.clear();
+//            confirmPwdBox.clear();
+//            return;
+//        }
 
         String sql="INSERT INTO user (`username`, `password`) VALUES('"+uname+"','"+pwd+"')";
 
@@ -107,12 +118,20 @@ public class RegForm {
             alert.setTitle("Error");
             alert.setContentText("Fill all details!");
             alert.showAndWait();
-        }
-        else{
+        } else if (!pwdBox.getText().equals(confirmPwdBox.getText())) {
+            Alert alert;
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error massage");
+            alert.setContentText("Passwords do not match!");
+            alert.showAndWait();//user can add data without filling animal_id box
+            pwdBox.clear();
+            confirmPwdBox.clear();
+
+        } else{
             reg();
             Alert alert=new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Registerd!");
-            alert.setContentText("Close this window!");
+            alert.setContentText("Registation successful!");
             alert.showAndWait();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoadingScreen.fxml"));
 

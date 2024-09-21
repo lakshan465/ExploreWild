@@ -11,10 +11,6 @@ public class LoadingTask extends Task<Integer> {
             updateProgress(i,100);
             Thread.sleep(7);
         }
-
-
-
-
         return 100;
     }
 }
