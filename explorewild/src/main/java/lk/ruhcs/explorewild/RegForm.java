@@ -75,6 +75,8 @@ public class RegForm {
         String uname=unameBox.getText();
         String pwd=getHashPwd(pwdBox.getText());
 
+
+
         String sql="INSERT INTO user (`username`, `password`) VALUES('"+uname+"','"+pwd+"')";
 
         try {

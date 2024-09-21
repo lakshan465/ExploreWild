@@ -201,7 +201,7 @@
                         </ImageView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="anc_Animal" layoutY="45.0" prefHeight="560.0" prefWidth="602.0" stylesheets="@AdminCss.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
+                  <AnchorPane fx:id="anc_Animal" layoutY="45.0" prefHeight="560.0" prefWidth="602.0" stylesheets="@AdminCss.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="45.0">
                      <children>
                         <AnchorPane layoutX="15.0" layoutY="14.0" prefHeight="319.0" prefWidth="567.0" stylesheets="@AdminCss.css" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="23.0">
                            <children>
@@ -272,7 +272,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="anc_task" layoutX="91.0" layoutY="31.0" prefHeight="560.0" prefWidth="602.0" visible="false" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
+                  <AnchorPane fx:id="anc_task" layoutX="91.0" layoutY="31.0" prefHeight="560.0" prefWidth="602.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="31.0">
                      <children>
                         <AnchorPane layoutX="61.0" layoutY="75.0" prefHeight="253.0" prefWidth="504.0" stylesheets="@AdminCss.css">
                            <children>

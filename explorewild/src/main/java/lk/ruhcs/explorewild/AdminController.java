@@ -338,7 +338,7 @@ public class AdminController extends User implements Initializable {
             addTaskShowListDatabySerach(sql);
         } else {
             // Corrected the SQL string
-            String sql = "SELECT * FROM task WHERE zoo zoo_keeper_id = " + Integer.parseInt(keeperIdSearch);
+            String sql = "SELECT * FROM task WHERE zoo_keeper_id = " + Integer.parseInt(keeperIdSearch);
             addTaskShowListDatabySerach(sql);
         }
 
