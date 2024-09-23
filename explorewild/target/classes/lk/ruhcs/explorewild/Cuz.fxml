@@ -8,12 +8,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ruhcs.explorewild.CuzController">
@@ -22,41 +18,18 @@
          <children>
             <AnchorPane prefHeight="600.0" prefWidth="332.0" styleClass="left-form" stylesheets="@loginCss.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="568.0">
                <children>
-                  <Rectangle arcHeight="5.0" arcWidth="5.0" height="275.0" layoutX="55.0" layoutY="286.0" stroke="BLACK" strokeType="INSIDE" width="246.0">
-                     <fill>
-                        <LinearGradient cycleMethod="REFLECT" endX="1.0" endY="0.8672985781990521">
-                           <stops>
-                              <Stop>
-                                 <color>
-                                    <Color opacity="0.4699999988079071" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="0.3378826321820265">
-                                 <color>
-                                    <Color opacity="0.4699999988079071" />
-                                 </color>
-                              </Stop>
-                              <Stop offset="1.0">
-                                 <color>
-                                    <Color red="0.20370370149612427" green="1.0" blue="0.442592591047287" opacity="0.4699999988079071" />
-                                 </color>
-                              </Stop>
-                           </stops>
-                        </LinearGradient>
-                     </fill>
-                  </Rectangle>
                   <Circle fill="#455461" layoutX="175.0" layoutY="120.0" radius="78.0" stroke="BLACK" strokeType="INSIDE" />
                   <ImageView fitHeight="130.0" fitWidth="100.0" layoutX="125.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/user-solid.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="76.0" layoutY="216.0" text="Welcome " textAlignment="CENTER" textFill="WHITE" wrapText="true">
+                  <Label layoutX="83.0" layoutY="216.0" text="Welcome " textAlignment="CENTER" textFill="WHITE" wrapText="true">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lebal_name" layoutX="188.0" layoutY="216.0" text="&quot;name&quot;" textFill="WHITE">
+                  <Label fx:id="lebal_name" layoutX="194.0" layoutY="216.0" text="name" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>

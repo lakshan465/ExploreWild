@@ -315,18 +315,34 @@ public class ZooKeeperController implements Initializable {
                     }
                 }
             } finally {
-                // Ensure the button is re-enabled after the operation
-//                Platform.runLater(() -> btn_pay.setDisable(false));
+                // Ensure the button is disabled initially
                 btn_pay.setDisable(true);
+
+                // Create a new thread for the background task
                 new Thread(() -> {
                     try {
-                        Thread.sleep(5000); // 5 seconds
+                        // Simulate a delay (e.g., 5 seconds for payment processing)
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    Platform.runLater(() -> btn_pay.setDisable(false)); // Re-enable the button
-                }).start();
+
+                    // Use Platform.runLater to run UI updates on the JavaFX Application Thread
+                    Platform.runLater(() -> {
+                        // Create and show the Alert on the JavaFX Application Thread
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Successful");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Payment Successful!");
+                        alert.showAndWait();  // Ensure the alert waits for user interaction
+
+                        // Clear the form and re-enable the button
+                        clearForm();
+                        btn_pay.setDisable(false);  // Re-enable the button
+                    });
+                }).start();  // Start the background thread
             }
+
         }
 
         // Disable the button for 10 seconds to prevent multiple submissions
