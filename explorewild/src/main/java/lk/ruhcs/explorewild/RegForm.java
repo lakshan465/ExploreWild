@@ -129,6 +129,7 @@ public class RegForm {
 
     @FXML
     void regBtnClicked() throws IOException {
+        flagCheck();
         if(unameBox.getText().isEmpty() || pwdBox.getText().isEmpty() ||confirmPwdBox.getText().isEmpty()){
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
