@@ -26,7 +26,7 @@
                         <Image url="@img/circle-arrow-left-solid.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="76.5" layoutY="181.5" prefHeight="57.0" prefWidth="149.0" text="Sign up here !" textAlignment="CENTER" textFill="#e1dada" wrapText="true" AnchorPane.bottomAnchor="163.0" AnchorPane.leftAnchor="76.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="181.0">
+                  <Label layoutX="64.8" layoutY="188.0" prefHeight="72.0" prefWidth="162.0" text="Sign up here !" textAlignment="CENTER" textFill="#e1dada" wrapText="true" AnchorPane.bottomAnchor="141.0" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="187.0">
                      <font>
                         <Font size="25.0" />
                      </font>

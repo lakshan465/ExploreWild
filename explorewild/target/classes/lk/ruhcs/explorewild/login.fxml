@@ -16,7 +16,7 @@
             <children>
                 <AnchorPane prefHeight="400.0" prefWidth="300.0" styleClass="left-form" stylesheets="@loginCss.css">
                     <children>
-                        <Label layoutX="29.0" layoutY="200.0" prefHeight="72.0" prefWidth="243.0" text="Zoo Management System" textAlignment="CENTER" textFill="#e1dada" wrapText="true" AnchorPane.bottomAnchor="130.0" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="200.0">
+                        <Label layoutX="32.0" layoutY="201.60000000000002" prefHeight="87.0" prefWidth="238.0" text="Zoo Management System" textAlignment="CENTER" textFill="#e1dada" wrapText="true" AnchorPane.bottomAnchor="112.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="201.0">
                             <font>
                                 <Font size="25.0" />
                             </font>
