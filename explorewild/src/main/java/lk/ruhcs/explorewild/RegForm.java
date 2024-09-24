@@ -15,6 +15,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class RegForm {
@@ -49,7 +50,7 @@ public class RegForm {
         try {
             MessageDigest md = null;
 
-            md = MessageDigest.getInstance("SHA");
+            md = MessageDigest.getInstance("SHA"); //oSHAn
 
             md.update(pwd.getBytes());
             byte[] rbt = md.digest();
@@ -74,20 +75,6 @@ public class RegForm {
     void reg(){
         String uname=unameBox.getText();
         String pwd=getHashPwd(pwdBox.getText());
-
-//        if (pwdBox.getText().equals(confirmPwdBox.getText())) {
-//            System.out.println("Passwords match!");
-//        } else {
-//            Alert alert;
-//            alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("Error massage");
-//            alert.setContentText("Passwords do not match!");
-//            alert.showAndWait();//user can add data without filling animal_id box
-//            pwdBox.clear();
-//            confirmPwdBox.clear();
-//            return;
-//        }
-
         String sql="INSERT INTO user (`username`, `password`) VALUES('"+uname+"','"+pwd+"')";
 
         try {
@@ -102,17 +89,47 @@ public class RegForm {
         back.getScene().getWindow().hide();
 
     }
-//    void backToLogin() throws IOException {
-//        FXMLLoader loader=new FXMLLoader(getClass().getResource("login.fxml"));
-//        Scene scene=new Scene(loader.load());
-//        Stage stage=new Stage();
-//        stage.setScene(scene);
-//        stage.show();
-//
-//    }
+
+    public int flag = 0;
+
+    int flagCheck() {
+        String uname = unameBox.getText();
+        String pwd = getHashPwd(pwdBox.getText());
+
+        // Corrected SQL query using placeholders (?)
+        String sql = "SELECT username, password FROM user WHERE username = ? AND password = ?";
+
+        try {
+            // Get the connection
+            Connection con = dbConnection.connection();
+
+            // Use PreparedStatement with placeholders
+            PreparedStatement pst = con.prepareStatement(sql);
+            pst.setString(1, uname);  // Set the username
+            pst.setString(2, pwd);    // Set the hashed password
+
+            // Execute the query
+            ResultSet rs = pst.executeQuery();
+
+            // If a matching user is found, set flag to 1, otherwise it remains 0
+            if (rs.next()) {
+                flag = 1;
+            } else {
+                flag = 0;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return flag;
+    }
+
+
 
     @FXML
     void regBtnClicked() throws IOException {
+        flagCheck();
         if(unameBox.getText().isEmpty() || pwdBox.getText().isEmpty() ||confirmPwdBox.getText().isEmpty()){
             Alert alert=new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
@@ -127,11 +144,21 @@ public class RegForm {
             pwdBox.clear();
             confirmPwdBox.clear();
 
+        } else if (flag==1) {
+            Alert alert;
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error massage");
+            alert.setContentText("Use another Username and Password!");
+            alert.showAndWait();//user can add data without filling animal_id box
+            unameBox.clear();
+            pwdBox.clear();
+            confirmPwdBox.clear();
+
         } else{
             reg();
             Alert alert=new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Registerd!");
-            alert.setContentText("Registation successful!");
+            alert.setTitle("Registered!");
+            alert.setContentText("Registration successful!");
             alert.showAndWait();
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LoadingScreen.fxml"));
 
