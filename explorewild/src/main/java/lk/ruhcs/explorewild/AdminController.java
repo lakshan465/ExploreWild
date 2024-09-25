@@ -25,6 +25,16 @@ import java.util.ResourceBundle;
 public class AdminController extends User implements Initializable {
 
 
+    public Button btn_revenue;
+    public AnchorPane anc_revenue;
+    public TableColumn txId_col;
+    public TableColumn amount_col;
+    public TableColumn name_col;
+    public TableView revenue_table;
+    public Button btn_reload_rev;
+    public Label total_revenue;
+    public Label total_txs;
+
     //assign task
     @FXML
     private Button Search_task_btn;
@@ -952,7 +962,83 @@ public class AdminController extends User implements Initializable {
         task_table_view.setItems(addTaskList);
     }
 //taskTableEnd
+    
+    //Revenue table
+    
+ResultSet resultRevenue ;
 
+    public ObservableList<Revenue> addRevenueData() throws SQLException {//AnimalData is newly created class name
+        //retrrive data from server and give to the linked list
+        //then function return it
+        ObservableList<Revenue> listData = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM revenue";
+        con = dbConnection.connection();
+        
+        try {
+            pre = con.prepareStatement(sql);
+            resultRevenue = pre.executeQuery();
+            Revenue revenue_d ;
+
+            while (resultRevenue.next()) {
+                revenue_d = new Revenue(
+                        resultRevenue.getInt("id"),
+                        resultRevenue.getString("Fname"),
+                        resultRevenue.getDouble("total"));
+
+                        listData.add(revenue_d);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        con.close();
+        resultRevenue.close();
+        return listData;
+
+    }
+    private ObservableList<Revenue> addRevenueList;
+
+    public void addRevenueShowListData() throws SQLException {//data that retrive form server spred to the table in order
+        addRevenueList = addRevenueData();//linked list
+
+        txId_col.setCellValueFactory(new PropertyValueFactory<>("id"));
+        name_col.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        amount_col.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+
+
+        revenue_table.setItems(addRevenueList);
+    }
+
+    private void updateTotalRevenue()  {
+        con = dbConnection.connection();
+        String sql="SELECT SUM(total) as Total,COUNT(id) as txs FROM revenue";
+
+        try{
+            PreparedStatement pst=con.prepareStatement(sql);
+            resultRevenue=pst.executeQuery();
+            //System.out.println(resultRevenue.next());
+            while(resultRevenue.next()){
+                System.out.println(resultRevenue.getString("Total"));
+                double tot=resultRevenue.getDouble(1);
+                int txs=resultRevenue.getInt(2);
+                total_revenue.setText(String.valueOf(tot));
+                total_txs.setText(String.valueOf(txs));
+            }
+
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+
+
+    }
+
+    //Revenue Table End
+    
+    
     //animalTableStart
     public ObservableList<AnimalData> addAnimalData() throws SQLException {//AnimalData is newly created class name
         //retrrive data from server and give to the linked list
@@ -1072,6 +1158,7 @@ public class AdminController extends User implements Initializable {
                 anc_ChangePwd.setVisible(false);
                 anc_live.setVisible(false);
                 anc_task.setVisible(false);
+                anc_revenue.setVisible(false);
 
 //              //  btn_assignTask.getStyleClass().add("login-btnLK");
 //                btn_updateAnimal.setStyle("-fx-background-color: linear-gradient(to bottom right, #4f937a, #6e2773);");
@@ -1111,6 +1198,7 @@ public class AdminController extends User implements Initializable {
                 anc_ChangePwd.setVisible(true);
                 anc_live.setVisible(false);
                 anc_task.setVisible(false);
+                anc_revenue.setVisible(false);
 
 
             } else if (event.getSource() == btn_assignTask) {
@@ -1118,6 +1206,7 @@ public class AdminController extends User implements Initializable {
                 anc_ChangePwd.setVisible(false);
                 anc_live.setVisible(false);
                 anc_task.setVisible(true);
+                anc_revenue.setVisible(false);
 
 
                 addTaskClear();
@@ -1127,11 +1216,21 @@ public class AdminController extends User implements Initializable {
                 anc_ChangePwd.setVisible(false);
                 anc_live.setVisible(true);
                 anc_task.setVisible(false);
+                anc_revenue.setVisible(false);
 
 
 
                 addIssueShowListData();
 
+            } else if (event.getSource() ==btn_revenue) {
+                System.out.println("Revenue Clicked");
+                anc_revenue.setVisible(true);
+                System.out.println("Rev Tab = "+anc_revenue.isVisible());
+                anc_Animal.setVisible(false);
+                anc_ChangePwd.setVisible(false);
+                anc_live.setVisible(false);
+                anc_task.setVisible(false);
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1178,12 +1277,14 @@ public class AdminController extends User implements Initializable {
         try {
             reload();
             addAnimalShowListData();
+            addRevenueShowListData();
             addTaskShowListData();
             addIssueShowListData();
             addTaskShowListData();
             genderList();
             animalTypeList();
             setCageBoxItems();
+            updateTotalRevenue();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -1192,5 +1293,9 @@ public class AdminController extends User implements Initializable {
 
     public AnchorPane getAnc_ChangePwd() {
         return anc_ChangePwd;
+    }
+
+    public void reload_revenue(ActionEvent actionEvent) {
+        updateTotalRevenue();
     }
 }

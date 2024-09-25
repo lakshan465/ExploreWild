@@ -205,7 +205,7 @@ public class CuzController implements Initializable {
             int payment = Integer.parseInt(txt_payAmount.getText());
             int numParent = Integer.parseInt(txt_parent.getText());
             int numChild = Integer.parseInt(txt_child.getText());
-            int total = numParent * 500 + numChild * 200;
+            double total = numParent * 500 + numChild * 200;
 
             label_balance.setText(String.valueOf(payment - total));
 
@@ -224,7 +224,7 @@ public class CuzController implements Initializable {
 
                 ps = con.prepareStatement(sql2);
                 ps.setString(1, txt_fname.getText());
-                ps.setInt(2, total);
+                ps.setDouble(2, total);
                 ps.executeUpdate();
 
                 System.out.println("payment is " + payment + " total is " + total);
