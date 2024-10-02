@@ -285,7 +285,7 @@
                                           <Font name="System Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Label fx:id="total_revenue" alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="50.0" prefHeight="38.0" prefWidth="48.0" text="0" textAlignment="CENTER" textFill="WHITE">
+                                    <Label fx:id="total_revenue" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="50.0" prefHeight="38.0" prefWidth="86.0" text="0" textAlignment="CENTER" textFill="WHITE">
                                        <font>
                                           <Font name="System Bold" size="21.0" />
                                        </font>
