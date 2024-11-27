@@ -25,6 +25,16 @@ import java.util.ResourceBundle;
 public class AdminController extends User implements Initializable {
 
 
+    public Button btn_revenue;
+    public AnchorPane anc_revenue;
+    public TableColumn txId_col;
+    public TableColumn amount_col;
+    public TableColumn name_col;
+    public TableView revenue_table;
+    public Button btn_reload_rev;
+    public Label total_revenue;
+    public Label total_txs;
+
     //assign task
     @FXML
     private Button Search_task_btn;
@@ -221,6 +231,43 @@ public class AdminController extends User implements Initializable {
 
     }
 
+    public void deleteOldPendingTask() throws SQLException {
+        String keeperId = txt_keeper_id.getText();
+
+        // Check if keeper ID is not null or empty
+        if (keeperId == null || keeperId.isEmpty()) {
+            System.out.println("Error: Keeper ID is empty or null.");
+            return;
+        }
+
+        // SQL query with placeholders
+        String sql = "DELETE FROM task WHERE zoo_keeper_id = ? AND status = 'Done'";
+
+        // Get the database connection
+        Connection con = dbConnection.connection();
+
+        // Prepare the statement
+        PreparedStatement prep = con.prepareStatement(sql);
+
+        // Set the parameter for the zoo_keeper_id
+        prep.setInt(1, Integer.parseInt(txt_keeper_id.getText()));
+
+        // Debugging - print the SQL query (for testing purposes)
+        System.out.println("Executing SQL: " + prep);
+
+        // Execute the update
+        int rowsAffected = prep.executeUpdate();
+
+        // Print the number of rows deleted
+        System.out.println("Rows affected: " + rowsAffected);
+
+        // Optionally close the PreparedStatement and connection if not handled elsewhere
+        prep.close();
+        con.close();
+    }
+
+
+
     //add task start
     public void addTask() {//insert new animal information to database
         String sql = "INSERT INTO task (zoo_keeper_id, status, description) VALUES (?, ?, ?)";
@@ -237,7 +284,7 @@ public class AdminController extends User implements Initializable {
                 alert.setContentText("Please fill blank fields except task ID");
                 alert.showAndWait();//user can add data without filling animal_id box
             } else {
-
+                deleteOldPendingTask();
                 assert conAdTsk != null;
 
                 preTask = conAdTsk.prepareStatement(sql);
@@ -261,6 +308,7 @@ public class AdminController extends User implements Initializable {
 
                 //clear the field
                 addTaskClear();
+                deleteOldPendingTask();
 
 
             }
@@ -300,7 +348,7 @@ public class AdminController extends User implements Initializable {
             addTaskShowListDatabySerach(sql);
         } else {
             // Corrected the SQL string
-            String sql = "SELECT * FROM task WHERE zoo zoo_keeper_id = '" + keeperIdSearch + "'";
+            String sql = "SELECT * FROM task WHERE zoo_keeper_id = " + Integer.parseInt(keeperIdSearch);
             addTaskShowListDatabySerach(sql);
         }
 
@@ -436,12 +484,12 @@ public class AdminController extends User implements Initializable {
             {
                 alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("confirmation massage");
-                alert.setContentText("Are you sure about updating pwd as" + cuz_pwd_chng_pwd.getText() + " ?");
+                alert.setContentText("Are you sure about updating password as " + cuz_pwd_chng_pwd.getText() + " ?");
                 Optional<ButtonType> option = alert.showAndWait();
 
                 if (option.get().equals(ButtonType.OK)) {
-                    String pwd = cuz_pwd_chng_pwd.getText();//cuz_pwd_chng_pwd
-                    String sql = "UPDATE user SET password = '" + pwd + "'WHERE username ='" + cuz_id_chng_pwd.getText() + "'";
+                    String pwd = LoginController.getHashPwd(cuz_pwd_chng_pwd.getText());//cuz_pwd_chng_pwd
+                    String sql = "UPDATE user SET password = '" + pwd + "'WHERE id ='" + cuz_id_chng_pwd.getText() + "'";
                     Connection concpwd = dbConnection.connection();
                     Statement st = null;
                     try {
@@ -455,17 +503,12 @@ public class AdminController extends User implements Initializable {
 
                     alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Information massage");
-                    alert.setContentText("Deleted!!");
+                    alert.setContentText("Password updated!");
                     alert.showAndWait();
                     //pre.close();
 
                 }
             }
-            //  addPetClear();
-
-            // addAnimalShowListData();
-
-//            return(0);
             cuz_id_chng_pwd.setText("");
             cuz_pwd_chng_pwd.setText("");
             //return 0;
@@ -477,8 +520,8 @@ public class AdminController extends User implements Initializable {
             Optional<ButtonType> option = alert.showAndWait();
 
             if (option.get().equals(ButtonType.OK)) {
-                String pwd = keeper_pwd_chng_pwd.getText();//keeper_pwd_chng_pwd
-                String sql = "UPDATE staff SET password = '" + pwd + "'WHERE username ='" + keeper_id_chng_pwd.getText() + "'";
+                String pwd = LoginController.getHashPwd(keeper_pwd_chng_pwd.getText());//keeper_pwd_chng_pwd
+                String sql = "UPDATE staff SET password = '" + pwd + "'WHERE id ='" + keeper_id_chng_pwd.getText() + "'";
                 Connection concpwd = dbConnection.connection();
                 Statement st = null;
                 try {
@@ -492,7 +535,7 @@ public class AdminController extends User implements Initializable {
 
                 alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information massage");
-                alert.setContentText("Deleted!!");
+                alert.setContentText("Password updated!");
                 alert.showAndWait();
                 //pre.close();
 
@@ -501,16 +544,6 @@ public class AdminController extends User implements Initializable {
             keeper_pwd_chng_pwd.setText("");
             //return 0;
         }
-        //  addPetClear();
-
-        // addAnimalShowListData();
-
-//            return(0);
-
-        //changes end
-
-
-        // return 0;
     }
 
 
@@ -805,6 +838,8 @@ public class AdminController extends User implements Initializable {
 
     public void reload() {
         try {
+             addIssueShowListData();
+
             conload = dbConnection.connection();
             String sqlcuz = " SELECT COUNT(id) AS ID FROM  current_cus";
             String sqlkeeper = "SELECT COUNT(id) AS ID FROM current_keepers2";
@@ -927,7 +962,83 @@ public class AdminController extends User implements Initializable {
         task_table_view.setItems(addTaskList);
     }
 //taskTableEnd
+    
+    //Revenue table
+    
+ResultSet resultRevenue ;
 
+    public ObservableList<Revenue> addRevenueData() throws SQLException {//AnimalData is newly created class name
+        //retrrive data from server and give to the linked list
+        //then function return it
+        ObservableList<Revenue> listData = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM revenue";
+        con = dbConnection.connection();
+        
+        try {
+            pre = con.prepareStatement(sql);
+            resultRevenue = pre.executeQuery();
+            Revenue revenue_d ;
+
+            while (resultRevenue.next()) {
+                revenue_d = new Revenue(
+                        resultRevenue.getInt("id"),
+                        resultRevenue.getString("Fname"),
+                        resultRevenue.getDouble("total"));
+
+                        listData.add(revenue_d);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        con.close();
+        resultRevenue.close();
+        return listData;
+
+    }
+    private ObservableList<Revenue> addRevenueList;
+
+    public void addRevenueShowListData() throws SQLException {//data that retrive form server spred to the table in order
+        addRevenueList = addRevenueData();//linked list
+
+        txId_col.setCellValueFactory(new PropertyValueFactory<>("id"));
+        name_col.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        amount_col.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+
+
+        revenue_table.setItems(addRevenueList);
+    }
+
+    private void updateTotalRevenue()  {
+        con = dbConnection.connection();
+        String sql="SELECT SUM(total) as Total,COUNT(id) as txs FROM revenue";
+
+        try{
+            PreparedStatement pst=con.prepareStatement(sql);
+            resultRevenue=pst.executeQuery();
+            //System.out.println(resultRevenue.next());
+            while(resultRevenue.next()){
+                System.out.println(resultRevenue.getString("Total"));
+                double tot=resultRevenue.getDouble(1);
+                int txs=resultRevenue.getInt(2);
+                total_revenue.setText(String.valueOf(tot));
+                total_txs.setText(String.valueOf(txs));
+            }
+
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+
+
+
+
+    }
+
+    //Revenue Table End
+    
+    
     //animalTableStart
     public ObservableList<AnimalData> addAnimalData() throws SQLException {//AnimalData is newly created class name
         //retrrive data from server and give to the linked list
@@ -1047,6 +1158,7 @@ public class AdminController extends User implements Initializable {
                 anc_ChangePwd.setVisible(false);
                 anc_live.setVisible(false);
                 anc_task.setVisible(false);
+                anc_revenue.setVisible(false);
 
 //              //  btn_assignTask.getStyleClass().add("login-btnLK");
 //                btn_updateAnimal.setStyle("-fx-background-color: linear-gradient(to bottom right, #4f937a, #6e2773);");
@@ -1086,33 +1198,7 @@ public class AdminController extends User implements Initializable {
                 anc_ChangePwd.setVisible(true);
                 anc_live.setVisible(false);
                 anc_task.setVisible(false);
-
-//                btn_changePwd.setStyle("-fx-background-color: linear-gradient(to bottom right, #4f937a, #6e2773);");
-//
-////                btn_changePwd
-////                        btn_updateAnimal
-////                btn_assignTask
-////                        btn_liveUpdate
-//                btn_updateAnimal.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
-//                        "-fx-background-radius: 5px;" +
-//                        "-fx-cursor: hand;" +
-//                        "-fx-text-fill: #fff;" +
-//                        "-fx-font-size:14px;" +
-//                        "-fx-font-family:'Arial';");
-//
-//                btn_assignTask.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
-//                        "-fx-background-radius: 5px;" +
-//                        "-fx-cursor: hand;" +
-//                        "-fx-text-fill: #fff;" +
-//                        "-fx-font-size:14px;" +
-//                        "-fx-font-family:'Arial';");
-//
-//                btn_liveUpdate.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
-//                        "-fx-background-radius: 5px;" +
-//                        "-fx-cursor: hand;" +
-//                        "-fx-text-fill: #fff;" +
-//                        "-fx-font-size:14px;" +
-//                        "-fx-font-family:'Arial';");
+                anc_revenue.setVisible(false);
 
 
             } else if (event.getSource() == btn_assignTask) {
@@ -1120,32 +1206,9 @@ public class AdminController extends User implements Initializable {
                 anc_ChangePwd.setVisible(false);
                 anc_live.setVisible(false);
                 anc_task.setVisible(true);
+                anc_revenue.setVisible(false);
 
-//                btn_assignTask.setStyle("-fx-background-color: linear-gradient(to bottom right, #4f937a, #6e2773);");
-//
-//                btn_updateAnimal.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
-//                        "-fx-background-radius: 5px;" +
-//                        "-fx-cursor: hand;" +
-//                        "-fx-text-fill: #fff;" +
-//                        "-fx-font-size:14px;" +
-//                        "-fx-font-family:'Arial';");
-////                btn_changePwd
-////                        btn_updateAnimal
-////                btn_assignTask
-////                        btn_liveUpdate
-//                btn_changePwd.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
-//                        "-fx-background-radius: 5px;" +
-//                        "-fx-cursor: hand;" +
-//                        "-fx-text-fill: #fff;" +
-//                        "-fx-font-size:14px;" +
-//                        "-fx-font-family:'Arial';");
-//
-//                btn_liveUpdate.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
-//                        "-fx-background-radius: 5px;" +
-//                        "-fx-cursor: hand;" +
-//                        "-fx-text-fill: #fff;" +
-//                        "-fx-font-size:14px;" +
-//                        "-fx-font-family:'Arial';");
+
                 addTaskClear();
                 addTaskShowListData();
             } else if (event.getSource() == btn_liveUpdate) {
@@ -1153,35 +1216,21 @@ public class AdminController extends User implements Initializable {
                 anc_ChangePwd.setVisible(false);
                 anc_live.setVisible(true);
                 anc_task.setVisible(false);
+                anc_revenue.setVisible(false);
 
-//                btn_liveUpdate.setStyle("-fx-background-color: linear-gradient(to bottom right, #4f937a, #6e2773);");
-//
-//                btn_updateAnimal.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
-//                        "-fx-background-radius: 5px;" +
-//                        "-fx-cursor: hand;" +
-//                        "-fx-text-fill: #fff;" +
-//                        "-fx-font-size:14px;" +
-//                        "-fx-font-family:'Arial';");
-////                btn_changePwd
-////                        btn_updateAnimal
-////                btn_assignTask
-////                        btn_liveUpdate
-//                btn_assignTask.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
-//                        "-fx-background-radius: 5px;" +
-//                        "-fx-cursor: hand;" +
-//                        "-fx-text-fill: #fff;" +
-//                        "-fx-font-size:14px;" +
-//                        "-fx-font-family:'Arial';");
-//
-//                btn_changePwd.setStyle("-fx-background-color: linear-gradient(to bottom right, #085203, #693803);" +
-//                        "-fx-background-radius: 5px;" +
-//                        "-fx-cursor: hand;" +
-//                        "-fx-text-fill: #fff;" +
-//                        "-fx-font-size:14px;" +
-//                        "-fx-font-family:'Arial';");
+
 
                 addIssueShowListData();
 
+            } else if (event.getSource() ==btn_revenue) {
+                System.out.println("Revenue Clicked");
+                anc_revenue.setVisible(true);
+                System.out.println("Rev Tab = "+anc_revenue.isVisible());
+                anc_Animal.setVisible(false);
+                anc_ChangePwd.setVisible(false);
+                anc_live.setVisible(false);
+                anc_task.setVisible(false);
+                
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -1228,12 +1277,14 @@ public class AdminController extends User implements Initializable {
         try {
             reload();
             addAnimalShowListData();
+            addRevenueShowListData();
             addTaskShowListData();
             addIssueShowListData();
             addTaskShowListData();
             genderList();
             animalTypeList();
             setCageBoxItems();
+            updateTotalRevenue();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -1242,5 +1293,9 @@ public class AdminController extends User implements Initializable {
 
     public AnchorPane getAnc_ChangePwd() {
         return anc_ChangePwd;
+    }
+
+    public void reload_revenue(ActionEvent actionEvent) {
+        updateTotalRevenue();
     }
 }

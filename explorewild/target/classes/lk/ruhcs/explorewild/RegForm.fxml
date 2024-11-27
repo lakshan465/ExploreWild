@@ -16,24 +16,9 @@
          <children>
             <AnchorPane prefHeight="400.0" prefWidth="300.0" styleClass="left-form" stylesheets="@loginCss.css">
                <children>
-                  <Label layoutX="29.0" layoutY="142.0" prefHeight="72.0" prefWidth="243.0" text="Features Available to You" textAlignment="CENTER" textFill="#e1dada" wrapText="true">
-                     <font>
-                        <Font name="Tahoma" size="21.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="99.0" fitWidth="95.0" layoutX="103.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="99.0" fitWidth="95.0" layoutX="103.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="70.0">
                      <image>
                         <Image url="@img/paw-solid.png" />
-                     </image>
-                  </ImageView>
-                  <Label layoutX="98.0" layoutY="224.0" prefHeight="59.0" prefWidth="144.0" text="Online Ticket Resavation" textFill="#b0ffbe" wrapText="true">
-                     <font>
-                        <Font name="Corbel" size="19.0" />
-                     </font>
-                  </Label>
-                  <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="44.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/ticket-solid.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="back" fitHeight="30.0" fitWidth="40.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#print" pickOnBounds="true" preserveRatio="true">
@@ -41,13 +26,18 @@
                         <Image url="@img/circle-arrow-left-solid.png" />
                      </image>
                   </ImageView>
+                  <Label layoutX="64.8" layoutY="188.0" prefHeight="72.0" prefWidth="162.0" text="Sign up here !" textAlignment="CENTER" textFill="#e1dada" wrapText="true" AnchorPane.bottomAnchor="141.0" AnchorPane.leftAnchor="64.0" AnchorPane.rightAnchor="74.0" AnchorPane.topAnchor="187.0">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
                </children></AnchorPane>
             <AnchorPane layoutX="302.0" prefHeight="400.0" prefWidth="300.0" stylesheets="@loginCss.css">
                <children>
                   <TextField fx:id="unameBox" layoutX="40.0" layoutY="151.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="textfield" stylesheets="@loginCss.css" />
                   <PasswordField fx:id="confirmPwdBox" layoutX="40.0" layoutY="238.0" prefHeight="30.0" prefWidth="220.0" promptText="Comform Password" styleClass="textfield" stylesheets="@loginCss.css" />
                   <Button fx:id="loginBtn" layoutX="40.0" layoutY="315.0" mnemonicParsing="false" onAction="#regBtnClicked" prefHeight="40.0" prefWidth="220.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Regiser Here !" />
-                  <ImageView fitHeight="72.0" fitWidth="67.0" layoutX="119.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="72.0" fitWidth="67.0" layoutX="119.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="288.0" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="117.0" AnchorPane.topAnchor="40.0">
                      <image>
                         <Image url="@img/user-regular.png" />
                      </image>

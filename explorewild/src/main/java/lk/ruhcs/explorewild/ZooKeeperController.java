@@ -142,18 +142,22 @@ public class ZooKeeperController implements Initializable {
         alert.setContentText("Fill empty text field!");
         Optional<ButtonType> option = alert.showAndWait();
         if(option.get().equals(ButtonType.OK)){
-            reportIssue();
+           // reportIssue();
         }
     }
     public void reportIssue() {
-        String sql = "INSERT INTO issue (Description) VALUES (?)"; // Corrected SQL query with parameter placeholder
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, txt_issueReport.getText()); // Set the description value as a parameter
-            ps.executeUpdate(); // Execute the insert statement
-        } catch (SQLException e) {
-            throw new RuntimeException("Error inserting issue", e); // Wrap the SQL exception in a RuntimeException
+        if(txt_issueReport.getText().isEmpty()){
+            reportIssueWithAlert();
+        }else {
+            String sql = "INSERT INTO issue (Description) VALUES (?)"; // Corrected SQL query with parameter placeholder
+            try (PreparedStatement ps = con.prepareStatement(sql)) {
+                ps.setString(1, txt_issueReport.getText()); // Set the description value as a parameter
+                ps.executeUpdate(); // Execute the insert statement
+            } catch (SQLException e) {
+                throw new RuntimeException("Error inserting issue", e); // Wrap the SQL exception in a RuntimeException
+            }
+            txt_issueReport.setText("");
         }
-        txt_issueReport.setText("");
     }
 
 
@@ -167,13 +171,13 @@ public class ZooKeeperController implements Initializable {
 //        }
 //    }
     public void searchByPending() {
-        String sql = "SELECT task_id, status, description FROM task WHERE status = 'Pending' AND task_id = '" + idForName + "'";
+        String sql = "SELECT task_id, status, description FROM task WHERE status = 'Pending' AND zoo_keeper_id = '" + idForName + "'";
         addTaskShowListDataBySerach(sql);
 
     }
 
     public void searchByDone(){
-        String sql = "SELECT task_id, status, description FROM task WHERE status = 'Done' AND task_id = '" + idForName + "'";
+        String sql = "SELECT task_id, status, description FROM task WHERE status = 'Done' AND zoo_keeper_id = '" + idForName + "'";
         addTaskShowListDataBySerach(sql);
     }
 
@@ -245,83 +249,6 @@ public class ZooKeeperController implements Initializable {
 
     //pay function without thread start.....................
 
-//    public void pay() throws SQLException {//making balance and quereis execute for two tables
-//        System.out.println("pay function");
-//        if (txt_fname.getText().isEmpty() || txt_Lname.getText().isEmpty() || txt_parent.getText().isEmpty() || txt_child.getText().isEmpty()) {
-//            Alert alert;
-//
-//            alert = new Alert(Alert.AlertType.ERROR);
-//            alert.setTitle("ERROR Message");
-//            alert.setHeaderText(null);
-//            alert.setContentText("Fill empty text field!");
-//            alert.showAndWait();
-//
-//        } else {
-//
-//
-//            int payment = Integer.parseInt(txt_payAmount.getText());
-//
-//            int numParent = Integer.parseInt(txt_parent.getText());
-//            int numChild = Integer.parseInt(txt_child.getText());
-//
-//            int total = numParent * 500 + numChild * 200;
-//
-//            label_balance.setText(String.valueOf(payment - total));
-//
-//            String sql = "INSERT INTO `ticket` ( `Fname`, `Lname`, `parentCount`, `kidCount`) VALUES ( ?, ?, ?, ?)";
-//            String sql2 = "INSERT INTO `revenue` (`Fname`, `total`) VALUES (?, ?)";
-//
-//            try {
-//                con.setAutoCommit(false); //step one
-//
-//
-//                ps = con.prepareStatement(sql);
-//                ps.setString(1, txt_fname.getText());
-//                ps.setString(2, txt_Lname.getText());
-//                ps.setInt(3, Integer.parseInt(txt_parent.getText()));
-//                ps.setInt(4, Integer.parseInt(txt_child.getText()));
-//
-//                ps.executeUpdate();
-//
-//                ps = con.prepareStatement(sql2);
-//                ps.setString(1, txt_fname.getText());
-//                ps.setInt(2, total);
-//
-//                ps.executeUpdate();
-//                //con.commit(); //step two
-//                System.out.println("payment is "+payment+" total is "+total);
-//
-//                if (payment < total) {
-//                    con.rollback();
-//
-//                    Alert alert;
-//
-//                    alert = new Alert(Alert.AlertType.ERROR);
-//                    alert.setTitle("ERROR Message");
-//                    alert.setHeaderText(null);
-//                    alert.setContentText("payment not sufficient!");
-//                    alert.showAndWait();
-//
-//
-//                }else {
-//                    // Commit should happen only if the payment is sufficient
-//                    con.commit();
-//
-//                }
-//
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//                if (con != null) {
-//                    try {
-//                        con.rollback(); //step three
-//                    } catch (SQLException ex) {
-//                        throw new RuntimeException(ex);
-//                    }
-//                }
-//            }
-//        }
-//
-//    }
 
     //pay function without thread end.....................
 
@@ -388,18 +315,34 @@ public class ZooKeeperController implements Initializable {
                     }
                 }
             } finally {
-                // Ensure the button is re-enabled after the operation
-//                Platform.runLater(() -> btn_pay.setDisable(false));
+                // Ensure the button is disabled initially
                 btn_pay.setDisable(true);
+
+                // Create a new thread for the background task
                 new Thread(() -> {
                     try {
-                        Thread.sleep(5000); // 5 seconds
+                        // Simulate a delay (e.g., 5 seconds for payment processing)
+                        Thread.sleep(5000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                    Platform.runLater(() -> btn_pay.setDisable(false)); // Re-enable the button
-                }).start();
+
+                    // Use Platform.runLater to run UI updates on the JavaFX Application Thread
+                    Platform.runLater(() -> {
+                        // Create and show the Alert on the JavaFX Application Thread
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Successful");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Payment Successful!");
+                        alert.showAndWait();  // Ensure the alert waits for user interaction
+
+                        // Clear the form and re-enable the button
+                        clearForm();
+                        btn_pay.setDisable(false);  // Re-enable the button
+                    });
+                }).start();  // Start the background thread
             }
+
         }
 
         // Disable the button for 10 seconds to prevent multiple submissions
@@ -596,7 +539,7 @@ public class ZooKeeperController implements Initializable {
 
             String logoutstaff = "DELETE FROM current_keepers2 LIMIT 1";
             PreparedStatement logoutstaffps = con.prepareStatement(logoutstaff);
-            logoutstaffps.execute();
+            logoutstaffps.executeUpdate(); // Use executeUpdate() for DELETE statements
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Error Message");

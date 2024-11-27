@@ -906,7 +906,7 @@
       <Charset>utf8mb4</Charset>
     </collation>
     <schema id="288" parent="1" name="explorewild">
-      <LastIntrospectionLocalTimestamp>2024-09-21.07:12:54</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-09-25.16:02:08</LastIntrospectionLocalTimestamp>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </schema>
     <schema id="289" parent="1" name="information_schema">
@@ -965,7 +965,7 @@
       <CollationName>latin1_swedish_ci</CollationName>
     </table>
     <column id="304" parent="292" name="id">
-      <AutoIncrement>21</AutoIncrement>
+      <AutoIncrement>23</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -991,7 +991,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="309" parent="293" name="animal_id">
-      <AutoIncrement>40</AutoIncrement>
+      <AutoIncrement>44</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1051,7 +1051,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="321" parent="295" name="id">
-      <AutoIncrement>15</AutoIncrement>
+      <AutoIncrement>50</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1067,7 +1067,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="324" parent="296" name="id">
-      <AutoIncrement>41</AutoIncrement>
+      <AutoIncrement>60</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1083,7 +1083,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="327" parent="297" name="issu_id">
-      <AutoIncrement>19</AutoIncrement>
+      <AutoIncrement>29</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1104,7 +1104,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="331" parent="298" name="id">
-      <AutoIncrement>60</AutoIncrement>
+      <AutoIncrement>78</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1117,7 +1117,7 @@
     <column id="333" parent="298" name="total">
       <NotNull>1</NotNull>
       <Position>3</Position>
-      <StoredType>varchar(100)|0s</StoredType>
+      <StoredType>double|0s</StoredType>
     </column>
     <index id="334" parent="298" name="PRIMARY">
       <ColNames>id</ColNames>
@@ -1130,7 +1130,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="336" parent="299" name="id">
-      <AutoIncrement>19</AutoIncrement>
+      <AutoIncrement>21</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1156,7 +1156,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="341" parent="300" name="task_id">
-      <AutoIncrement>15</AutoIncrement>
+      <AutoIncrement>37</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1187,7 +1187,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="347" parent="301" name="id">
-      <AutoIncrement>61</AutoIncrement>
+      <AutoIncrement>79</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>
@@ -1223,7 +1223,7 @@
       <UnderlyingIndexName>PRIMARY</UnderlyingIndexName>
     </key>
     <column id="354" parent="302" name="id">
-      <AutoIncrement>32</AutoIncrement>
+      <AutoIncrement>47</AutoIncrement>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <StoredType>int|0s</StoredType>

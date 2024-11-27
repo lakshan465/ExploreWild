@@ -16,12 +16,12 @@
             <children>
                 <AnchorPane prefHeight="400.0" prefWidth="300.0" styleClass="left-form" stylesheets="@loginCss.css">
                     <children>
-                        <Label layoutX="29.0" layoutY="200.0" prefHeight="72.0" prefWidth="243.0" text="Zoo Management System" textAlignment="CENTER" textFill="#e1dada" wrapText="true">
+                        <Label layoutX="32.0" layoutY="201.60000000000002" prefHeight="87.0" prefWidth="238.0" text="Zoo Management System" textAlignment="CENTER" textFill="#e1dada" wrapText="true" AnchorPane.bottomAnchor="112.0" AnchorPane.leftAnchor="31.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="201.0">
                             <font>
                                 <Font size="25.0" />
                             </font>
                         </Label>
-                        <ImageView fitHeight="99.0" fitWidth="95.0" layoutX="103.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="99.0" fitWidth="95.0" layoutX="103.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="230.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="70.0">
                             <image>
                                 <Image url="@img/paw-solid.png" />
                             </image>
@@ -36,7 +36,7 @@
                         <TextField fx:id="unameTxt" layoutX="40.0" layoutY="170.0" prefHeight="30.0" prefWidth="220.0" promptText="Username" styleClass="textfield" stylesheets="@loginCss.css" />
                         <PasswordField fx:id="pwdTxt" layoutX="40.0" layoutY="222.0" prefHeight="30.0" prefWidth="220.0" promptText="Password" styleClass="textfield" stylesheets="@loginCss.css" />
                         <Button fx:id="loginBtn" layoutX="41.0" layoutY="283.0" mnemonicParsing="false" onAction="#adminLogin" prefHeight="40.0" prefWidth="220.0" styleClass="login-btnLK" stylesheets="@loginCss.css" text="Login" />
-                        <ImageView fitHeight="72.0" fitWidth="67.0" layoutX="119.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="72.0" fitWidth="67.0" layoutX="119.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="288.0" AnchorPane.leftAnchor="117.0" AnchorPane.rightAnchor="117.0" AnchorPane.topAnchor="40.0">
                             <image>
                                 <Image url="@img/user-regular.png" />
                             </image>
